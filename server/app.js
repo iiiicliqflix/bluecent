@@ -27,7 +27,7 @@ app.post('/get_access_token', function(req, res, next) {
   PUBLIC_TOKEN = req.body.public_token;
   client.exchangePublicToken(PUBLIC_TOKEN, function(error, tokenResponse) {
     if (error != null) {
-      console.log(`Could not exchange public_token! ${error}.`);
+      console.log(`Could not exchange public_token: ${error}.`);
       return res.json({error: msg});
     }
     ACCESS_TOKEN = tokenResponse.access_token;
@@ -35,6 +35,20 @@ app.post('/get_access_token', function(req, res, next) {
     console.log(`Access Token: ${ACCESS_TOKEN}`);
     console.log(`Item ID: ${ITEM_ID}`);
     res.json({'error': false});
+  });
+});
+
+app.get('/auth', function(req, res, next) {
+  client.getAuth(ACCESS_TOKEN, function(error, numbersData) {
+    if (error != null) {
+      console.log(`Unable to pull accounts from Plaid API: ${error}.`);
+      return res.json({error: msg});
+    }
+    res.json({
+      error: false,
+      accounts: numbersData.accounts,
+      numbers: numbersData.numbers
+    });
   });
 });
 

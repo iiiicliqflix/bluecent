@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SelectAccount from '../SelectAccount';
+import { Link } from 'react-router';
 import './App.css';
 
 export default class App extends Component {
@@ -8,8 +8,12 @@ export default class App extends Component {
       <div className="App">
         <h1 className="hdr">Every cent counts.</h1>
         <div className="btns">
-          <SelectAccount/>
-          <button className="btn">FAQ</button>
+          <Link to="/sign-up">
+            <button className="btn">Sign Up</button>
+          </Link>
+          <Link to="/login">
+            <button className="btn">Login</button>
+          </Link>
         </div>
       </div>
     );

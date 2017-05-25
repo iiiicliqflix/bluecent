@@ -8,7 +8,6 @@ export default class SelectAccount extends Component {
       key: '80aa88b8cce388ffc75efe840a5709',
       product: ['auth', 'transactions'],
       onSuccess: function(public_token, metadata) {
-        console.log(public_token, metadata);
         fetch('http://localhost:8000/get_access_token', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

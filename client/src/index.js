@@ -1,14 +1,20 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, browserHistory } from 'react-router';
-import App from './components/App';
-import SignUp from './components/SignUp';
-import Login from './components/Login';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import { Router, browserHistory } from 'react-router';
+import { syncHistoryWithStore} from 'react-router-redux';
+import reduxThunk from 'redux-thunk';
+import reducers from './reducers';
+import routes from './routes';
 
-render((
-  <Router history={browserHistory}>
-    <Route path="/" component={App}/>
-    <Route path="/sign-up" component={SignUp}/>
-    <Route path="/login" component={Login}/>
-  </Router>
-), document.getElementById('root'));
+const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+const store = createStoreWithMiddleware(reducers);
+const history = syncHistoryWithStore(browserHistory, store);
+
+render(
+  <Provider store={store}>
+    <Router history={history} routes={routes} />
+  </Provider>,
+  document.getElementById('root')
+);

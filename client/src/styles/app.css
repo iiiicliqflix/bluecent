@@ -18,7 +18,7 @@ button {
   outline: none;
 }
 
-.Home {
+.container {
   text-align: center;
 }
 
@@ -49,4 +49,14 @@ button {
 .btn:hover {
   background-color: white;
   color: #3A7CA5;
+}
+
+.input {
+  border: none;
+  border-radius: 3px;
+  height: 25px;
+  margin-top: 15px;
+  padding: 10px;
+  outline: none;
+  width: 300px;
 }

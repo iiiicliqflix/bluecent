@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-export default class App extends Component {
+export default class Dashboard extends Component {
   render() {
     return (
       <div className="container">
-        {this.props.children}
+        <h1 className="hdr">Dashboard</h1>
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class SelectAccount extends Component {
+export default class SelectBank extends Component {
   componentWillMount() {
     let handler = window.Plaid.create({
       clientName: 'BlueCent',

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
 import * as actions from '../actions/auth';
 
 class VerifyAccount extends Component {
@@ -10,11 +9,12 @@ class VerifyAccount extends Component {
   }
 
   componentWillMount() {
-    this.email = this.props.location.query.email;
+    const { email, token } =  this.props.location.query;
 
-    if (!this.props.signup || !this.email) {
-      browserHistory.push('/signup');
-    }
+    this.user = {};
+    this.user.email = email;
+    this.user.token = token;
+    this.props.verifyAccount({ email, token });
   }
 
   resendEmail(props) {
@@ -25,24 +25,32 @@ class VerifyAccount extends Component {
   render() {
     return (
       <div className="container">
-        <h1 className="hdr">Activate your account.</h1>
-        <h3>You'll be all set once your confirm the verification email we sent to you at <u>{ this.email && this.email }</u></h3>
         {
-          !this.state.resend ?
-            <p className="resend" onClick={this.resendEmail.bind(this, { email: this.email })}>Resend email verification code</p> :
-            <p className="resended">Email verification code has been resended</p>
+          this.props.errorMessage && this.props.errorMessage.verifyAccount &&
+            <div>
+              <h1>Failure</h1>
+              <p>{ this.props.errorMessage.verifyAccount.message }</p>
+            </div>
         }
         {
-          this.props.errorMessage && this.props.errorMessage.signupResend &&
-            <div className="error-container">{ this.props.errorMessage.signupResend }</div>
+          this.props.errorMessage && this.props.errorMessage.verifyAccount && this.props.errorMessage.verifyAccount.resend && !this.state.resend &&
+            <p className="resend" onClick={this.resendEmail.bind(this, this.user)}>
+              Resend verification code
+            </p>
+          }
+        {
+          this.state.resend &&
+            <p className="resended">
+              Email verification code has been resended
+            </p>
         }
       </div>
-    );
+    )
   }
 }
 
 function mapStateToProps(state) {
-  return { errorMessage: state.auth.error, signup: state.auth.signup };
+  return { errorMessage: state.auth.error };
 }
 
 export default connect(mapStateToProps, actions)(VerifyAccount);

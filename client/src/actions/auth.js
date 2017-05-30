@@ -5,7 +5,8 @@ import {
   SIGNUP_FAILURE,
   AUTH_USER,
   LOGIN_FAILURE,
-  VERIFY_ACCOUNT_ERROR
+  VERIFY_ACCOUNT_FAILURE,
+  UNAUTH_USER
 } from './types';
 
 export function authError(CONST, error) {
@@ -42,12 +43,24 @@ export function loginUser(props) {
 
 export function verifyAccount(props) {
   return function(dispatch) {
-    axios.post('http://localhost:8000/signup/verify-acount', props)
+    axios.post('http://localhost:8000/signup/verify-account', props)
       .then(response => {
         localStorage.setItem('user', JSON.stringify(response.data));
         dispatch({ type: AUTH_USER });
         browserHistory.push('/dashboard');
       })
-      .catch(response => dispatch(authError(VERIFY_ACCOUNT_ERROR, response.data.error)));
+      .catch(response => {
+        console.log(`RESPONSE: ${response}`);
+        dispatch(authError(VERIFY_ACCOUNT_FAILURE, response.data.error));
+      });
+  }
+}
+
+export function signOut() {
+  localStorage.clear();
+  browserHistory.push('/');
+
+  return {
+    type: UNAUTH_USER,
   }
 }

@@ -1,7 +1,7 @@
 import jwt from 'jwt-simple';
-import { dbConfig } from '../config';
+import { mongoConfig } from '../config';
 
 export function tokenForUser(user) {
   const timestamp = new Date().getTime();
-  return jwt.encode({ sub: user.id, iat: timestamp }, dbConfig.secret);
+  return jwt.encode({ sub: user.id, iat: timestamp }, mongoConfig.secret);
 }

@@ -1,3 +1,8 @@
+import envvar from 'envvar';
+
+const EMAIL_ADDRESS = envvar.string('EMAIL_ADDRESS');
+const EMAIL_PASSWORD = envvar.string('EMAIL_PASSWORD');
+
 export const mongoConfig = {
   secret: 'SomeSecret',
   db: 'mongodb://localhost/bluecent'
@@ -5,8 +10,5 @@ export const mongoConfig = {
 
 export const emailConfig = {
   service: 'Gmail',
-  auth: {
-    user: 'rowan.krishnan@gmail.com',
-    pass: 'Password'
-  }
+  auth: { user: EMAIL_ADDRESS, pass: EMAIL_PASSWORD }
 };

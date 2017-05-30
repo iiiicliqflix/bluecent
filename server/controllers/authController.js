@@ -55,6 +55,7 @@ export const verifyAccount = (req, res, next) => {
     }
 
     User.findByIdAndUpdate(user.id, { role: 1, auth: { used: true } }, (err) => {
+      console.log("I AM HERE");
       if (err) { return next(err); }
 
       const { email, first, last } = user;

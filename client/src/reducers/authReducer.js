@@ -3,7 +3,8 @@ import {
   SIGNUP_FAILURE,
   AUTH_USER,
   LOGIN_FAILURE,
-  VERIFY_ACCOUNT_ERROR
+  VERIFY_ACCOUNT_FAILURE,
+  UNAUTH_USER
 } from '../actions/types';
 
 export default function(state = {}, action) {
@@ -16,8 +17,10 @@ export default function(state = {}, action) {
       return { ...state, authenticated: true, error: {} };
     case LOGIN_FAILURE:
       return { ...state, error: { login: action.payload } };
-    case VERIFY_ACCOUNT_ERROR:
+    case VERIFY_ACCOUNT_FAILURE:
       return { ...state, signup: true, error: { verifyAccount: action.payload } };
+    case UNAUTH_USER:
+      return { ...state, authenticated: false, error: {} };
   }
 
   return state;

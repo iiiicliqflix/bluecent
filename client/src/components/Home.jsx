@@ -8,10 +8,7 @@ export default class Home extends Component {
         <h1 className="hdr">Every cent counts.</h1>
         <div className="btns">
           <Link to="/signup">
-            <button className="btn">Sign Up</button>
-          </Link>
-          <Link to="/login">
-            <button className="btn">Login</button>
+            <button className="get-started">Get Started</button>
           </Link>
         </div>
       </div>

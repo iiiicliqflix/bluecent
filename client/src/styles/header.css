@@ -1,0 +1,26 @@
+.logo {
+  color: #FFF;
+  display: inline;
+}
+
+.nav {
+  color: #FFF;
+  display: inline;
+  float: right;
+  margin-top: 22px;
+}
+
+.nav li {
+  display: inline;
+  list-style-type: none;
+}
+
+.nav-item {
+  margin-left: 30px;
+}
+
+.login {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 9999px;
+  padding: 4px 17px 4px 17px;
+}

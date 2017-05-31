@@ -1,0 +1,55 @@
+.container {
+  margin-top: 12%;
+  text-align: center;
+}
+
+.hdr {
+  color: white;
+  font-family: 'Avenir';
+  font-size: 50px;
+  font-weight: 300;
+}
+
+.btns {
+  margin-top: 20px;
+}
+
+.btn {
+  /*background-color: #4062BB;*/
+  background-color: #515ff7;
+  border: 2px solid white;
+  border-radius: 2px;
+  color: white;
+  font-size: 16px;
+  height: 50px;
+  margin: 20px;
+  padding: 10px;
+  width: 150px;
+}
+
+.btn:hover {
+  background-color: white;
+  color: #3A7CA5;
+}
+
+.input {
+  border: none;
+  border-radius: 3px;
+  height: 25px;
+  margin-top: 15px;
+  padding: 10px;
+  outline: none;
+  width: 300px;
+}
+
+.get-started {
+  border: none;
+  border-radius: 9999px;
+  background-color: #FFF;
+  color: #515ff7;
+  font-size: 15px;
+  height: 45px;
+  margin-top: 10px;
+  padding: 10px;
+  width: 150px;
+}

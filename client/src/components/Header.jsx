@@ -1,19 +1,38 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import * as actions from '../actions/auth';
 
-export default class Header extends Component {
+class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick() {
+    this.props.signOut();
+  }
+
   render() {
     return (
       <header>
-        <h1 className="logo"><Link to="/">bluecent</Link></h1>
+        <h1 className="logo"><Link to={this.props.authenticated ? '/dashboard' : '/'}>bluecent</Link></h1>
         <ul className="nav">
           <li className="nav-item"><Link to="/">FAQ</Link></li>
-          <li className="nav-item"><Link to="/">Team</Link></li>
-          <li className="nav-item"><Link to="/">Contact</Link></li>
-          <li className="nav-item"><Link to="/">Contribute</Link></li>
-          <li className="nav-item login"><Link to="/">Login</Link></li>
+          <li className="nav-item"><Link to="https://github.com/rkrishnan8594/BlueCent">Contribute</Link></li>
+          {this.props.authenticated ?
+            <li className="nav-item login" onClick={this.handleClick}><Link to="#">Sign Out</Link></li>
+          :
+            <li className="nav-item login"><Link to="/login">Login</Link></li>
+          }
         </ul>
       </header>
     )
   }
 }
+
+function mapStateToProps(state) {
+  return { authenticated: state.auth.authenticated };
+}
+
+export default connect(mapStateToProps, actions)(Header);

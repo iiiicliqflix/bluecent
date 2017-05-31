@@ -1,0 +1,9 @@
+.dashboard-container {
+  margin: 15% auto 0 auto;
+  text-align: center;
+  width: 600px;
+}
+
+.dashboard-hdr {
+  color: white;
+}

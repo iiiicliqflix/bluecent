@@ -3,8 +3,8 @@ import { tokenForUser } from '../helpers/token';
 import { sendVerificationEmail } from '../helpers/email';
 
 export const login = (req, res, next) => {
-  const { email } = req.user;
-  res.json({ token: tokenForUser(req.user), email });
+  const { first, last, email } = req.user;
+  res.json({ token: tokenForUser(req.user), first, last, email });
 }
 
 export const signup = (req, res, next) => {

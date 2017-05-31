@@ -23,7 +23,7 @@ class SignUp extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <div className="container">
+      <div className="signup-container">
         <h1 className="hdr">Sign Up</h1>
         <form onSubmit={handleSubmit(this.handleFormSubmit)}>
           <Field name="first" component={renderField} type="text" placeholder="First Name" />
@@ -31,7 +31,7 @@ class SignUp extends Component {
           <Field name="email" component={renderField} type="text" placeholder="Email" />
           <Field name="password" component={renderField} type="password" placeholder="Password" />
           <Field name="confirmpassword" component={renderField} type="password" placeholder="Confirm Password" />
-          <button type="submit" className="btn">Sign Up</button>
+          <button type="submit" className="btn auth">Sign Up</button>
         </form>
       </div>
     )

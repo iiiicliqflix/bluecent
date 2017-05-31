@@ -28,7 +28,7 @@ class Login extends Component {
         <form onSubmit={handleSubmit(this.handleFormSubmit)}>
           <Field name="email" component={renderField} type="text" placeholder="Email" />
           <Field name="password" component={renderField} type="password" placeholder="Password" />
-          <button type="submit" className="btn">Login</button>
+          <button type="submit" className="btn auth">Login</button>
         </form>
       </div>
     )

@@ -21,7 +21,7 @@ export default class SelectBank extends Component {
   render() {
     return (
       <button className="btn" onClick={() => {this.state.handler.open()}}>
-        Get Started
+        Select Account
       </button>
     );
   }

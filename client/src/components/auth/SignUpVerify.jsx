@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import * as actions from '../actions/auth';
+import * as actions from '../../actions/auth';
 
 class SignUpVerify extends Component {
   constructor(props) {

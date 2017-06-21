@@ -3,8 +3,8 @@ import { tokenForUser } from '../helpers/token';
 import { sendVerificationEmail } from '../helpers/email';
 
 export const login = (req, res, next) => {
-  const { first, last, email } = req.user;
-  res.json({ token: tokenForUser(req.user), first, last, email });
+  const { first, last, email, access_token } = req.user;
+  res.json({ token: tokenForUser(req.user), first, last, email, access_token });
 }
 
 export const signup = (req, res, next) => {
@@ -21,7 +21,8 @@ export const signup = (req, res, next) => {
       return res.status(422).send({ error: "Email already in use." });
     }
 
-    const user = new User({ first, last, email, password });
+    let access_token = null;
+    const user = new User({ first, last, email, password, access_token });
 
     user.save((err) => {
       if (err) { return next(err); }
@@ -55,7 +56,6 @@ export const verifyAccount = (req, res, next) => {
     }
 
     User.findByIdAndUpdate(user.id, { role: 1, auth: { used: true } }, (err) => {
-      console.log("I AM HERE");
       if (err) { return next(err); }
 
       const { email, first, last } = user;

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
-import * as actions from '../actions/auth';
+import * as actions from '../../actions/auth';
 
-const renderField = ({ input, type, placeholder }) => (
-  <div className="form-field">
-    <input className="input" type={type} placeholder={placeholder} {...input} />
+const renderField = ({ input, className, type, placeholder }) => (
+  <div className={className}>
+    <input className="input signup-input" type={type} placeholder={placeholder} {...input} />
   </div>
 );
 
@@ -26,11 +26,11 @@ class SignUp extends Component {
       <div className="signup-container">
         <h1 className="hdr">Sign Up</h1>
         <form onSubmit={handleSubmit(this.handleFormSubmit)}>
-          <Field name="first" component={renderField} type="text" placeholder="First Name" />
-          <Field name="last" component={renderField} type="text" placeholder="Last Name" />
-          <Field name="email" component={renderField} type="text" placeholder="Email" />
-          <Field name="password" component={renderField} type="password" placeholder="Password" />
-          <Field name="confirmpassword" component={renderField} type="password" placeholder="Confirm Password" />
+          <Field name="first" component={renderField} className="form-field field-first" type="text" placeholder="First" />
+          <Field name="last" component={renderField} className="form-field field-last" type="text" placeholder="Last" />
+          <Field name="email" component={renderField} className="form-field" type="text" placeholder="Email" />
+          <Field name="password" component={renderField} className="form-field" type="password" placeholder="Password" />
+          <Field name="confirmpassword" component={renderField} className="form-field" type="password" placeholder="Confirm Password" />
           <button type="submit" className="btn auth">Sign Up</button>
         </form>
       </div>

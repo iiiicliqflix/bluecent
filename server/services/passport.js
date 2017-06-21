@@ -6,6 +6,7 @@ import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 
 const localOptions = { usernameField: 'email' };
 const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
+  console.log(password);
   User.findOne({ email }, (err, user) => {
     if (err) { return done(err); }
 

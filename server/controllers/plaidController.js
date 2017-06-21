@@ -1,13 +1,15 @@
 import plaid from 'plaid';
 import envvar from 'envvar';
+import User from '../models/user';
 
 const PLAID_CLIENT_ID = envvar.string('PLAID_CLIENT_ID');
 const PLAID_SECRET = envvar.string('PLAID_SECRET');
 const PLAID_PUBLIC_KEY = envvar.string('PLAID_PUBLIC_KEY');
-const PLAID_ENV = 'sandbox';
+const PLAID_ENV = 'development';
 
 let ACCESS_TOKEN = null;
 let PUBLIC_TOKEN = null;
+let ITEM_ID = null;
 
 let client = new plaid.Client(
   PLAID_CLIENT_ID,
@@ -18,16 +20,20 @@ let client = new plaid.Client(
 
 export const getAccessToken = (req, res, next) => {
   PUBLIC_TOKEN = req.body.public_token;
+  let u = req.body.user;
   client.exchangePublicToken(PUBLIC_TOKEN, function(error, tokenResponse) {
     if (error != null) {
       console.log(`Could not exchange public_token: ${error}.`);
-      return res.json({error: msg});
+      return res.json({error: error});
     }
+
     ACCESS_TOKEN = tokenResponse.access_token;
     ITEM_ID = tokenResponse.item_id;
-    console.log(`Access Token: ${ACCESS_TOKEN}`);
-    console.log(`Item ID: ${ITEM_ID}`);
-    res.json({'error': false});
+
+    User.findOneAndUpdate({ email: u.email }, { access_token: ACCESS_TOKEN }, (err) => {
+      if (err) { return next(err); }
+      res.json({ access_token: ACCESS_TOKEN });
+    });
   });
 }
 

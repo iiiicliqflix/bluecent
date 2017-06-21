@@ -6,3 +6,28 @@
   margin-top: 5%;
   text-align: center;
 }
+
+.field-first {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.field-first .signup-input {
+  width: 200px;
+}
+
+.field-last {
+  display: inline-block;
+}
+
+.field-last .signup-input {
+  width: 200px;
+}
+
+.signup-input {
+  width: 430px;
+}
+
+.login-input {
+  width: 300px;
+}

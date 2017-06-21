@@ -3,11 +3,11 @@ import { Route, IndexRoute } from 'react-router';
 
 import App from './components/App.jsx';
 import Home from './components/Home.jsx';
-import SignUp from './components/SignUp.jsx';
-import SignUpVerify from './components/SignUpVerify.jsx';
-import VerifyAccount from './components/VerifyAccount.jsx';
-import Login from './components/Login.jsx';
-import Dashboard from './components/Dashboard.jsx';
+import SignUp from './components/auth/SignUp.jsx';
+import SignUpVerify from './components/auth/SignUpVerify.jsx';
+import VerifyAccount from './components/auth/VerifyAccount.jsx';
+import Login from './components/auth/Login.jsx';
+import Dashboard from './components/dash/Dashboard.jsx';
 
 export default (
   <Route path="/" component={App}>

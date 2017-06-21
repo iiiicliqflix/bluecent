@@ -8,6 +8,7 @@ const userSchema = new Schema({
   last: String,
   email: { type: String, lowercase: true, unique: true },
   password: String,
+  access_token: String,
   role: { type: Number, default: 0 },
   auth: {
     token: String,

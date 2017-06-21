@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
-import * as actions from '../actions/auth';
+import * as actions from '../../actions/auth';
 
 const renderField = ({ input, type, placeholder }) => (
   <div className="form-field">
-    <input className="input" type={type} placeholder={placeholder} {...input} />
+    <input className="input login-input" type={type} placeholder={placeholder} {...input} />
   </div>
 );
 

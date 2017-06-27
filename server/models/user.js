@@ -8,7 +8,10 @@ const userSchema = new Schema({
   last: String,
   email: { type: String, lowercase: true, unique: true },
   password: String,
-  access_token: String,
+  access_token: { type: String, default: null },
+  total: { type: Number, default: 0 },
+  weeks: { type: Number, default: 0 },
+  this_week: { type: Number, default: 0 },
   role: { type: Number, default: 0 },
   auth: {
     token: String,

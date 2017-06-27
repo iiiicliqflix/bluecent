@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import DashHeader from './DashHeader';
+import TransactionTable from './TransactionTable';
 import SelectBank from './SelectBank';
-import MainDash from './MainDash';
-import SelectAccount from './SelectAccount';
 
 export default class Dashboard extends Component {
   constructor(props) {
@@ -9,28 +9,21 @@ export default class Dashboard extends Component {
     let user = JSON.parse(localStorage.getItem('user'));
     this.state = {
       user,
-      account_id: user.account_id,
       access_token: user.access_token
     }
   }
 
   setAccessToken(token) {
-    console.log(`Token: ${token}`);
     this.setState({ access_token: token });
   }
 
-  setAccountId(id) {
-    this.setState({ account_id: id });
-  }
-
   render() {
-    if (this.state.account_id) {
+    if (this.state.access_token) {
       return (
-        <MainDash />
-      );
-    } else if (this.state.access_token) {
-      return (
-        <SelectAccount user={this.state.user} access_token={this.state.access_token} />
+        <div className="dash-container">
+          <DashHeader user={this.state.user} />
+          <TransactionTable />
+        </div>
       );
     } else {
       return (

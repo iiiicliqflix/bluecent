@@ -1,9 +1,46 @@
-.dashboard-container {
+.bank-container {
   margin: 15% auto 0 auto;
   text-align: center;
   width: 600px;
 }
 
-.dashboard-hdr {
+.bank-hdr {
   color: white;
+}
+
+.dash-container {
+  margin: 5% auto 0 auto;
+  text-align: center;
+  width: 1200px;
+}
+
+.dash-hdr {
+  color: white;
+  font-weight: normal;
+}
+
+.dash-stats {
+  margin-top: 50px;
+}
+
+.dash-stat {
+  border-right: 3px solid white;
+  display: inline-block;
+  height: 150px;
+  padding: 0 50px 0 50px;
+  width: 250px;
+}
+
+.dash-stat:last-of-type {
+  border: none;
+}
+
+.stat-number {
+  color: white;
+  font-size: 40px;
+  margin: 30px 0 15px 0;
+}
+
+.stat-name {
+  color: #FCF5C7;
 }

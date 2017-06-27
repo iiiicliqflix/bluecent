@@ -18,7 +18,7 @@ class Header extends Component {
       <header>
         <h1 className="logo"><Link to={this.props.authenticated ? '/dashboard' : '/'}>bluecent</Link></h1>
         <ul className="nav">
-          <li className="nav-item"><Link to="/">FAQ</Link></li>
+          <li className="nav-item"><Link to="/faq">FAQ</Link></li>
           <li className="nav-item"><a href="https://github.com/rkrishnan8594/BlueCent">Contribute</a></li>
           {this.props.authenticated ?
             <li className="nav-item login" onClick={this.handleClick}><Link to="#">Sign Out</Link></li>

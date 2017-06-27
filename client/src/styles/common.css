@@ -20,8 +20,7 @@
 }
 
 .btn {
-  /*background-color: #4062BB;*/
-  background-color: #515ff7;
+  background-color: #6699CC;
   border: 2px solid white;
   border-radius: 9999px;
   color: white;
@@ -34,7 +33,7 @@
 
 .btn:hover {
   background-color: white;
-  color: #3A7CA5;
+  color: #6699CC;
 }
 
 .input {
@@ -51,7 +50,7 @@
 .get-started {
   border: 2px solid white;
   border-radius: 9999px;
-  background-color: #515ff7;
+  background-color: #6699CC;
   color: white;
   font-size: 15px;
   height: 45px;
@@ -62,5 +61,5 @@
 
 .get-started:hover {
   background-color: white;
-  color: #515ff7;
+  color: #6699CC;
 }

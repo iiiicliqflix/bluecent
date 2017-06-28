@@ -11,7 +11,6 @@ const userSchema = new Schema({
   access_token: { type: String, default: null },
   total: { type: Number, default: 0 },
   weeks: { type: Number, default: 0 },
-  this_week: { type: Number, default: 0 },
   role: { type: Number, default: 0 },
   auth: {
     token: String,

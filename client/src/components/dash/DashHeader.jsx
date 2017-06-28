@@ -15,7 +15,7 @@ export default class DashHeader extends Component {
           </div>
           <div className="dash-stat">
             <p className="stat-number">{this.props.user.weeks}</p>
-            <p className="stat-name">Number of weeks.</p>
+            <p className="stat-name">Number of contributions.</p>
           </div>
         </div>
       </div>

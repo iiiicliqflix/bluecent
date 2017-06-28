@@ -4,7 +4,7 @@ import { sendVerificationEmail } from '../helpers/email';
 
 export const login = (req, res, next) => {
   const { first, last, email, access_token, total, this_week, weeks } = req.user;
-  res.json({ token: tokenForUser(req.user), first, last, email, access_token, total, this_week, weeks });
+  res.json({ token: tokenForUser(req.user), first, last, email, access_token, total, weeks });
 }
 
 export const signup = (req, res, next) => {

@@ -50,3 +50,20 @@ export const getAuth = (req, res, next) => {
     });
   });
 }
+
+export const getTransactions = (req, res, next) => {
+  let access_token = req.query.access_token;
+
+  client.getTransactions(access_token, '2017-01-01', '2017-02-15',
+    { count: 250, offset: 0 }, (err, result) => {
+      const transactions = result.transactions;
+
+      if (err != null) {
+        console.log(err);
+        console.log('Error in fetching transactions.');
+        return res.json({ error: err });
+      }
+
+      res.json({ transactions });
+  });
+}

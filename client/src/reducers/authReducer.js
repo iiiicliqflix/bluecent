@@ -21,7 +21,7 @@ export default function(state = {}, action) {
       return { ...state, signup: true, error: { verifyAccount: action.payload } };
     case UNAUTH_USER:
       return { ...state, authenticated: false, error: {} };
+    default:
+      return state;
   }
-
-  return state;
 }

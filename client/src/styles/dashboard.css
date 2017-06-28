@@ -35,6 +35,10 @@
   border: none;
 }
 
+.dash-stat:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
 .stat-number {
   color: white;
   font-size: 40px;
@@ -43,4 +47,10 @@
 
 .stat-name {
   color: #FCF5C7;
+}
+
+.donate-btn {
+  height: 30px;
+  padding: 0;
+  width: 100px;
 }

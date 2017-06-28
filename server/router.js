@@ -1,5 +1,5 @@
 import passport from 'passport';
-import { getAccessToken, getAuth } from './controllers/plaidController';
+import { getAccessToken, getAuth, getTransactions } from './controllers/plaidController';
 import { login, signup, verifyAccount } from './controllers/authController';
 import passportService from './services/passport';
 
@@ -12,6 +12,7 @@ const router = (app) => {
   app.post('/signup', signup);
   app.post('/signup/verify-account', verifyAccount);
   app.post('/login', requireLogin, login);
+  app.get('/get_transactions', getTransactions);
 };
 
 export default router;

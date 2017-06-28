@@ -22,7 +22,7 @@ export default class Dashboard extends Component {
       return (
         <div className="dash-container">
           <DashHeader user={this.state.user} />
-          <TransactionTable />
+          <TransactionTable access_token={this.state.access_token} />
         </div>
       );
     } else {

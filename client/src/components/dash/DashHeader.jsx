@@ -10,7 +10,7 @@ export default class DashHeader extends Component {
             <p className="stat-name">Total contributed.</p>
           </div>
           <div className="dash-stat">
-            <p className="stat-number">${this.props.user.this_week}</p>
+            <p className="stat-number">${this.props.savedChange.toFixed(2)}</p>
             <p className="stat-name">Total saved this period.</p>
           </div>
           <div className="dash-stat">

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './common/Header';
 import Footer from './common/Footer';
+import 'react-table/react-table.css'
 import '../styles/app.css';
 
 export default class App extends Component {
@@ -8,7 +9,9 @@ export default class App extends Component {
     return (
       <div>
         <Header />
-        {this.props.children}
+        <div className="content">
+          {this.props.children}
+        </div>
         <Footer />
       </div>
     );

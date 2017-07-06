@@ -11,7 +11,6 @@
 .dash-container {
   margin: 5% auto 0 auto;
   text-align: center;
-  width: 1200px;
 }
 
 .dash-hdr {
@@ -20,37 +19,85 @@
 }
 
 .dash-stats {
-  margin-top: 50px;
+  margin: 0 auto;
+  width: 1200px;
 }
 
 .dash-stat {
-  border-right: 3px solid white;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-bottom: 3px solid #FAFAFC;
+  border-radius: 3px;
   display: inline-block;
   height: 150px;
-  padding: 0 50px 0 50px;
-  width: 250px;
-}
-
-.dash-stat:last-of-type {
-  border: none;
+  margin-right: 100px;
+  padding: 0 20px 0 20px;
+  width: 200px;
 }
 
 .dash-stat:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.3);
+  border-bottom: 3px solid #FCF5C7;
+  cursor: pointer;
+}
+
+.dash-stat:last-of-type {
+  margin: 0;
 }
 
 .stat-number {
   color: white;
   font-size: 40px;
-  margin: 30px 0 15px 0;
 }
 
 .stat-name {
   color: #FCF5C7;
+  margin: 35px 0 15px 0;
 }
 
 .donate-btn {
   height: 30px;
   padding: 0;
   width: 100px;
+}
+
+.transaction-table {
+  margin-top: 5%;
+  background-color: #fafafc;
+  padding-top: 30px;
+}
+
+.table-hdr {
+  text-align: left;
+  font-size: 24px;
+  margin: 0 auto 30px auto;
+  width: 1000px;
+}
+
+.ReactTable {
+  border: none;
+  margin: 0 auto;
+  text-align: left;
+  width: 1000px;
+}
+
+.ReactTable .rt-thead.-header {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  border-top: 2px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.ReactTable .rt-thead .rt-th {
+  border-right: none;
+}
+
+.rt-td:not(:first-child) {
+  text-align: right;
+}
+
+.rt-tr-group:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }

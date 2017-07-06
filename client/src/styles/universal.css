@@ -7,17 +7,26 @@ html {
   height: 100%;
 }
 
+#root {
+  min-height: 100%;
+  position: relative;
+}
+
+.content {
+  padding-bottom: 25px;
+}
+
 a {
-  color: #FFF;
+  color: white;
   text-decoration: none;
 }
 
 body {
-  background-color: #6699CC;
-  min-height: 94%;
+  background-color: #6665DD;
   font-family: 'Avenir';
   font-weight: 300;
   overflow: auto;
+  height: 94%;
 }
 
 button {
@@ -29,7 +38,7 @@ button {
 
 footer {
   bottom: 0;
-  color: #FFF;
+  color: white;
   height: 25px;
   font-size: 14px;
   position: absolute;

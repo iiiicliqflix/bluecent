@@ -14,12 +14,13 @@ export default class TransactionTable extends Component {
 
   render() {
     const columns = [{
-      Header: 'Name',
-      accessor: 'name'
-    }, {
       Header: 'Date',
       accessor: 'date',
       width: 120
+    },
+    {
+      Header: 'Name',
+      accessor: 'name'
     }, {
       id: 'amount',
       Header: 'Amount',
@@ -36,8 +37,19 @@ export default class TransactionTable extends Component {
 
     return (
       <div className="transaction-table">
-        <h2 className="table-hdr">Transactions</h2>
-        <ReactTable data={this.getTableData()} columns={columns} />
+        <div className="table-hdr">
+          <h2 className="table-title">Transactions</h2>
+          <div className="table-toggle">
+            <button className="toggle-btn left">Active</button>
+            <button className="toggle-btn right">Contributed</button>
+          </div>
+        </div>
+        <ReactTable
+          data={this.getTableData()}
+          columns={columns}
+          defaultPageSize={25}
+          showPageSizeOptions={false}
+          showPageJump={false} />
       </div>
     );
   }

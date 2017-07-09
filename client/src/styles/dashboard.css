@@ -54,13 +54,11 @@
   height: 170px;
   margin-right: 100px;
   padding: 0 20px 0 20px;
-  width: 250px;
+  width: 230px;
 }
 
 .dash-stat:hover {
-  background-color: rgba(255, 255, 255, 0.3);
   border-bottom: 3px solid #FCF5C7;
-  cursor: pointer;
 }
 
 .dash-stat:last-of-type {
@@ -77,10 +75,10 @@
   margin: 40px 0 20px 0;
 }
 
-.donate-btn {
-  height: 30px;
-  padding: 0;
-  width: 100px;
+.stat-mid {
+  height: 250px;
+  position: relative;
+  width: 300px;
 }
 
 .transaction-table {
@@ -179,4 +177,21 @@
 .ReactTable .rt-tr-group {
   height: 40px;
   padding: 4px 0;
+}
+
+.donate-btn {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  border: 1px solid #FCF5C7;
+  bottom: -20px;
+  color: #FCF5C7;
+  font-size: 15px;
+  height: 40px;
+  position: relative;
+  width: 150px;
+}
+
+.donate-btn:hover {
+  background-color: #FCF5C7;
+  color: #6665DD;
 }

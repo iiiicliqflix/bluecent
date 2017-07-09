@@ -6,15 +6,16 @@ export default class DashHeader extends Component {
     return (
       <div>
         <div className="dash-stats">
-          <div className="dash-stat">
+          <div className="dash-stat stat-side">
             <p className="stat-name">Total contributed.</p>
             <p className="stat-number">${this.props.user.total}</p>
           </div>
-          <div className="dash-stat">
+          <div className="dash-stat stat-mid">
             <p className="stat-name">Total saved this period.</p>
             <p className="stat-number">${this.props.savedChange.toFixed(2)}</p>
+            <button className="donate-btn">Contribute</button>
           </div>
-          <div className="dash-stat">
+          <div className="dash-stat stat-side">
             <p className="stat-name">Number of contributions.</p>
             <p className="stat-number">{this.props.user.weeks}</p>
           </div>

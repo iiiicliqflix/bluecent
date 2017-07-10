@@ -1,7 +1,8 @@
 {
-  "name": "BlueCent",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8000",
   "dependencies": {
     "history": "^4.6.1",
     "react": "^15.5.4",
@@ -20,8 +21,6 @@
     "react-scripts": "1.0.0"
   },
   "scripts": {
-    "build-css": "node-sass-chokidar src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

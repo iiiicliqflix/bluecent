@@ -18,7 +18,7 @@ export function authError(CONST, error) {
 
 export function signupUser(props) {
   return function(dispatch) {
-    axios.post('http://localhost:8000/signup', props)
+    axios.post('/signup', props)
       .then(() => {
         dispatch({ type: SIGNUP_SUCCESS });
         browserHistory.push(`/signup/verify-account?email=${props.email}`);
@@ -31,7 +31,7 @@ export function loginUser(props) {
   const { email, password } = props;
 
   return function(dispatch) {
-    axios.post('http://localhost:8000/login', { email, password })
+    axios.post('/login', { email, password })
       .then(response => {
         localStorage.setItem('user', JSON.stringify(response.data));
         dispatch({ type: AUTH_USER });
@@ -43,7 +43,7 @@ export function loginUser(props) {
 
 export function verifyAccount(props) {
   return function(dispatch) {
-    axios.post('http://localhost:8000/signup/verify-account', props)
+    axios.post('/signup/verify-account', props)
       .then(response => {
         localStorage.setItem('user', JSON.stringify(response.data));
         dispatch({ type: AUTH_USER });

@@ -20,6 +20,6 @@
     "heroku-postbuild": "npm build",
     "install": "(cd client && npm i) && (cd server && npm i)",
     "start": "concurrently \"cd client && npm start\" \"cd server && npm start\"",
-    "start:prod": "cd server && npm start:prod"
+    "start:prod": "cd server && npm run start:prod"
   }
 }

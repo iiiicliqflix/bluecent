@@ -1,5 +1,6 @@
 import plaid from 'plaid';
 import envvar from 'envvar';
+import moment from 'moment';
 import User from '../models/user';
 
 const PLAID_CLIENT_ID = envvar.string('PLAID_CLIENT_ID');
@@ -53,9 +54,12 @@ export const getAuth = (req, res, next) => {
 
 export const getTransactions = (req, res, next) => {
   let access_token = req.query.access_token;
+  let today = moment().format('YYYY-MM-DD');
+  let lastWeek = moment().subtract(1, 'months').format('YYYY-MM-DD');
 
-  client.getTransactions(access_token, '2017-01-01', '2017-02-15',
+  client.getTransactions(access_token, lastWeek, today,
     { count: 250, offset: 0 }, (err, result) => {
+      console.log(err);
       const transactions = result.transactions;
 
       if (err != null) {

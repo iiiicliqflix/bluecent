@@ -3,8 +3,8 @@ import { tokenForUser } from '../helpers/token';
 import { sendVerificationEmail } from '../helpers/email';
 
 export const login = (req, res, next) => {
-  const { first, last, email, access_token, total, this_week, weeks } = req.user;
-  res.json({ token: tokenForUser(req.user), first, last, email, access_token, total, weeks });
+  const { first, last, email, access_token, total, numContribs, lastContribDate } = req.user;
+  res.json({ token: tokenForUser(req.user), first, last, email, access_token, total, numContribs, lastContribDate });
 }
 
 export const signup = (req, res, next) => {
@@ -21,7 +21,8 @@ export const signup = (req, res, next) => {
       return res.status(422).send({ error: "Email already in use." });
     }
 
-    const user = new User({ first, last, email, password });
+    let lastContribDate = moment().format('YYYY-MM-DD');
+    const user = new User({ first, last, email, password, lastContribDate });
 
     user.save((err) => {
       if (err) { return next(err); }

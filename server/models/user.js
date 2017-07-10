@@ -10,7 +10,8 @@ const userSchema = new Schema({
   password: String,
   access_token: { type: String, default: null },
   total: { type: Number, default: 0 },
-  weeks: { type: Number, default: 0 },
+  numContribs: { type: Number, default: 0 },
+  lastContribDate: String,
   role: { type: Number, default: 0 },
   auth: {
     token: String,

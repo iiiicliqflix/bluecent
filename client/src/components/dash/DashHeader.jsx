@@ -11,13 +11,13 @@ export default class DashHeader extends Component {
             <p className="stat-number">${this.props.user.total}</p>
           </div>
           <div className="dash-stat stat-mid">
-            <p className="stat-name">Total saved this period.</p>
+            <p className="stat-name">Amount saved since last contribution.</p>
             <p className="stat-number">${this.props.savedChange.toFixed(2)}</p>
             <button className="donate-btn">Contribute</button>
           </div>
           <div className="dash-stat stat-side">
             <p className="stat-name">Number of contributions.</p>
-            <p className="stat-number">{this.props.user.weeks}</p>
+            <p className="stat-number">{this.props.user.numContribs}</p>
           </div>
         </div>
         <ul className="dash-nav">

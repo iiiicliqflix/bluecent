@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import morgan from 'morgan';
@@ -9,6 +10,9 @@ import { mongoConfig } from './config';
 
 const app = express();
 
+const staticFiles = express.static(path.join(__dirname, '../client/build'))
+app.use(staticFiles)
+
 mongoose.connect(mongoConfig.db);
 mongoose.set('debug', true);
 
@@ -17,5 +21,7 @@ app.use(morgan('combined'));
 app.use(cors());
 app.use(bodyParser.json({ type: '*/*' }));
 router(app);
+app.use('/*', staticFiles);
 
-app.listen(8000);
+app.set('port', (process.env.PORT || 8000))
+app.listen(app.get('port'));

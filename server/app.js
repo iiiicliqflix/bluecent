@@ -29,7 +29,7 @@ router(app);
 app.use('/*', staticFiles);
 
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/build/index.html'));
+  res.sendFile(path.resolve(__dirname, '../../client/build/index.html'));
 });
 
 app.set('port', (process.env.PORT || 8000))

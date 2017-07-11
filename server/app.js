@@ -13,7 +13,12 @@ const app = express();
 const staticFiles = express.static(path.join(__dirname, '../client/build'))
 app.use(staticFiles)
 
-mongoose.connect(mongoConfig.db);
+if (process.env.NODE_ENV === 'production') {
+  mongoose.connect(process.env.MONGODB_URI);
+} else {
+  mongoose.connect(mongoConfig.db);
+}
+
 mongoose.set('debug', true);
 
 app.use(compression());

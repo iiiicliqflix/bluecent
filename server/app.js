@@ -5,6 +5,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import compression from 'compression';
 import mongoose from 'mongoose';
+import sslRedirect from 'heroku-ssl-redirect';
 import router from './router';
 import { mongoConfig } from './config';
 
@@ -20,7 +21,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 mongoose.set('debug', true);
-
+app.use(sslRedirect());
 app.use(compression());
 app.use(morgan('combined'));
 app.use(cors());

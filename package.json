@@ -14,7 +14,8 @@
   "author": "Rowan Krishnan",
   "license": "ISC",
   "dependencies": {
-    "concurrently": "^3.5.0"
+    "concurrently": "^3.5.0",
+    "heroku-ssl-redirect": "0.0.4"
   },
   "scripts": {
     "build": "concurrently \"cd client && npm run build\" \"cd server && npm run build\"",

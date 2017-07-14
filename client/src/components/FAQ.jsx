@@ -23,7 +23,7 @@ export default class FAQ extends Component {
             </li>
             <li className="faq-item">
               <p className="faq-question">Who is behind Bluecent?</p>
-              <p className="faq-answer">Bluecent is created and maintained by Rowan Krishnan, with help from Sophia Geanacopolous (illustration) and Joseph Leone (marketing).</p>
+              <p className="faq-answer">Bluecent is created and maintained by Rowan Krishnan.</p>
             </li>
             <li className="faq-item">
               <p className="faq-question">How do I contact Bluecent?</p>

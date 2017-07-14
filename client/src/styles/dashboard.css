@@ -104,21 +104,21 @@
 }
 
 .toggle-btn {
-  border: 1px solid #6665DD;
+  border: 1px solid #0c1c5e;
   background-color: #FAFAFC;
-  color: #6665DD;
+  color: #0c1c5e;
   font-size: 15px;
   height: 40px;
   width: 150px;
 }
 
 .toggle-btn:hover {
-  background-color: #6665DD;
+  background-color: #0c1c5e;
   color: #FAFAFC;
 }
 
 .left {
-  background-color: #6665DD;
+  background-color: #0c1c5e;
   color: #FAFAFC;
   border-top-left-radius: 9999px;
   border-bottom-left-radius: 9999px;
@@ -167,11 +167,11 @@
 }
 
 .ReactTable .rt-thead .rt-th.-sort-asc, .ReactTable .rt-thead .rt-td.-sort-asc {
-  box-shadow: inset 0 3px 0 0 #6665DD;
+  box-shadow: inset 0 3px 0 0 #0c1c5e;
 }
 
 .ReactTable .rt-thead .rt-th.-sort-desc, .ReactTable .rt-thead .rt-td.-sort-desc {
-  box-shadow: inset 0 -3px 0 0 #6665DD;
+  box-shadow: inset 0 -3px 0 0 #0c1c5e;
 }
 
 .ReactTable .rt-tr-group {
@@ -193,5 +193,5 @@
 
 .donate-btn:hover {
   background-color: #FCF5C7;
-  color: #6665DD;
+  color: #0c1c5e;
 }

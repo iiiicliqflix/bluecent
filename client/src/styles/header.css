@@ -24,12 +24,17 @@
 }
 
 .login {
-  background-color: rgba(255, 255, 255, 0.3);
+  /*background-color: rgba(255, 255, 255, 0.3);*/
+  background-color: white;
   border-radius: 9999px;
   padding: 4px 17px 4px 17px;
 }
 
+.login-link, .signout-link {
+  color: #0c1c5e;
+}
+
 .login:hover {
-  background-color: rgba(255, 255, 255, 0.6);
+  /*background-color: rgba(255, 255, 255, 0.6);*/
   border: none;
 }

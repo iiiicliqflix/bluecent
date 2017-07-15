@@ -24,7 +24,6 @@
 }
 
 .login {
-  /*background-color: rgba(255, 255, 255, 0.3);*/
   background-color: white;
   border-radius: 9999px;
   padding: 4px 17px 4px 17px;
@@ -35,6 +34,5 @@
 }
 
 .login:hover {
-  /*background-color: rgba(255, 255, 255, 0.6);*/
   border: none;
 }

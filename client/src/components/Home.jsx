@@ -10,7 +10,9 @@ export default class Home extends Component {
           <Link to="/signup">
             <button className="get-started">Get Started</button>
           </Link>
-          <button className="get-started">How It Works</button>
+          <a href="/faq#how">
+            <button className="get-started">How It Works</button>
+          </a>
         </div>
       </div>
     );

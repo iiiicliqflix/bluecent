@@ -5,7 +5,7 @@ export default class Candidates extends Component {
     return (
       <div className="candidates">
         <div className="table-hdr">
-          <h2 className="table-title">Candidates</h2>
+          <h3 className="coming-soon">Coming soon! We're working on it.</h3>
         </div>
       </div>
     );

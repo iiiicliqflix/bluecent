@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 
 export default class DashHeader extends Component {
   render() {
@@ -21,14 +20,17 @@ export default class DashHeader extends Component {
           </div>
         </div>
         <ul className="dash-nav">
-          <li className="dash-item active-item">
-            <Link to="#">Transactions</Link>
+          <li className={`dash-item ${this.props.dashState === 'transaction' ? 'active-item' : ''}`}
+            onClick={() => {this.props.onClick('transaction')}}>
+            Transactions
           </li>
-          <li className="dash-item">
-            <Link to="#">Candidates</Link>
+          <li className={`dash-item ${this.props.dashState === 'candidates' ? 'active-item' : ''}`}
+            onClick={() => {this.props.onClick('candidates')}}>
+            Candidates
           </li>
-          <li className="dash-item">
-            <Link to="#">Settings</Link>
+          <li className={`dash-item ${this.props.dashState === 'settings' ? 'active-item' : ''}`}
+            onClick={() => {this.props.onClick('settings')}}>
+            Settings
           </li>
         </ul>
       </div>

@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions/plaid';
 import DashHeader from './DashHeader';
 import TransactionTable from './TransactionTable';
+import Candidates from './Candidates';
+import Settings from './Settings';
 import SelectBank from './SelectBank';
 
 class Dashboard extends Component {
@@ -12,7 +14,8 @@ class Dashboard extends Component {
     this.props.getTransactions(user.access_token);
     this.state = {
       user,
-      access_token: user.access_token
+      access_token: user.access_token,
+      dashState: 'transaction'
     }
   }
 
@@ -29,6 +32,11 @@ class Dashboard extends Component {
     this.setState({ access_token: token });
   }
 
+  updateDash(tab) {
+    console.log('hello');
+    this.setState({ dashState: tab });
+  }
+
   render() {
     if (this.state.access_token) {
       if (this.props.transactions) {
@@ -36,8 +44,14 @@ class Dashboard extends Component {
           <div className="dash-container">
             <DashHeader
               user={this.state.user}
-              savedChange={this.calculateSavedChange(this.props.transactions)} />
-            <TransactionTable transactions={this.props.transactions} />
+              savedChange={this.calculateSavedChange(this.props.transactions)}
+              onClick={this.updateDash.bind(this)}
+              dashState={this.state.dashState} />
+            {(this.state.dashState === 'transaction') ?
+              <TransactionTable transactions={this.props.transactions} />
+              : (this.state.dashState === 'candidates') ? <Candidates />
+              : <Settings />
+            }
           </div>
         );
       }

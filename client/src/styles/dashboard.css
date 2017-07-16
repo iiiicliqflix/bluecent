@@ -24,21 +24,19 @@
 }
 
 .dash-item {
+  color: white;
+  cursor: pointer;
   display: inline;
   margin-right: 40px;
   padding-bottom: 15px;
 }
 
-.dash-item:hover {
+.dash-item:hover, .active-item {
   border-bottom: 3px solid white;
 }
 
 .dash-item:nth-child(3) {
   margin-right: 0;
-}
-
-.active-item {
-  border-bottom: 3px solid white;
 }
 
 .dash-stats {
@@ -194,4 +192,12 @@
 .donate-btn:hover {
   background-color: #FCF5C7;
   color: #0c1c5e;
+}
+
+.candidates, .settings {
+  background-color: #FAFAFC;
+  height: 1000px;
+  margin-top: 18px;
+  padding: 30px 0;
+  width: 100%;
 }

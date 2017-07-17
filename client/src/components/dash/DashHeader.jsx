@@ -12,7 +12,9 @@ export default class DashHeader extends Component {
           <div className="dash-stat stat-mid">
             <p className="stat-name">Amount saved since last contribution.</p>
             <p className="stat-number">${this.props.savedChange.toFixed(2)}</p>
-            <button className="donate-btn">Contribute</button>
+            <a href="https://secure.actblue.com/donate/bluecent">
+              <button className="donate-btn">Contribute</button>
+            </a>
           </div>
           <div className="dash-stat stat-side">
             <p className="stat-name">Number of contributions.</p>

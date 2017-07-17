@@ -205,6 +205,7 @@
 
 .coming-soon {
   border: 2px solid rgba(0, 0, 0, 0.4);
+  border-radius: 3px;
   color: rgba(0, 0, 0, 0.4);
   display: block;
   margin: 5% auto;

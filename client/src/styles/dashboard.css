@@ -157,6 +157,10 @@
   text-align: center;
 }
 
+.rt-th:nth-child(3), .rt-th:nth-child(4) {
+  text-align: right;
+}
+
 .rt-tr-group:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }

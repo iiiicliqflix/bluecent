@@ -28,7 +28,7 @@ export default class FAQ extends Component {
             </li>
             <li className="faq-item">
               <p className="faq-question">How do I contact Bluecent?</p>
-              <p className="faq-answer">The best way to get in touch is to send an email to <a href="mailto:rowan@bluecent.org" className="faq-link">rowan@bluecent.org</a>. You can also reach out on <a href="#" className="faq-link">Twitter</a> or <a href="#" className="faq-link">Facebook</a>. If you notice any bugs or inconsistencies on the site, please let us know!</p>
+              <p className="faq-answer">The best way to get in touch is to send an email to <a href="mailto:rowan@bluecent.org" className="faq-link">rowan@bluecent.org</a>. You can also reach out on <a href="https://www.facebook.com" className="faq-link">Twitter</a> or <a href="https://www.facebook.com" className="faq-link">Facebook</a>. If you notice any bugs or inconsistencies on the site, please let us know!</p>
             </li>
             <li className="faq-item">
               <p className="faq-question">Can I help or get involved in any way?</p>

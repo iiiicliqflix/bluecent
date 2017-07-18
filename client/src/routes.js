@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
-
+import requireAuth from './components/common/RequireAuth.jsx';
+import requireNotAuth from './components/common/RequireNotAuth.jsx';
 import App from './components/App.jsx';
 import Home from './components/Home.jsx';
 import FAQ from './components/FAQ.jsx';
@@ -12,12 +13,12 @@ import Dashboard from './components/dash/Dashboard.jsx';
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={Home}/>
+    <IndexRoute component={requireNotAuth(Home)}/>
     <Route path="faq" component={FAQ}/>
-    <Route path="signup" component={SignUp}/>
-    <Route path="login" component={Login}/>
-    <Route path="signup/verify-account" component={SignUpVerify}/>
-    <Route path="verify-account" component={VerifyAccount}/>
-    <Route path="dashboard" component={Dashboard}/>
+    <Route path="signup" component={requireNotAuth(SignUp)}/>
+    <Route path="login" component={requireNotAuth(Login)}/>
+    <Route path="signup/verify-account" component={requireNotAuth(SignUpVerify)}/>
+    <Route path="verify-account" component={requireNotAuth(VerifyAccount)}/>
+    <Route path="dashboard" component={requireAuth(Dashboard)}/>
   </Route>
 )

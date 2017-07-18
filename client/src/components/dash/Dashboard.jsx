@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/plaid';
-import DashHeader from './DashHeader';
+import DashStats from './DashStats';
+import DashNav from './DashNav';
 import TransactionTable from './TransactionTable';
 import Candidates from './Candidates';
 import Settings from './Settings';
@@ -42,9 +43,10 @@ class Dashboard extends Component {
       if (this.props.transactions) {
         return (
           <div className="dash-container">
-            <DashHeader
+            <DashStats
               user={this.state.user}
-              savedChange={this.calculateSavedChange(this.props.transactions)}
+              savedChange={this.calculateSavedChange(this.props.transactions)} />
+            <DashNav
               onClick={this.updateDash.bind(this)}
               dashState={this.state.dashState} />
             {(this.state.dashState === 'transaction') ?

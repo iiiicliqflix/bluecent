@@ -12,6 +12,40 @@
     float: none;
     margin-top: 30px;
   }
+
+  .faq-content {
+    height: 100%;
+    width: 100%;
+  }
+
+  .faq-hdr {
+    margin-top: 16%;
+  }
+
+  .container {
+    margin-top: 20%;
+  }
+
+  .signup-container {
+    margin-top: 10%;
+  }
+
+  .field-first {
+    display: block;
+    margin: 0;
+  }
+
+  .field-last {
+    display: block;
+  }
+
+  .field-first .signup-input, .field-last .signup-input, .signup-input {
+    width: 300px;
+  }
+
+  .hdr {
+    font-size: 45px;
+  }
 }
 
 @media only screen and (min-width: 320px) and (max-width: 600px) {

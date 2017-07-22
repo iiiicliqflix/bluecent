@@ -5,29 +5,14 @@ import 'react-table/react-table.css'
 import '../styles/app.css';
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-    if (this.props.location.pathname === '/dashboard') {
-      this.state = {
-        contentClass: 'content-white',
-        footerClass: 'footer-white'
-      }
-    } else {
-      this.state = {
-        contentClass: '',
-        footerClass: ''
-      }
-    }
-  }
-
   render() {
     return (
       <div>
         <Header />
-        <div className={"content " + this.state.contentClass}>
+        <div className="content">
           {this.props.children}
         </div>
-        <Footer class={this.state.footerClass} />
+        <Footer />
       </div>
     );
   }

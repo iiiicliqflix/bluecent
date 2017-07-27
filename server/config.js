@@ -10,5 +10,17 @@ export const mongoConfig = {
 
 export const emailConfig = {
   service: 'Gmail',
-  auth: { user: EMAIL_ADDRESS, pass: EMAIL_PASSWORD }
+  auth: {
+    user: EMAIL_ADDRESS,
+    pass: EMAIL_PASSWORD
+  }
 };
+
+let STRIPE_KEY = null;
+if (process.env.NODE_ENV === 'production') {
+  STRIPE_KEY = envvar.string('STRIPE_LIVE_KEY');
+} else {
+  STRIPE_KEY = envvar.string('STRIPE_TEST_KEY');
+}
+
+export STRIPE_KEY;

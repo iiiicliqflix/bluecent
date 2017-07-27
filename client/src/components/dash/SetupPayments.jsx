@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { CardNumberElement, CardExpiryElement, CardCVCElement, injectStripe } from 'react-stripe-elements';
-import * as actions from '../../actions/auth';
 
 class SetupPayments extends Component {
   constructor(props) {
@@ -17,6 +16,7 @@ class SetupPayments extends Component {
     }
     this.props.stripe.createToken(extraDetails).then(({token}) => {
       console.log('Received Stripe token:', token);
+      this.props.submitToken(token);
     });
   }
 

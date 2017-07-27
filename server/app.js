@@ -15,7 +15,6 @@ app.use((req, res, next) => {
 
   if (process.env.NODE_ENV === 'production' &&
     req.headers['x-forwarded-proto'] !== 'https') {
-    console.log('redirecting');
     sslUrl = ['https://www.bluecent.org', req.url].join('');
     return res.redirect(sslUrl);
   }

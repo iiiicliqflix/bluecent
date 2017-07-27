@@ -63,15 +63,3 @@ export function signOut() {
     type: UNAUTH_USER,
   }
 }
-
-export function setupPayments(props) {
-  return function(dispatch) {
-    axios.post('/setup-payments', props)
-      .then(response => {
-        browserHistory.push('/dashboard');
-      })
-      .catch(response => {
-        console.log(`RESPONSE: ${response}`);
-      });
-  }
-}

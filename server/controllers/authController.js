@@ -1,10 +1,12 @@
 import User from '../models/user';
+import stripePackage from 'stripe';
 import { tokenForUser } from '../helpers/token';
 import { sendVerificationEmail } from '../helpers/email';
+import { STRIPE_KEY } from '../config';
 
 export const login = (req, res, next) => {
-  const { first, last, email, access_token, total, numContribs, lastContribDate } = req.user;
-  res.json({ token: tokenForUser(req.user), first, last, email, access_token, total, numContribs, lastContribDate });
+  const { first, last, email, access_token, customerId, total, numContribs, lastContribDate } = req.user;
+  res.json({ token: tokenForUser(req.user), first, last, email, access_token, customerId, total, numContribs, lastContribDate });
 }
 
 export const signup = (req, res, next) => {
@@ -66,5 +68,19 @@ export const verifyAccount = (req, res, next) => {
 }
 
 export const setupPayments = (req, res, next) => {
-  console.log(req.body);
+  let stripe = stripePackage(STRIPE_KEY);
+  let user = req.body.user;
+  let token = req.body.token;
+
+  stripe.customers.create({
+    email: user.email
+  }).then((customer) => {
+    User.findOneAndUpdate({ email: user.email }, { customerId: customer.id }, (err) => {
+      if (err) { return next(err); }
+    });
+
+    return stripe.customers.createSource(customer.id, { source: token.id });
+  }).catch((err) => {
+    console.log('Error setting up payment: ', err);
+  });
 }

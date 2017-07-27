@@ -19,9 +19,16 @@ if (user && user.token) {
   store.dispatch({ type: AUTH_USER });
 }
 
+let apiKey = null;
+if (process.env.NODE_ENV === 'production') {
+  apiKey = 'pk_live_xvmsTnJOgZBGHRntb8kNTRYP';
+} else {
+  apiKey = 'pk_test_at49IUFDA9RttSjpq7zmrqId';
+}
+
 render(
   <Provider store={store}>
-    <StripeProvider apiKey="pk_live_xvmsTnJOgZBGHRntb8kNTRYP">
+    <StripeProvider apiKey={apiKey}>
       <Router history={history} routes={routes} />
     </StripeProvider>
   </Provider>,

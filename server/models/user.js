@@ -12,6 +12,7 @@ const userSchema = new Schema({
   total: { type: Number, default: 0 },
   numContribs: { type: Number, default: 0 },
   lastContribDate: String,
+  customerId: { type: String, default: null },
   role: { type: Number, default: 0 },
   auth: {
     token: String,

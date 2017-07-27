@@ -33,6 +33,10 @@ class Dashboard extends Component {
     }, 0);
   }
 
+  submitStripeToken(token) {
+    this.props.setupPayments(token, this.state.user);
+  }
+
   setAccessToken(token) {
     this.setState({ access_token: token });
   }
@@ -49,7 +53,7 @@ class Dashboard extends Component {
           <div className="payment-container">
             <h3 className="payment-hdr">Setup your payment information.</h3>
             <Elements>
-              <SetupPayments user={this.state.user} />
+              <SetupPayments submitToken={this.submitStripeToken.bind(this)} />
             </Elements>
           </div>
         </div>

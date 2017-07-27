@@ -64,3 +64,7 @@ export const verifyAccount = (req, res, next) => {
     });
   });
 }
+
+export const setupPayments = (req, res, next) => {
+  console.log(req.body);
+}

@@ -29,9 +29,9 @@ export default class SelectBank extends Component {
   render() {
     return (
       <div className="bank-container">
-        <h2 className="bank-hdr">Hey, {this.props.user.first}! Connect your bank account to get started donating to progressive candidates.</h2>
-        <button className="btn" onClick={() => {this.state.handler.open()}}>
-          Connect Account
+        <h2 className="bank-hdr">Connect your bank account to start tracking transactions.</h2>
+        <button className="btn btn-bank" onClick={() => {this.state.handler.open()}}>
+          Select Account
         </button>
       </div>
     );

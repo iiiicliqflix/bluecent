@@ -1,17 +1,106 @@
-.bank-container {
-  margin: 15% auto 0 auto;
-  text-align: center;
-  width: 600px;
-}
-
-.bank-hdr {
-  color: white;
-}
-
 .dash-container {
   margin: 5% auto 0 auto;
   text-align: center;
 }
+
+/* Choose Bank Account */
+
+.bank-container {
+  margin: 6% auto 0 auto;
+  text-align: center;
+  width: 800px;
+}
+
+.bank-hdr {
+  color: white;
+  font-size: 30px;
+  font-weight: 300;
+}
+
+.btn-bank {
+  border-radius: 10px;
+}
+
+/* Setup Payment */
+
+.payment-container {
+  margin-top: 3%;
+  text-align: center;
+}
+
+.payment-form {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.payment-hdr {
+  color: white;
+  font-family: 'Avenir';
+  font-size: 30px;
+  font-weight: 300;
+}
+
+.input-cardholder {
+  width: 390px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.input-zipcode {
+  width: 80px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.btn-payment {
+  border-radius: 10px;
+  display: block;
+  margin: 20px auto;
+  padding: 0;
+  width: 120px;
+}
+
+.payment-form iframe {
+  background-color: white;
+  border-radius: 3px;
+  color: black;
+  font-size: 14px;
+  font-family: 'Avenir';
+  height: 14px !important;
+  line-height: 1;
+  margin-top: 30px !important;
+  padding: 15px 10px !important;
+  outline: none;
+}
+
+.payment-form span * {
+  display: inline !important;
+}
+
+.card-number iframe {
+  min-width: 320px !important;
+  width: 320px !important;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 1px solid rgba(0, 0, 0, 0.3) !important;
+}
+
+.card-expiry iframe {
+  min-width: 90px !important;
+  width: 90px !important;
+  border-radius: 0;
+  border-right: 1px solid rgba(0, 0, 0, 0.3) !important;
+}
+
+.card-cvc iframe {
+  min-width: 40px !important;
+  width: 40px !important;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* Dash Header */
 
 .dash-hdr {
   color: white;
@@ -79,6 +168,25 @@
   position: relative;
   width: 300px;
 }
+
+.donate-btn {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  border: 1px solid #FCF5C7;
+  bottom: -20px;
+  color: #FCF5C7;
+  font-size: 15px;
+  height: 40px;
+  position: relative;
+  width: 150px;
+}
+
+.donate-btn:hover {
+  background-color: #FCF5C7;
+  color: #0c1c5e;
+}
+
+/* Transaction Table */
 
 .transaction-table {
   background-color: #fafafc;
@@ -182,22 +290,7 @@
   padding: 4px 0;
 }
 
-.donate-btn {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 9999px;
-  border: 1px solid #FCF5C7;
-  bottom: -20px;
-  color: #FCF5C7;
-  font-size: 15px;
-  height: 40px;
-  position: relative;
-  width: 150px;
-}
-
-.donate-btn:hover {
-  background-color: #FCF5C7;
-  color: #0c1c5e;
-}
+/* Candidates & Settings */
 
 .candidates, .settings {
   background-color: #FAFAFC;

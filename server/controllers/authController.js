@@ -2,7 +2,7 @@ import User from '../models/user';
 import stripePackage from 'stripe';
 import { tokenForUser } from '../helpers/token';
 import { sendVerificationEmail } from '../helpers/email';
-import { STRIPE_KEY } from '../config';
+import { stripeKeys } from '../config';
 
 export const login = (req, res, next) => {
   const { first, last, email, access_token, customerId, total, numContribs, lastContribDate } = req.user;
@@ -68,6 +68,7 @@ export const verifyAccount = (req, res, next) => {
 }
 
 export const setupPayments = (req, res, next) => {
+  let stripeKey = ((process.env.NODE_ENV === 'production') ? stripeKeys.live : stripeKeys.test);
   let stripe = stripePackage(STRIPE_KEY);
   let user = req.body.user;
   let token = req.body.token;

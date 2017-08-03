@@ -69,7 +69,7 @@ export const verifyAccount = (req, res, next) => {
 
 export const setupPayments = (req, res, next) => {
   let stripeKey = ((process.env.NODE_ENV === 'production') ? stripeKeys.live : stripeKeys.test);
-  let stripe = stripePackage(STRIPE_KEY);
+  let stripe = stripePackage(stripeKey);
   let user = req.body.user;
   let token = req.body.token;
 

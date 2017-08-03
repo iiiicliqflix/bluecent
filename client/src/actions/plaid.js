@@ -6,7 +6,7 @@ export function getTransactions(props) {
   return function(dispatch) {
     axios.get('/get_transactions', { params: { access_token: props } })
       .then((response) => {
-        dispatch({ type: GET_TRANSACTIONS, payload: response.data.transactions });
+        dispatch({ type: GET_TRANSACTIONS, payload: response.data });
       });
   }
 }
@@ -15,7 +15,6 @@ export function setupPayments(token, user) {
   return function(dispatch) {
     axios.post('/setup-payments', {token, user})
       .then(response => {
-        console.log('successful');
         browserHistory.push('/dashboard');
       })
       .catch(response => {

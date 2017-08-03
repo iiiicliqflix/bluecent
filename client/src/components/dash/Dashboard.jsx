@@ -24,15 +24,6 @@ class Dashboard extends Component {
     }
   }
 
-  calculateSavedChange(transactions) {
-    return transactions.reduce((acc, item) => {
-      if (item.amount > 0) {
-        return acc + (Math.ceil(item.amount) - item.amount);
-      }
-      return acc;
-    }, 0);
-  }
-
   submitStripeToken(token) {
     this.props.setupPayments(token, this.state.user);
   }
@@ -62,7 +53,7 @@ class Dashboard extends Component {
       if (this.props.transactions) {
         return (
           <div className="dash-container">
-            <DashStats user={this.state.user} savedChange={this.calculateSavedChange(this.props.transactions)} />
+            <DashStats user={this.state.user} savedChange={this.props.savedChange} />
             <DashNav onClick={this.updateDash.bind(this)} dashState={this.state.dashState} />
             {(this.state.dashState === 'transaction') ?
               <TransactionTable transactions={this.props.transactions} />
@@ -91,7 +82,8 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
-    transactions: state.plaid.transactions
+    transactions: state.plaid.transactions,
+    savedChange: state.plaid.savedChange
   };
 }
 

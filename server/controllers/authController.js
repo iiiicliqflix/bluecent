@@ -1,5 +1,6 @@
 import User from '../models/user';
 import stripePackage from 'stripe';
+import moment from 'moment';
 import { tokenForUser } from '../helpers/token';
 import { sendVerificationEmail } from '../helpers/email';
 import { stripeKeys } from '../config';

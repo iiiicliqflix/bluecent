@@ -46,39 +46,46 @@ export const getTransactions = (req, res, next) => {
   let lastWeek = moment().subtract(1, 'months').format('YYYY-MM-DD');
 
   client.getTransactions(access_token, lastWeek, today, { count: 250, offset: 0 }, (err, result) => {
-    let transactions = result.transactions;
-
     if (err != null) {
       console.log(err);
       console.log('Error in fetching transactions.');
       return res.json({ error: err });
     }
 
+    let transactions = filterTransactions(result.transactions);
     let savedChange = calculateSavedChange(transactions);
     res.json({ transactions, savedChange });
   });
 }
 
-export function chargeUsers() {
+export const chargeUsers = () => {
   let stripeKey = ((process.env.NODE_ENV === 'production') ? stripeKeys.live : stripeKeys.test);
   let stripe = stripePackage(stripeKey);
   let today = moment().format('YYYY-MM-DD');
-  let lastWeek = moment().subtract(1, 'months').format('YYYY-MM-DD');
 
   User.find({}, (err, users) => {
-    users.map((user) => {
-      if (user.customerId) {
-        client.getTransactions(user.access_token, lastWeek, today, { count: 250, offset: 0 }, (err, result) => {
+    users.map((u) => {
+      if (u.customerId) {
+        client.getTransactions(u.access_token, u.lastContribDate, today, { count: 250, offset: 0 }, (err, result) => {
           if (err == null) {
-            let transactions = result.transactions;
+            let transactions = filterTransactions(result.transactions);
             let savedChange = calculateSavedChange(transactions);
             savedChange = 100 * savedChange.toFixed(2);
 
-            stripe.charges.create({
-              amount: savedChange,
-              currency: "usd",
-              customer: user.customerId
-            });
+            if (savedChange >= 50) {
+              stripe.charges.create({
+                amount: savedChange,
+                currency: "usd",
+                customer: u.customerId
+              });
+
+              u.total += savedChange;
+              u.numContribs += transactions.length;
+              u.lastContribDate = today;
+              u.update();
+            }
+          } else {
+            console.log(err);
           }
         });
       }
@@ -93,4 +100,13 @@ function calculateSavedChange(transactions) {
     }
     return acc;
   }, 0);
+}
+
+function filterTransactions(transactions) {
+  return transactions.filter((item) => {
+    if (item.amount > 0 && (Math.ceil(item.amount) - item.amount) !== 0) {
+      return true
+    }
+    return false
+  });
 }

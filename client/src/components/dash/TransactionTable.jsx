@@ -5,22 +5,13 @@ import 'react-table/react-table.css';
 export default class TransactionTable extends Component {
   constructor(props) {
     super(props);
-    let transactions = this.getTableData();
+    let transactions = this.props.transactions;
     let numTransactions = transactions.length;
-    if (numTransactions > 25) {
-      this.state = { numRows: 25, transactions, showPagination: true }
-    } else {
-      this.state = { numRows: numTransactions, transactions, showPagination: false }
+    this.state = {
+      numRows: numTransactions,
+      transactions,
+      showPagination: false
     }
-  }
-
-  getTableData() {
-    return this.props.transactions.filter((item) => {
-      if (item.amount > 0 && (Math.ceil(item.amount) - item.amount) !== 0) {
-        return true
-      }
-      return false
-    });
   }
 
   render() {

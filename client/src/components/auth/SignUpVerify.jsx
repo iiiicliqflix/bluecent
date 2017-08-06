@@ -26,7 +26,7 @@ class SignUpVerify extends Component {
     return (
       <div className="container">
         <h1 className="hdr">Activate your account.</h1>
-        <h3>You'll be all set once your confirm the verification email we sent to you at <u>{ this.email && this.email }</u></h3>
+        <h3 className="verify-text">You'll be all set once your confirm the verification email we sent to you at <u>{ this.email && this.email }</u></h3>
         {
           !this.state.resend ?
             <p className="resend" onClick={this.resendEmail.bind(this, { email: this.email })}>Resend email verification code</p> :

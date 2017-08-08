@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Elements } from 'react-stripe-elements';
-import * as actions from '../../actions/plaid';
+import * as actions from '../../actions';
 import DashStats from './DashStats';
 import DashNav from './DashNav';
 import TransactionTable from './TransactionTable';
@@ -19,7 +19,6 @@ class Dashboard extends Component {
     }
     this.state = {
       user,
-      access_token: user.access_token,
       dashState: 'transaction'
     }
   }
@@ -28,8 +27,8 @@ class Dashboard extends Component {
     this.props.setupPayments(token, this.state.user);
   }
 
-  setAccessToken(token) {
-    this.setState({ access_token: token });
+  getAccessToken() {
+    this.props.getAccessToken(this.state.user);
   }
 
   updateDash(tab) {
@@ -37,10 +36,11 @@ class Dashboard extends Component {
   }
 
   render() {
-    if (!this.state.user.customerId || !this.state.access_token) {
+    console.log(this.state);
+    if (!this.state.user.customerId || !this.state.accessToken) {
       return (
         <div>
-          <SelectBank user={this.state.user} update={this.setAccessToken.bind(this)} />
+          <SelectBank getAccessToken={this.getAccessToken.bind(this)} />
           <div className="payment-container">
             <h3 className="payment-hdr">Setup your payment information.</h3>
             <Elements>
@@ -49,12 +49,18 @@ class Dashboard extends Component {
           </div>
         </div>
       );
-    } else if (this.state.access_token) {
+    } else if (this.state.accessToken) {
       if (this.props.transactions) {
         return (
           <div className="dash-container">
-            <DashStats user={this.state.user} savedChange={this.props.savedChange} />
-            <DashNav onClick={this.updateDash.bind(this)} dashState={this.state.dashState} />
+            <DashStats
+              user={this.state.user}
+              savedChange={this.props.savedChange}
+            />
+            <DashNav
+              onClick={this.updateDash.bind(this)}
+              dashState={this.state.dashState}
+            />
             {(this.state.dashState === 'transaction') ?
               <TransactionTable transactions={this.props.transactions} />
               : (this.state.dashState === 'candidates') ? <Candidates />
@@ -83,7 +89,8 @@ class Dashboard extends Component {
 function mapStateToProps(state) {
   return {
     transactions: state.plaid.transactions,
-    savedChange: state.plaid.savedChange
+    savedChange: state.plaid.savedChange,
+    accessToken: state.plaid.accessToken
   };
 }
 

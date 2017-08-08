@@ -42,11 +42,11 @@ if (process.env.NODE_ENV === 'production') {
 //   chargeUsers();
 // });
 
-let rule = new schedule.RecurrenceRule();
-rule.second = 0;
-schedule.scheduleJob(rule, function() {
-  chargeUsers();
-});
+// let rule = new schedule.RecurrenceRule();
+// rule.second = 0;
+// schedule.scheduleJob(rule, function() {
+//   chargeUsers();
+// });
 
 // App settings
 mongoose.set('debug', true);

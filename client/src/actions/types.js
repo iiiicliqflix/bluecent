@@ -8,3 +8,9 @@ export const UNAUTH_USER = 'UNAUTH_USER';
 
 // plaid
 export const GET_TRANSACTIONS = 'GET_TRANSACTIONS';
+export const ACCESS_TOKEN_SUCCESS = 'ACCESS_TOKEN_SUCCESS';
+export const ACCESS_TOKEN_ERROR = 'ACCESS_TOKEN_ERROR';
+
+// stripe
+export const STRIPE_SUCCESS = 'STRIPE_SUCCESS';
+export const STRIPE_ERROR = 'STRIPE_ERROR';

@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { GET_TRANSACTIONS } from './types';
+import {
+  GET_TRANSACTIONS,
+  ACCESS_TOKEN_SUCCESS,
+  ACCESS_TOKEN_ERROR
+} from './types';
 
 export function getTransactions(access_token) {
   return function(dispatch) {
@@ -11,14 +15,27 @@ export function getTransactions(access_token) {
   }
 }
 
-export function setupPayments(token, user) {
+export function getAccessToken(user) {
   return function(dispatch) {
-    axios.post('/setup-payments', {token, user})
-      .then(response => {
-        browserHistory.push('/dashboard');
-      })
-      .catch(response => {
-        console.log(`RESPONSE: ${response}`);
-      });
+    let handler = window.Plaid.create({
+      clientName: 'BlueCent',
+      env: 'development',
+      key: '80aa88b8cce388ffc75efe840a5709',
+      product: ['auth', 'transactions'],
+      onSuccess: (public_token, metadata) => {
+        axios.post('/get_access_token', {
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ public_token: public_token, user: user })
+        }).then((resp) => {
+          return resp.json();
+        }).then((data) => {
+          dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: data });
+        }).catch((error) => {
+          console.log('ERROR');
+          dispatch({ type: ACCESS_TOKEN_ERROR, payload: error });
+        })
+      }
+    });
+    handler.open();
   }
 }

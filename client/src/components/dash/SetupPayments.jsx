@@ -15,7 +15,6 @@ class SetupPayments extends Component {
       address_zip: form.querySelector('input[name=zipcode]').value
     }
     this.props.stripe.createToken(extraDetails).then(({token}) => {
-      console.log('Received Stripe token:', token);
       this.props.submitToken(token);
     });
   }

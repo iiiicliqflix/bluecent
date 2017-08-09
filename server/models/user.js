@@ -9,6 +9,8 @@ const userSchema = new Schema({
   email: { type: String, lowercase: true, unique: true },
   password: String,
   access_token: { type: String, default: null },
+  hasAccessToken: { type: Boolean, default: false },
+  hasCustomerId: { type: Boolean, default: false },
   total: { type: Number, default: 0 },
   numContribs: { type: Number, default: 0 },
   lastContribDate: String,

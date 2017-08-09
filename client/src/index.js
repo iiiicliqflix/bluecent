@@ -16,7 +16,7 @@ const history = syncHistoryWithStore(browserHistory, store);
 
 const user = JSON.parse(localStorage.getItem('user'));
 if (user && user.token) {
-  store.dispatch({ type: AUTH_USER });
+  store.dispatch({ type: AUTH_USER, payload: user });
 }
 
 let apiKey = null;

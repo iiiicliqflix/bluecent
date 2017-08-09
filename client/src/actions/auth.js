@@ -34,7 +34,7 @@ export function loginUser(props) {
     axios.post('/login', { email, password })
       .then(response => {
         localStorage.setItem('user', JSON.stringify(response.data));
-        dispatch({ type: AUTH_USER });
+        dispatch({ type: AUTH_USER, payload: response.data });
         browserHistory.push('/dashboard');
       })
       .catch(() => dispatch(authError(LOGIN_FAILURE, "Email or password is invalid")));

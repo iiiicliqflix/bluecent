@@ -9,9 +9,9 @@ export default function(state = {}, action) {
     case GET_TRANSACTIONS:
       return { ...state, transactions: action.payload.transactions, savedChange: action.payload.savedChange };
     case ACCESS_TOKEN_SUCCESS:
-      return { ...state, accessToken: action.payload, error: {} };
+      return { ...state, hasAccessToken: true, error: {} };
     case ACCESS_TOKEN_ERROR:
-      return { ...state, stripeSetup: true, error: action.payload };
+      return { ...state, hasAccessToken: false, error: action.payload };
     default:
       return state;
   }

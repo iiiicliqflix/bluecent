@@ -33,28 +33,32 @@ export const getAccessToken = (req, res, next) => {
     ACCESS_TOKEN = tokenResponse.access_token;
     ITEM_ID = tokenResponse.item_id;
 
-    User.findOneAndUpdate({ email: u.email }, { access_token: ACCESS_TOKEN }, (err) => {
+    User.findOneAndUpdate({ email: u.email }, { access_token: ACCESS_TOKEN, hasAccessToken: true }, (err) => {
       if (err) { return next(err); }
-      res.json({ access_token: ACCESS_TOKEN });
+      res.json({ hasAccessToken: true });
     });
   });
 }
 
 export const getTransactions = (req, res, next) => {
-  let access_token = req.query.access_token;
-  let today = moment().format('YYYY-MM-DD');
-  let lastWeek = moment().subtract(1, 'months').format('YYYY-MM-DD');
+  const user = req.query.user;
+  const today = moment().format('YYYY-MM-DD');
+  const lastWeek = moment().subtract(1, 'months').format('YYYY-MM-DD');
 
-  client.getTransactions(access_token, lastWeek, today, { count: 250, offset: 0 }, (err, result) => {
-    if (err != null) {
-      console.log(err);
-      console.log('Error in fetching transactions.');
-      return res.json({ error: err });
-    }
+  User.findOne({ email: user.email }, (error, u) => {
+    const accessToken = u.access_token;
 
-    let transactions = filterTransactions(result.transactions);
-    let savedChange = calculateSavedChange(transactions);
-    res.json({ transactions, savedChange });
+    client.getTransactions(accessToken, lastWeek, today, { count: 250, offset: 0 }, (err, result) => {
+      if (err != null) {
+        console.log(err);
+        console.log('Error in fetching transactions.');
+        return res.json({ error: err });
+      }
+
+      const transactions = filterTransactions(result.transactions);
+      const savedChange = calculateSavedChange(transactions);
+      res.json({ transactions, savedChange });
+    });
   });
 }
 

@@ -13,22 +13,19 @@ import SetupPayments from './SetupPayments';
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    let user = JSON.parse(localStorage.getItem('user'));
+    let user = props.user;
     if (user.access_token) {
-      this.props.getTransactions(user.access_token);
+      this.props.getTransactions(user);
     }
-    this.state = {
-      user,
-      dashState: 'transaction'
-    }
+    this.state = { dashState: 'transaction' };
   }
 
   submitStripeToken(token) {
-    this.props.setupPayments(token, this.state.user);
+    this.props.setupPayments(token, this.props.user);
   }
 
   getAccessToken() {
-    this.props.getAccessToken(this.state.user);
+    this.props.getAccessToken(this.props.user);
   }
 
   updateDash(tab) {
@@ -37,7 +34,7 @@ class Dashboard extends Component {
 
   render() {
     console.log(this.state);
-    if (!this.state.user.customerId || !this.state.accessToken) {
+    if (!this.props.user.hasCustomerId && !this.props.user.hasAccessToken) {
       return (
         <div>
           <SelectBank getAccessToken={this.getAccessToken.bind(this)} />
@@ -49,12 +46,23 @@ class Dashboard extends Component {
           </div>
         </div>
       );
-    } else if (this.state.accessToken) {
+    } else if (this.props.user.hasAccessToken && !this.props.user.hasCustomerId) {
+      return (
+        <div className="payment-container">
+          <h3 className="payment-hdr">Setup your payment information.</h3>
+          <Elements>
+            <SetupPayments submitToken={this.submitStripeToken.bind(this)} />
+          </Elements>
+        </div>
+      );
+    } else if (!this.props.user.hasAccessToken && this.props.user.hasCustomerId) {
+      return <SelectBank getAccessToken={this.getAccessToken.bind(this)} />;
+    } else {
       if (this.props.transactions) {
         return (
           <div className="dash-container">
             <DashStats
-              user={this.state.user}
+              user={this.props.user}
               savedChange={this.props.savedChange}
             />
             <DashNav
@@ -76,12 +84,6 @@ class Dashboard extends Component {
           </div>
         );
       }
-    } else {
-      return (
-        <SelectBank
-          user={this.state.user}
-          update={this.setAccessToken.bind(this)} />
-      );
     }
   }
 }
@@ -90,7 +92,7 @@ function mapStateToProps(state) {
   return {
     transactions: state.plaid.transactions,
     savedChange: state.plaid.savedChange,
-    accessToken: state.plaid.accessToken
+    user: state.auth.user
   };
 }
 

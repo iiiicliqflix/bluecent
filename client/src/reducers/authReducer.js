@@ -14,7 +14,7 @@ export default function(state = {}, action) {
     case SIGNUP_FAILURE:
       return { ...state, signup: false, error: { signupResend: action.payload } };
     case AUTH_USER:
-      return { ...state, authenticated: true, error: {} };
+      return { ...state, authenticated: true, error: {}, user: action.payload };
     case LOGIN_FAILURE:
       return { ...state, error: { login: action.payload } };
     case VERIFY_ACCOUNT_FAILURE:

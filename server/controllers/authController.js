@@ -6,8 +6,28 @@ import { sendVerificationEmail } from '../helpers/email';
 import { stripeKeys } from '../config';
 
 export const login = (req, res, next) => {
-  const { first, last, email, access_token, customerId, total, numContribs, lastContribDate } = req.user;
-  res.json({ token: tokenForUser(req.user), first, last, email, access_token, customerId, total, numContribs, lastContribDate });
+  const {
+    first,
+    last,
+    email,
+    hasAccessToken,
+    hasCustomerId,
+    total,
+    numContribs,
+    lastContribDate
+  } = req.user;
+
+  res.json({
+    token: tokenForUser(req.user),
+    first,
+    last,
+    email,
+    hasAccessToken,
+    hasCustomerId,
+    total,
+    numContribs,
+    lastContribDate
+  });
 }
 
 export const signup = (req, res, next) => {
@@ -77,7 +97,7 @@ export const setupPayments = (req, res, next) => {
   stripe.customers.create({
     email: user.email
   }).then((customer) => {
-    User.findOneAndUpdate({ email: user.email }, { customerId: customer.id }, (err) => {
+    User.findOneAndUpdate({ email: user.email }, { customerId: customer.id, hasCustomerId: true }, (err) => {
       if (err) { return next(err); }
     });
 

@@ -14,7 +14,7 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     let user = props.user;
-    if (user.access_token) {
+    if (user.hasAccessToken) {
       this.props.getTransactions(user);
     }
     this.state = { dashState: 'transaction' };
@@ -33,7 +33,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    console.log(this.state);
+    console.log(this.props);
     if (!this.props.user.hasCustomerId && !this.props.user.hasAccessToken) {
       return (
         <div>

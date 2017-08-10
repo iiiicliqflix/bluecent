@@ -24,7 +24,7 @@ export function getAccessToken(user) {
       onSuccess: (public_token, metadata) => {
         axios.post('/get_access_token', { public_token, user })
           .then((response) => {
-            dispatch({ type: ACCESS_TOKEN_SUCCESS });
+            dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: response.data });
           })
           .catch((error) => {
             console.log('Error getting access token.');

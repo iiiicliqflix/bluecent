@@ -9,12 +9,12 @@ export function setupPayments(token, user) {
   return function(dispatch) {
     axios.post('/setup-payments', {token, user})
       .then((response) => {
-        dispatch({ type: STRIPE_SUCCESS });
+        dispatch({ type: STRIPE_SUCCESS, payload: response.data });
         browserHistory.push('/dashboard');
       })
-      .catch((err) => {
-        dispatch({ type: STRIPE_ERROR, payload: err });
-        console.log(`Error: ${err}`);
+      .catch((error) => {
+        dispatch({ type: STRIPE_ERROR, payload: error });
+        console.log(`Error: ${error}`);
       });
   }
 }

@@ -81,9 +81,28 @@ export const verifyAccount = (req, res, next) => {
     User.findByIdAndUpdate(user.id, { role: 1, auth: { used: true } }, (err) => {
       if (err) { return next(err); }
 
-      const { email, first, last } = user;
+      const {
+        first,
+        last,
+        email,
+        hasAccessToken,
+        hasCustomerId,
+        total,
+        numContribs,
+        lastContribDate
+      } = req.user;
 
-      res.json({ token: tokenForUser(user), email, first, last });
+      res.json({
+        token: tokenForUser(req.user),
+        first,
+        last,
+        email,
+        hasAccessToken,
+        hasCustomerId,
+        total,
+        numContribs,
+        lastContribDate
+      });
     });
   });
 }
@@ -94,15 +113,16 @@ export const setupPayments = (req, res, next) => {
   let user = req.body.user;
   let token = req.body.token;
 
-  stripe.customers.create({
-    email: user.email
-  }).then((customer) => {
-    User.findOneAndUpdate({ email: user.email }, { customerId: customer.id, hasCustomerId: true }, (err) => {
-      if (err) { return next(err); }
-    });
+  stripe.customers.create({ email: user.email })
+    .then((customer) => {
+      User.findOneAndUpdate({ email: user.email }, { customerId: customer.id, hasCustomerId: true }, (err) => {
+        if (err) { return next(err); }
+        res.json({ hasCustomerId: true });
+      });
 
-    return stripe.customers.createSource(customer.id, { source: token.id });
-  }).catch((err) => {
-    console.log('Error setting up payment: ', err);
-  });
+      return stripe.customers.createSource(customer.id, { source: token.id });
+    })
+    .catch((err) => {
+      console.log('Error setting up payment: ', err);
+    });
 }

@@ -1,16 +1,21 @@
 import nodemailer from 'nodemailer';
 import { emailConfig } from '../config';
 
-const from = 'BlueCent Team';
+const from = 'Bluecent Team';
 
 export function sendVerificationEmail(email, first, token) {
   const transporter = nodemailer.createTransport(emailConfig);
-  const html = "<a href='" + "http://localhost:3000/verify-account/?email=" + email + "&token=" + token + "' style='background-color: #288feb; color: #fff; padding: 14px; text-decoration: none; border-radius: 5px; margin-top: 20px; display: inline-block;'>Activate Account</a>"
+  const baseUrl = ((process.env.NODE_ENV === 'production') ? 'https://www.bluecent.org' : 'http://localhost:3000');
+  const html = `<a href="${someVar}/verify-account/?email=${email}&token=${token}" style="background-color: #288feb; color: #fff; padding: 14px; text-decoration: none; border-radius: 5px; margin-top: 20px; display: inline-block;">Activate Account</a>`
 
   transporter.sendMail({
     from,
     to: email,
-    subject: 'Verify Email',
+    subject: 'Thanks for joining Bluecent!',
     html,
-  }, (err) => { if (err) { return err; } });
+  }, (err) => {
+    if (err) {
+      return err;
+    }
+  });
 }

@@ -16,14 +16,24 @@ class Header extends Component {
   render() {
     return (
       <header>
-        <h1 className="logo"><Link to={this.props.authenticated ? '/dashboard' : '/'}>bluecent</Link></h1>
+        <h1 className="logo">
+          <Link to={this.props.authenticated ? '/dashboard' : '/'}>bluecent</Link>
+        </h1>
         <ul className="nav">
-          <li className="nav-item"><Link to="/faq">FAQ</Link></li>
-          <li className="nav-item"><a href="https://github.com/rkrishnan8594/bluecent">Open Source</a></li>
+          <li className="nav-item">
+            <Link to="/faq">FAQ</Link>
+          </li>
+          <li className="nav-item">
+            <a href="https://github.com/rkrishnan8594/bluecent">Open Source</a>
+          </li>
           {this.props.authenticated ?
-            <li className="nav-item login" onClick={this.handleClick}><Link to="#" className="signout-link">Sign Out</Link></li>
+            <li className="nav-item login" onClick={this.handleClick}>
+              <Link to="#" className="signout-link">Sign Out</Link>
+            </li>
           :
-            <li className="nav-item login"><Link to="/login" className="login-link">Login</Link></li>
+            <li className="nav-item login">
+              <Link to="/login" className="login-link">Login</Link>
+            </li>
           }
         </ul>
       </header>

@@ -23,7 +23,9 @@ export function signupUser(props) {
         dispatch({ type: SIGNUP_SUCCESS });
         browserHistory.push(`/signup/verify-account?email=${props.email}`);
       })
-      .catch(response => dispatch(authError(SIGNUP_FAILURE, response.data.error)));
+      .catch(response => {
+        dispatch(authError(SIGNUP_FAILURE, response.data.error));
+      });
   }
 }
 
@@ -37,7 +39,9 @@ export function loginUser(props) {
         dispatch({ type: AUTH_USER, payload: response.data });
         browserHistory.push('/dashboard');
       })
-      .catch(() => dispatch(authError(LOGIN_FAILURE, "Email or password is invalid")));
+      .catch(() => {
+        dispatch(authError(LOGIN_FAILURE, "Email or password is invalid"));
+      });
   }
 }
 

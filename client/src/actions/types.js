@@ -14,5 +14,3 @@ export const ACCESS_TOKEN_ERROR = 'ACCESS_TOKEN_ERROR';
 // stripe
 export const STRIPE_SUCCESS = 'STRIPE_SUCCESS';
 export const STRIPE_ERROR = 'STRIPE_ERROR';
-
-export const TEST_FUNCTION = 'TEST_FUNCTION';

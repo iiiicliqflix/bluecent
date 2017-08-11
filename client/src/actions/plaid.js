@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { browserHistory } from 'react-router';
 import {
   GET_TRANSACTIONS,
   ACCESS_TOKEN_SUCCESS,
@@ -17,7 +18,7 @@ export function getTransactions(user) {
 export function getAccessToken(user) {
   return function(dispatch) {
     let handler = window.Plaid.create({
-      clientName: 'BlueCent',
+      clientName: 'Bluecent',
       env: 'development',
       key: '80aa88b8cce388ffc75efe840a5709',
       product: ['auth', 'transactions'],
@@ -25,6 +26,7 @@ export function getAccessToken(user) {
         axios.post('/get_access_token', { public_token, user })
           .then((response) => {
             dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: response.data });
+            browserHistory.push('/dashboard');
           })
           .catch((error) => {
             console.log('Error getting access token.');

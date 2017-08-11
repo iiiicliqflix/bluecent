@@ -41,7 +41,7 @@ export const getAccessToken = (req, res, next) => {
 }
 
 export const getTransactions = (req, res, next) => {
-  const user = req.query.user;
+  const user = JSON.parse(req.query.user);
   const today = moment().format('YYYY-MM-DD');
   const lastWeek = moment().subtract(1, 'months').format('YYYY-MM-DD');
 
@@ -69,7 +69,7 @@ export const chargeUsers = () => {
 
   User.find({}, (err, users) => {
     users.map((u) => {
-      if (u.customerId) {
+      if (u.customerId && u.access_token) {
         client.getTransactions(u.access_token, u.lastContribDate, today, { count: 250, offset: 0 }, (err, result) => {
           if (err == null) {
             let transactions = filterTransactions(result.transactions);
@@ -83,10 +83,13 @@ export const chargeUsers = () => {
                 customer: u.customerId
               });
 
-              u.total += savedChange;
-              u.numContribs += transactions.length;
-              u.lastContribDate = today;
-              u.update();
+              const total = u.total + (savedChange/100);
+              const numContribs = u.numContribs + transactions.length;
+              const lastContribDate = today;
+              User.findOneAndUpdate({ email: u.email }, { total, numContribs, lastContribDate }, (err, result) => {
+                if (err != null) { console.log('There was an error:', err); }
+                console.log("Successfully charged user.");
+              });
             }
           } else {
             console.log(err);

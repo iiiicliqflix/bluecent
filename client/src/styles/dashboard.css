@@ -11,6 +11,10 @@
   width: 800px;
 }
 
+.solo {
+  margin: 14% auto 0 auto;
+}
+
 .bank-hdr {
   color: white;
   font-size: 30px;
@@ -139,10 +143,10 @@
   border-bottom: 3px solid #FAFAFC;
   border-radius: 3px;
   display: inline-block;
-  height: 170px;
+  height: 200px;
   margin-right: 100px;
   padding: 0 20px 0 20px;
-  width: 230px;
+  width: 250px;
 }
 
 .dash-stat:hover {
@@ -160,7 +164,7 @@
 
 .stat-name {
   color: #FCF5C7;
-  margin: 40px 0 20px 0;
+  margin: 55px 0 20px 0;
 }
 
 .stat-mid {

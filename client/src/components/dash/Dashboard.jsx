@@ -33,8 +33,9 @@ class Dashboard extends Component {
   }
 
   render() {
-    console.log(this.props);
-    if (!this.props.user.hasCustomerId && !this.props.user.hasAccessToken) {
+    const { user } = this.props;
+
+    if (!user.hasCustomerId && !user.hasAccessToken) {
       return (
         <div>
           <SelectBank getAccessToken={this.getAccessToken.bind(this)} />
@@ -46,7 +47,7 @@ class Dashboard extends Component {
           </div>
         </div>
       );
-    } else if (this.props.user.hasAccessToken && !this.props.user.hasCustomerId) {
+    } else if (user.hasAccessToken && !user.hasCustomerId) {
       return (
         <div className="payment-container">
           <h3 className="payment-hdr">Setup your payment information.</h3>
@@ -55,14 +56,19 @@ class Dashboard extends Component {
           </Elements>
         </div>
       );
-    } else if (!this.props.user.hasAccessToken && this.props.user.hasCustomerId) {
-      return <SelectBank getAccessToken={this.getAccessToken.bind(this)} />;
+    } else if (!user.hasAccessToken && user.hasCustomerId) {
+      return (
+        <SelectBank
+          getAccessToken={this.getAccessToken.bind(this)}
+          displaySolo={true}
+        />
+      );
     } else {
       if (this.props.transactions) {
         return (
           <div className="dash-container">
             <DashStats
-              user={this.props.user}
+              user={user}
               savedChange={this.props.savedChange}
             />
             <DashNav
@@ -71,8 +77,10 @@ class Dashboard extends Component {
             />
             {(this.state.dashState === 'transaction') ?
               <TransactionTable transactions={this.props.transactions} />
-              : (this.state.dashState === 'candidates') ? <Candidates />
-              : <Settings />
+            : (this.state.dashState === 'candidates') ?
+              <Candidates />
+            :
+              <Settings />
             }
           </div>
         );

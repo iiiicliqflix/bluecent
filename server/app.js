@@ -37,16 +37,16 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Charge stripe accounts every week
-// schedule.scheduleJob({hour: 14, minute: 30, dayOfWeek: 0}, function() {
-//   console.log('Charging stripe accounts.');
-//   chargeUsers();
-// });
+schedule.scheduleJob({hour: 14, minute: 30, dayOfWeek: 0}, function() {
+  chargeUsers();
+});
 
-// let rule = new schedule.RecurrenceRule();
-// rule.second = 0;
-// schedule.scheduleJob(rule, function() {
-//   chargeUsers();
-// });
+// For testing purposes
+/*let rule = new schedule.RecurrenceRule();
+  rule.second = 0;
+  schedule.scheduleJob(rule, function() {
+  chargeUsers();
+});*/
 
 // App settings
 mongoose.set('debug', true);

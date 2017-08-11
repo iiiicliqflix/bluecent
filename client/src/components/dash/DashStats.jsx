@@ -4,18 +4,15 @@ export default class DashStats extends Component {
   render() {
     return (
       <div className="dash-stats">
-        <div className="dash-stat stat-side">
+        <div className="dash-stat">
           <p className="stat-name">Total contributed.</p>
-          <p className="stat-number">${this.props.user.total}</p>
+          <p className="stat-number">${this.props.user.total.toFixed(2)}</p>
         </div>
-        <div className="dash-stat stat-mid">
-          <p className="stat-name">Amount saved since last contribution.</p>
+        <div className="dash-stat">
+          <p className="stat-name">Amount saved this week.</p>
           <p className="stat-number">${this.props.savedChange.toFixed(2)}</p>
-          <a href={`https://secure.actblue.com/donate/bluecent?amount=${this.props.savedChange.toFixed(2)}`}>
-            <button className="donate-btn">Contribute</button>
-          </a>
         </div>
-        <div className="dash-stat stat-side">
+        <div className="dash-stat">
           <p className="stat-name">Number of contributions.</p>
           <p className="stat-number">{this.props.user.numContribs}</p>
         </div>

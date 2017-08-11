@@ -90,7 +90,7 @@ export const verifyAccount = (req, res, next) => {
         total,
         numContribs,
         lastContribDate
-      } = req.user;
+      } = user;
 
       res.json({
         token: tokenForUser(req.user),

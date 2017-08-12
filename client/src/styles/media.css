@@ -78,7 +78,7 @@
   }
 
   .input-cardholder {
-    width: 60%;
+    width: 45%;
   }
 
   .input-zipcode {
@@ -87,11 +87,13 @@
 
   .payment-hdr {
     font-size: 25px;
+    width: 90%;
+    margin: 0 auto;
   }
 
   .card-number iframe {
-    min-width: 85% !important;
-    width: 85% !important;
+    min-width: 70% !important;
+    width: 70% !important;
     border-radius: 3px;
   }
 

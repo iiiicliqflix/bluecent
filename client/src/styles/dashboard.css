@@ -28,13 +28,9 @@
 /* Setup Payment */
 
 .payment-container {
-  margin-top: 3%;
+  margin: 3% auto 0;
   text-align: center;
-}
-
-.payment-form {
   width: 600px;
-  margin: 0 auto;
 }
 
 .payment-hdr {

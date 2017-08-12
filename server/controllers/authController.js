@@ -93,7 +93,7 @@ export const verifyAccount = (req, res, next) => {
       } = user;
 
       res.json({
-        token: tokenForUser(req.user),
+        token: tokenForUser(user),
         first,
         last,
         email,

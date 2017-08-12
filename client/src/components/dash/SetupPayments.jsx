@@ -22,11 +22,11 @@ class SetupPayments extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit} className="payment-form">
-        <div>
-          <span className="payment-field">
+        <div className="payment-details">
+          <span>
             <input className="input input-cardholder" name="cardholder" placeholder="Carholder's Name" />
           </span>
-          <span className="payment-field">
+          <span>
             <input className="input input-zipcode" name="zipcode" maxLength="5" placeholder="Zipcode" />
           </span>
         </div>

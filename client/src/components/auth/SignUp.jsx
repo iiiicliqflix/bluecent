@@ -92,7 +92,6 @@ const validate = props => {
 }
 
 const onSubmitFail = (errors, dispatch) => {
-  console.log(errors);
   for (let field in errors) {
     dispatch(change('signup', `${field}`, ''));
   }

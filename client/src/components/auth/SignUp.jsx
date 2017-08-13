@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, change } from 'redux-form';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
-const renderField = ({ input, className, type, placeholder }) => (
-  <div className={className}>
-    <input className="input signup-input" type={type} placeholder={placeholder} {...input} />
-  </div>
-);
+const renderField = ({ input, className, type, placeholder, meta: { touched, error } }) => {
+  return (
+    <div className={className}>
+      <input
+        className={`input signup-input ${(touched && error) ? 'has-error' : ''}`}
+        type={type}
+        placeholder={(touched && error) ? error : placeholder}
+        {...input}
+      />
+    </div>
+  )
+}
 
 class SignUp extends Component {
   constructor(props) {
@@ -40,33 +47,63 @@ class SignUp extends Component {
 
 const validate = props => {
   const errors = {};
-  const fields = ['firstname', 'lastname', 'email', 'password', 'confirmpassword'];
+  const fields = [
+    {
+      name: 'first',
+      title: 'First name'
+    },
+    {
+      name: 'last',
+      title: 'Last name'
+    },
+    {
+      name: 'email',
+      title: 'Email'
+    },
+    {
+      name: 'password',
+      title: 'Password'
+    },
+    {
+      name: 'confirmpassword',
+      title: 'Confirm password'
+    }
+  ];
 
   fields.forEach((f) => {
-    if(!(f in props)) {
-      errors[f] = `${f} is required`;
+    if (!(f.name in props)) {
+      errors[f.name] = `${f.title} is required.`;
     }
   });
 
-  if(props.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(props.email)) {
-    errors.email = "please provide valid email";
+  if (props.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(props.email)) {
+    errors.email = "Please provide a valid email.";
   }
 
-  if(props.password && props.password.length < 6) {
-    errors.password = "minimum 6 characters";
+  if (props.password && props.password.length < 6) {
+    errors.password = "Minimum 6 characters.";
   }
 
-  if(props.password !== props.confirmpassword) {
-    errors.confirmpassword = "Passwords don't match";
+  if (props.password !== props.confirmpassword) {
+    errors.confirmpassword = "Passwords don't match.";
   }
 
   return errors;
 }
 
-function mapStateToProps(state) {
-  return { errorMessage: state.auth.error };
+const onSubmitFail = (errors, dispatch) => {
+  console.log(errors);
+  for (let field in errors) {
+    dispatch(change('signup', `${field}`, ''));
+  }
 }
 
-SignUp = reduxForm({ form: 'signup', validate })(SignUp);
+function mapStateToProps(state) {
+  return {
+    errorMessage: state.auth.error
+  };
+}
+
+SignUp = reduxForm({ form: 'signup', validate, onSubmitFail })(SignUp);
 
 export default connect(mapStateToProps, actions)(SignUp);

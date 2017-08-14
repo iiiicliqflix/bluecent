@@ -50,7 +50,7 @@ export function verifyAccount(props) {
     axios.post('/signup/verify-account', props)
       .then(response => {
         localStorage.setItem('user', JSON.stringify(response.data));
-        dispatch({ type: AUTH_USER });
+        dispatch({ type: AUTH_USER, payload: response.data });
         browserHistory.push('/dashboard');
       })
       .catch(response => {

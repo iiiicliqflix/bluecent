@@ -1,5 +1,17 @@
 import React, { Component } from 'react';
+import { reduxForm, Field, change } from 'redux-form';
 import { CardNumberElement, CardExpiryElement, CardCVCElement, injectStripe } from 'react-stripe-elements';
+
+const renderField = ({ input, className, placeholder, maxLength, meta: { touched, error } }) => (
+  <span>
+    <input
+      className={`input input-${className} ${(touched && error) ? 'has-error' : ''}`}
+      placeholder={(touched && error) ? error : placeholder}
+      maxLength={maxLength ? maxLength : 50}
+      {...input}
+    />
+  </span>
+);
 
 class SetupPayments extends Component {
   constructor(props) {
@@ -9,13 +21,15 @@ class SetupPayments extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    let form = document.querySelector('form');
-    let extraDetails = {
+    const form = document.querySelector('form');
+    const extraDetails = {
       name: form.querySelector('input[name=cardholder]').value,
       address_zip: form.querySelector('input[name=zipcode]').value
     }
     this.props.stripe.createToken(extraDetails).then(({token}) => {
       this.props.submitToken(token);
+    }).catch((error) => {
+      console.log(error);
     });
   }
 
@@ -23,12 +37,8 @@ class SetupPayments extends Component {
     return (
       <form onSubmit={this.handleSubmit} className="payment-form">
         <div className="payment-details">
-          <span>
-            <input className="input input-cardholder" name="cardholder" placeholder="Carholder's Name" />
-          </span>
-          <span>
-            <input className="input input-zipcode" name="zipcode" maxLength="5" placeholder="Zipcode" />
-          </span>
+          <Field component={renderField} className="cardholder" name="cardholder" placeholder="Carholder's Name" />
+          <Field component={renderField} className="zipcode" name="zipcode" maxLength="5" placeholder="Zipcode" />
         </div>
         <div>
           <CardNumberElement classes={{base: 'card-number'}} />
@@ -40,5 +50,31 @@ class SetupPayments extends Component {
     );
   }
 }
+
+const validate = (props) => {
+  const errors = {};
+
+  if (!props.cardholder) {
+    errors.cardholder = "Cardholder's name is required.";
+  }
+
+  if (!props.zipcode) {
+    errors.zipcode = 'Required.';
+  }
+
+  if (props.zipcode && !(/(^\d{5}$)|(^\d{5}-\d{4}$)/.test(props.zipcode))) {
+    errors.zipcode = 'Invalid.';
+  }
+
+  return errors;
+}
+
+const onSubmitFail = (errors, dispatch) => {
+  for (let field in errors) {
+    dispatch(change('setuppayments', `${field}`, ''));
+  }
+}
+
+SetupPayments = reduxForm({ form: 'setuppayments', validate, onSubmitFail })(SetupPayments);
 
 export default injectStripe(SetupPayments);

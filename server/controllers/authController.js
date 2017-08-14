@@ -78,7 +78,7 @@ export const verifyAccount = (req, res, next) => {
       return res.status(422).send({ error: { message: "Something has gone wrong, please sign up again.", resend: false } });
     }
 
-    User.findByIdAndUpdate(user.id, { role: 1, auth: { used: true } }, (err) => {
+    User.findByIdAndUpdate(user.id, { role: 1, auth: { used: true } }, { new: true }, (err, user) => {
       if (err) { return next(err); }
 
       const {

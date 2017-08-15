@@ -22,6 +22,10 @@ class SignUp extends Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
+  componentWillUnmount() {
+    this.props.errorMessage.signup = null;
+  }
+
   handleFormSubmit(props) {
     this.props.signupUser(props);
   }
@@ -38,6 +42,9 @@ class SignUp extends Component {
           <Field name="email" component={renderField} className="form-field" type="text" placeholder="Email" />
           <Field name="password" component={renderField} className="form-field" type="password" placeholder="Password" />
           <Field name="confirmpassword" component={renderField} className="form-field" type="password" placeholder="Confirm Password" />
+          { this.props.errorMessage && this.props.errorMessage.signup &&
+            <div className="error-container">{this.props.errorMessage.signup}</div>
+          }
           <button type="submit" className="btn auth">Sign Up</button>
         </form>
       </div>

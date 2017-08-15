@@ -31,3 +31,13 @@
 .login-input {
   width: 300px;
 }
+
+.error-container {
+  background-color: #DA627D;
+  border: 1px solid red;
+  border-radius: 3px;
+  font-size: 14px;
+  margin: 20px auto -20px auto;
+  padding: 5px;
+  width: 200px;
+}

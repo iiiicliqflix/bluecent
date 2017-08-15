@@ -1,11 +1,22 @@
 .logo {
   color: white;
-  display: inline;
+  display: inline-block;
+}
+
+.alert {
+  background-color: rgba(103, 224, 163, 0.8);
+  border: 1px solid rgb(103, 224, 163);
+  border-radius: 3px;
+  display: inline-block;
+  margin-left: 33%;
+  text-align: center;
+  width: 200px;
+  height: 40px;
 }
 
 .nav {
   color: white;
-  display: inline;
+  display: inline-block;
   float: right;
   margin-top: 22px;
 }

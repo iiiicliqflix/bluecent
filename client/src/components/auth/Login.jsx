@@ -20,6 +20,10 @@ class Login extends Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
+  componentWillUnmount() {
+    this.props.errorMessage.login = null;
+  }
+
   handleFormSubmit(props) {
     this.props.loginUser(props);
   }
@@ -33,6 +37,9 @@ class Login extends Component {
         <form onSubmit={handleSubmit(this.handleFormSubmit)}>
           <Field name="email" component={renderField} type="text" placeholder="Email" />
           <Field name="password" component={renderField} type="password" placeholder="Password" />
+          { this.props.errorMessage && this.props.errorMessage.login &&
+            <div className="error-container">{this.props.errorMessage.login}</div>
+          }
           <button type="submit" className="btn auth">Login</button>
         </form>
       </div>
@@ -65,7 +72,9 @@ const onSubmitFail = (errors, dispatch) => {
 }
 
 function mapStateToProps(state) {
-  return { errorMessage: state.auth.error };
+  return {
+    errorMessage: state.auth.error
+  };
 }
 
 Login = reduxForm({ form: 'login', validate, onSubmitFail })(Login);

@@ -26,7 +26,7 @@ export default function(state = {}, action) {
         ...state,
         signup: false,
         error: {
-          signupResend: action.payload
+          signup: action.payload
         }
       };
     case AUTH_USER:

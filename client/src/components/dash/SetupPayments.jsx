@@ -19,6 +19,13 @@ class SetupPayments extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    let frames = Array.from(document.getElementsByTagName('iframe'));
+    let stripeEls = Array.from(document.getElementsByClassName('__PrivateStripeElement'));
+    Array.from(frames).forEach((el) => { el.style = null; });
+    Array.from(stripeEls).forEach((el) => { el.style = null; });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     const form = document.querySelector('form');
@@ -76,5 +83,4 @@ const onSubmitFail = (errors, dispatch) => {
 }
 
 SetupPayments = reduxForm({ form: 'setuppayments', validate, onSubmitFail })(SetupPayments);
-
 export default injectStripe(SetupPayments);

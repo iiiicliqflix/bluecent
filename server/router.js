@@ -1,5 +1,5 @@
 import passport from 'passport';
-import { getAccessToken, getTransactions } from './controllers/plaidController';
+import { getAccessToken, getTransactions } from './controllers/financeController';
 import { login, signup, verifyAccount, setupPayments } from './controllers/authController';
 import passportService from './services/passport';
 

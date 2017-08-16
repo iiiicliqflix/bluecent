@@ -8,7 +8,7 @@ import mongoose from 'mongoose';
 import schedule from 'node-schedule';
 import router from './router';
 import { mongoConfig } from './config';
-import { chargeUsers } from './controllers/plaidController';
+import { chargeUsers } from './controllers/financeController';
 
 const app = express();
 

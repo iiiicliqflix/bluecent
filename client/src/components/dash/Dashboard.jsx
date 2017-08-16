@@ -49,7 +49,7 @@ class Dashboard extends Component {
       );
     } else if (user.hasAccessToken && !user.hasCustomerId) {
       return (
-        <div className="payment-container solo">
+        <div className="payment-container solo-payment">
           <h3 className="payment-hdr">Setup your payment information.</h3>
           <Elements>
             <SetupPayments submitToken={this.submitStripeToken.bind(this)} />

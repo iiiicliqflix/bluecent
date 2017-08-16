@@ -11,7 +11,7 @@
   width: 800px;
 }
 
-.solo {
+.solo-bank {
   margin: 14% auto 0 auto;
 }
 
@@ -31,6 +31,10 @@
   margin: 3% auto 0;
   text-align: center;
   width: 600px;
+}
+
+.solo-payment {
+  margin: 10% auto 0 auto;
 }
 
 .payment-hdr {

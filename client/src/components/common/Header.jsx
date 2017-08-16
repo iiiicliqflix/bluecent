@@ -7,11 +7,16 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.closeAlert = this.closeAlert.bind(this);
     this.state = { showBetaAlert: true };
   }
 
   handleClick() {
     this.props.signOut();
+  }
+
+  closeAlert() {
+    this.setState({ showBetaAlert: false });
   }
 
   render() {
@@ -20,6 +25,12 @@ class Header extends Component {
         <h1 className="logo">
           <Link to={this.props.authenticated ? '/dashboard' : '/'}>bluecent</Link>
         </h1>
+        {/*{this.state.showBetaAlert &&
+          <div className="beta-alert">
+            <span>We're currently in beta!</span>
+            <span className="close-alert" onClick={this.closeAlert}>×</span>
+          </div>
+        }*/}
         <ul className="nav">
           <li className="nav-item">
             <Link to="/faq">FAQ</Link>

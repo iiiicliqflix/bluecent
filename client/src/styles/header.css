@@ -3,15 +3,19 @@
   display: inline-block;
 }
 
-.alert {
+.beta-alert {
   background-color: rgba(103, 224, 163, 0.8);
-  border: 1px solid rgb(103, 224, 163);
+  border: 1px solid green;
   border-radius: 3px;
   display: inline-block;
-  margin-left: 33%;
+  margin-left: 32%;
+  padding: 10px 10px 10px 20px;
   text-align: center;
-  width: 200px;
-  height: 40px;
+}
+
+.close-alert {
+  cursor: pointer;
+  margin-left: 20px;
 }
 
 .nav {

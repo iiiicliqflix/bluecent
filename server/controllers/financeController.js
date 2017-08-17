@@ -43,21 +43,22 @@ export const getAccessToken = (req, res, next) => {
 export const getTransactions = (req, res, next) => {
   const user = JSON.parse(req.query.user);
   const today = moment().format('YYYY-MM-DD');
-  const lastWeek = moment().subtract(1, 'months').format('YYYY-MM-DD');
+  const threeWeeksAgo = moment().subtract(3, 'weeks').format('YYYY-MM-DD');
 
   User.findOne({ email: user.email }, (error, u) => {
     const accessToken = u.access_token;
 
-    client.getTransactions(accessToken, lastWeek, today, { count: 250, offset: 0 }, (err, result) => {
+    client.getTransactions(accessToken, threeWeeksAgo, today, { count: 250, offset: 0 }, (err, result) => {
       if (err != null) {
         console.log(err);
         console.log('Error in fetching transactions.');
         return res.json({ error: err });
       }
 
-      const transactions = filterTransactions(result.transactions);
-      const savedChange = calculateSavedChange(transactions);
-      res.json({ transactions, savedChange });
+      let transactions = filterTransactions(result.transactions);
+      let transObj = splitTransactions(transactions, u.lastContribDate);
+      const savedChange = calculateSavedChange(transObj.active);
+      res.json({ transactions: transObj, savedChange });
     });
   });
 }
@@ -116,4 +117,17 @@ function filterTransactions(transactions) {
     }
     return false
   });
+}
+
+function splitTransactions(transactions, lastContribDate) {
+  let active = [];
+  let contributed = [];
+  transactions.forEach((item) => {
+    if (moment(item.date, 'YYYY-MM-DD').isBefore(lastContribDate)) {
+      contributed.push(item);
+    } else {
+      active.push(item);
+    }
+  });
+  return { active, contributed };
 }

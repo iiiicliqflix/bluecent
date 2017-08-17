@@ -23,7 +23,9 @@ class SignUp extends Component {
   }
 
   componentWillUnmount() {
-    this.props.errorMessage.signup = null;
+    if (this.props.errorMessage) {
+      this.props.errorMessage.signup = null;
+    }
   }
 
   handleFormSubmit(props) {

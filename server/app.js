@@ -37,7 +37,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Charge stripe accounts every week
-schedule.scheduleJob({hour: 14, minute: 30, dayOfWeek: 0}, function() {
+schedule.scheduleJob({hour: 0, minute: 0, dayOfWeek: 0}, function() {
   chargeUsers();
 });
 

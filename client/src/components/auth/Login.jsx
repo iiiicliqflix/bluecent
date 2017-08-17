@@ -21,7 +21,9 @@ class Login extends Component {
   }
 
   componentWillUnmount() {
-    this.props.errorMessage.login = null;
+    if (this.props.errorMessage) {
+      this.props.errorMessage.login = null;
+    }
   }
 
   handleFormSubmit(props) {

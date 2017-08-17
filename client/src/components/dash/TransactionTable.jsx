@@ -5,16 +5,33 @@ import 'react-table/react-table.css';
 export default class TransactionTable extends Component {
   constructor(props) {
     super(props);
-    let transactions = this.props.transactions;
-    let numTransactions = transactions.length;
+    this.toggleTable = this.toggleTable.bind(this);
+    let transObj = this.props.transactions;
+    let numActiveTransactions = transObj.active.length;
+    let numContributedTransactions = transObj.contributed.length;
     this.state = {
-      numRows: numTransactions,
-      transactions,
-      showPagination: false
+      numActiveTransactions,
+      numContributedTransactions,
+      active: transObj.active,
+      contributed: transObj.contributed,
+      showActive: true
     }
   }
 
+  toggleTable() {
+    let showActive = !this.state.showActive;
+    this.setState({ showActive: showActive });
+  }
+
   render() {
+    let {
+      showActive,
+      active,
+      contributed,
+      numActiveTransactions,
+      numContributedTransactions
+    } = this.state;
+
     const columns = [{
       Header: 'Date',
       accessor: 'date',
@@ -42,17 +59,33 @@ export default class TransactionTable extends Component {
         <div className="table-hdr">
           <h2 className="table-title">Transactions</h2>
           <div className="table-toggle">
-            <button className="toggle-btn left">Active</button>
-            <button className="toggle-btn right">Contributed</button>
+            <button className={`toggle-btn left ${showActive ? 'toggle-selected' : ''}`} onClick={this.toggleTable}>
+              Active
+            </button>
+            <button className={`toggle-btn right ${showActive ? '' : 'toggle-selected'}`} onClick={this.toggleTable}>
+              Contributed
+            </button>
           </div>
         </div>
-        <ReactTable
-          data={this.state.transactions}
-          columns={columns}
-          defaultPageSize={this.state.numRows}
-          showPageSizeOptions={false}
-          showPageJump={false}
-          showPagination={this.state.showPagination} />
+        {showActive ? (
+          <ReactTable
+            data={active}
+            columns={columns}
+            pageSize={numActiveTransactions}
+            showPageSizeOptions={false}
+            showPageJump={false}
+            showPagination={false}
+          />
+        ) : (
+          <ReactTable
+            data={contributed}
+            columns={columns}
+            pageSize={numContributedTransactions}
+            showPageSizeOptions={false}
+            showPageJump={false}
+            showPagination={false}
+          />
+        )}
       </div>
     );
   }

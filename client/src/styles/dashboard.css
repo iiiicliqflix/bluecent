@@ -229,8 +229,6 @@
 }
 
 .left {
-  background-color: #0c1c5e;
-  color: #FAFAFC;
   border-top-left-radius: 9999px;
   border-bottom-left-radius: 9999px;
 }
@@ -239,6 +237,11 @@
   border-top-right-radius: 9999px;
   border-bottom-right-radius: 9999px;
   border-left: none;
+}
+
+.toggle-selected {
+  background-color: #0c1c5e;
+  color: #FAFAFC;
 }
 
 .ReactTable {

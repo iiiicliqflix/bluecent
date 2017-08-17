@@ -157,6 +157,10 @@
   margin: 0;
 }
 
+.stat-content {
+  margin-top: 55px;
+}
+
 .stat-number {
   color: white;
   font-size: 40px;
@@ -164,7 +168,7 @@
 
 .stat-name {
   color: #FCF5C7;
-  margin: 55px 0 20px 0;
+  margin-bottom: 20px;
 }
 
 .stat-mid {

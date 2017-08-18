@@ -12,7 +12,7 @@ export default class DashStats extends Component {
         </div>
         <div className="dash-stat">
           <div className="stat-content">
-            <p className="stat-name">Amount saved this week.</p>
+            <p className="stat-name">Amount saved this period.</p>
             <p className="stat-number">${this.props.savedChange.toFixed(2)}</p>
           </div>
         </div>

@@ -44,8 +44,7 @@ export const signup = (req, res, next) => {
       return res.status(422).send({ error: "Email already in use." });
     }
 
-    let lastContribDate = moment().format('YYYY-MM-DD');
-    const user = new User({ first, last, email, password, lastContribDate });
+    const user = new User({ first, last, email, password });
 
     user.save((err) => {
       if (err) { return next(err); }
@@ -115,7 +114,15 @@ export const setupPayments = (req, res, next) => {
 
   stripe.customers.create({ email: user.email })
     .then((customer) => {
-      User.findOneAndUpdate({ email: user.email }, { customerId: customer.id, hasCustomerId: true }, (err) => {
+      let lastContribDate = null;
+      let startedTrackingDate = null;
+
+      if (customer.id && user.hasAccessToken) {
+        startedTrackingDate = moment().format('YYYY-MM-DD');
+        lastContribDate = moment().format('YYYY-MM-DD');
+      }
+
+      User.findOneAndUpdate({ email: user.email }, { customerId: customer.id, hasCustomerId: true, startedTrackingDate, lastContribDate }, (err) => {
         if (err) { return next(err); }
         res.json({ hasCustomerId: true });
       });

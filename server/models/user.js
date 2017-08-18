@@ -13,7 +13,8 @@ const userSchema = new Schema({
   hasCustomerId: { type: Boolean, default: false },
   total: { type: Number, default: 0 },
   numContribs: { type: Number, default: 0 },
-  lastContribDate: String,
+  lastContribDate: { type: String, default: null },
+  startedTrackingDate: { type: String, default: null },
   customerId: { type: String, default: null },
   role: { type: Number, default: 0 },
   auth: {

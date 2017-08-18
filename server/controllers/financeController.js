@@ -10,10 +10,6 @@ const PLAID_SECRET = envvar.string('PLAID_SECRET');
 const PLAID_PUBLIC_KEY = envvar.string('PLAID_PUBLIC_KEY');
 const PLAID_ENV = 'development';
 
-let ACCESS_TOKEN = null;
-let PUBLIC_TOKEN = null;
-let ITEM_ID = null;
-
 let client = new plaid.Client(
   PLAID_CLIENT_ID,
   PLAID_SECRET,
@@ -22,7 +18,7 @@ let client = new plaid.Client(
 );
 
 export const getAccessToken = (req, res, next) => {
-  PUBLIC_TOKEN = req.body.public_token;
+  const PUBLIC_TOKEN = req.body.public_token;
   let u = req.body.user;
   client.exchangePublicToken(PUBLIC_TOKEN, function(error, tokenResponse) {
     if (error != null) {
@@ -30,10 +26,17 @@ export const getAccessToken = (req, res, next) => {
       return res.json({error: error});
     }
 
-    ACCESS_TOKEN = tokenResponse.access_token;
-    ITEM_ID = tokenResponse.item_id;
+    const ACCESS_TOKEN = tokenResponse.access_token;
+    const ITEM_ID = tokenResponse.item_id;
+    let lastContribDate = null;
+    let startedTrackingDate = null;
 
-    User.findOneAndUpdate({ email: u.email }, { access_token: ACCESS_TOKEN, hasAccessToken: true }, (err) => {
+    if (ACCESS_TOKEN && u.hasCustomerId) {
+      startedTrackingDate = moment().format('YYYY-MM-DD');
+      lastContribDate = moment().format('YYYY-MM-DD');
+    }
+
+    User.findOneAndUpdate({ email: u.email }, { access_token: ACCESS_TOKEN, hasAccessToken: true, startedTrackingDate, lastContribDate }, (err) => {
       if (err) { return next(err); }
       res.json({ hasAccessToken: true });
     });
@@ -42,13 +45,20 @@ export const getAccessToken = (req, res, next) => {
 
 export const getTransactions = (req, res, next) => {
   const user = JSON.parse(req.query.user);
-  const today = moment().format('YYYY-MM-DD');
-  const threeWeeksAgo = moment().subtract(3, 'weeks').format('YYYY-MM-DD');
 
   User.findOne({ email: user.email }, (error, u) => {
+    const today = moment().format('YYYY-MM-DD');
+    const threeWeeksAgo = moment().subtract(3, 'weeks').format('YYYY-MM-DD');
     const accessToken = u.access_token;
+    let startDate;
 
-    client.getTransactions(accessToken, threeWeeksAgo, today, { count: 250, offset: 0 }, (err, result) => {
+    if (moment(threeWeeksAgo, 'YYYY-MM-DD').isBefore(u.startedTrackingDate)) {
+      startDate = u.startedTrackingDate
+    } else {
+      startDate = threeWeeksAgo;
+    }
+
+    client.getTransactions(accessToken, startDate, today, { count: 250, offset: 0 }, (err, result) => {
       if (err != null) {
         console.log(err);
         console.log('Error in fetching transactions.');

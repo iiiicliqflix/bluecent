@@ -75,6 +75,7 @@ export default class TransactionTable extends Component {
             showPageSizeOptions={false}
             showPageJump={false}
             showPagination={false}
+            noDataText="No active transactions to display."
           />
         ) : (
           <ReactTable
@@ -84,6 +85,7 @@ export default class TransactionTable extends Component {
             showPageSizeOptions={false}
             showPageJump={false}
             showPagination={false}
+            noDataText="No contributed transactions to display."
           />
         )}
       </div>

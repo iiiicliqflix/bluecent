@@ -64,7 +64,7 @@ class Dashboard extends Component {
         />
       );
     } else {
-      if (this.props.transactions) {
+      if (this.props.isDataLoaded) {
         return (
           <div className="dash-container">
             <DashStats
@@ -100,6 +100,7 @@ function mapStateToProps(state) {
   return {
     transactions: state.plaid.transactions,
     savedChange: state.plaid.savedChange,
+    isDataLoaded: state.plaid.isDataLoaded,
     user: state.auth.user
   };
 }

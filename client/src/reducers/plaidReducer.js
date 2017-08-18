@@ -6,7 +6,8 @@ export default function(state = {}, action) {
       return {
         ...state,
         transactions: action.payload.transactions,
-        savedChange: action.payload.savedChange
+        savedChange: action.payload.savedChange,
+        isDataLoaded: true
       };
     default:
       return state;

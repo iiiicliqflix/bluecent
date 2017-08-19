@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { browserHistory } from 'react-router';
 import {
   GET_TRANSACTIONS,
   ACCESS_TOKEN_SUCCESS,
@@ -26,7 +25,6 @@ export function getAccessToken(user) {
         axios.post('/get_access_token', { public_token, user })
           .then((response) => {
             dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: response.data });
-            browserHistory.push('/dashboard');
           })
           .catch((error) => {
             console.log('Error getting access token.');

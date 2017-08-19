@@ -9,6 +9,7 @@ import SignUp from './components/auth/SignUp.jsx';
 import SignUpVerify from './components/auth/SignUpVerify.jsx';
 import VerifyAccount from './components/auth/VerifyAccount.jsx';
 import Login from './components/auth/Login.jsx';
+import SetupAccount from './components/account/SetupAccount';
 import Dashboard from './components/dash/Dashboard.jsx';
 
 export default (
@@ -19,6 +20,7 @@ export default (
     <Route path="login" component={requireNotAuth(Login)}/>
     <Route path="signup/verify-account" component={requireNotAuth(SignUpVerify)}/>
     <Route path="verify-account" component={requireNotAuth(VerifyAccount)}/>
+    <Route path="setup-account" component={requireAuth(SetupAccount)}/>
     <Route path="dashboard" component={requireAuth(Dashboard)}/>
   </Route>
 )

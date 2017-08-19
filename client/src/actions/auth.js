@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
+import { push } from 'react-router-redux';
 import {
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
@@ -21,7 +22,7 @@ export function signupUser(props) {
     axios.post('/signup', props)
       .then(() => {
         dispatch({ type: SIGNUP_SUCCESS });
-        browserHistory.push(`/signup/verify-account?email=${props.email}`);
+        dispatch(push(`/signup/verify-account?email=${props.email}`));
       })
       .catch(error => {
         dispatch(authError(SIGNUP_FAILURE, error.response.data.error));
@@ -37,7 +38,11 @@ export function loginUser(props) {
       .then(response => {
         localStorage.setItem('user', JSON.stringify(response.data));
         dispatch({ type: AUTH_USER, payload: response.data });
-        browserHistory.push('/dashboard');
+        if (response.data.hasAccessToken && response.data.hasCustomerId) {
+          dispatch(push('/dashboard'));
+        } else {
+          dispatch(push('/setup-account'));
+        }
       })
       .catch(() => {
         dispatch(authError(LOGIN_FAILURE, "Email or password is invalid."));
@@ -51,7 +56,7 @@ export function verifyAccount(props) {
       .then(response => {
         localStorage.setItem('user', JSON.stringify(response.data));
         dispatch({ type: AUTH_USER, payload: response.data });
-        browserHistory.push('/dashboard');
+        dispatch(push('/setup-account'));
       })
       .catch(error => {
         console.log(`ERROR: ${error}`);

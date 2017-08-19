@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { browserHistory } from 'react-router';
+import { push } from 'react-router-redux';
 import {
   STRIPE_SUCCESS,
   STRIPE_ERROR
@@ -10,11 +10,22 @@ export function setupPayments(token, user) {
     axios.post('/setup-payments', {token, user})
       .then((response) => {
         dispatch({ type: STRIPE_SUCCESS, payload: response.data });
-        browserHistory.push('/dashboard');
       })
       .catch((error) => {
         dispatch({ type: STRIPE_ERROR, payload: error });
         console.log(`Error: ${error}`);
       });
+  }
+}
+
+export function redirectToDashboard() {
+  return function(dispatch) {
+    dispatch(push('/dashboard'));
+  }
+}
+
+export function redirectToSetupAccount() {
+  return function(dispatch) {
+    dispatch(push('/setup-account'));
   }
 }

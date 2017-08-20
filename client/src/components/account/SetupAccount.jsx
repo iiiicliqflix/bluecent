@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import { Elements } from 'react-stripe-elements';
 import * as actions from '../../actions';
 import SelectBank from './SelectBank';
 import SetupPayments from './SetupPayments';
 
 class SetupAccount extends Component {
-  constructor(props) {
-    super(props);
-    const user = props.user;
+  componentWillMount() {
+    const user = this.props.user;
     if (user.hasAccessToken && user.hasCustomerId) {
-      this.props.redirectToDashboard();
+      browserHistory.push('/dashboard');
     }
   }
 
-  componentWillReceiveProps() {
-    const { user } = this.props;
+  componentWillReceiveProps(nextProps) {
+    const user = nextProps.user;
     if (user.hasAccessToken && user.hasCustomerId) {
-      this.props.redirectToDashboard();
+      browserHistory.push('/dashboard');
     }
   }
 
@@ -53,7 +53,7 @@ class SetupAccount extends Component {
           </Elements>
         </div>
       );
-    } else if (!user.hasAccessToken && user.hasCustomerId) {
+    } else {
       return (
         <SelectBank
           getAccessToken={this.getAccessToken.bind(this)}

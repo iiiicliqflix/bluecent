@@ -13,7 +13,7 @@ export function setupPayments(token, user) {
       })
       .catch((error) => {
         dispatch({ type: STRIPE_ERROR, payload: error });
-        console.log(`Error: ${error}`);
+        console.log(`Error setting up Stripe: ${error}`);
       });
   }
 }

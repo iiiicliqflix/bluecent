@@ -20,14 +20,14 @@ export function getAccessToken(user) {
       clientName: 'Bluecent',
       env: 'development',
       key: '80aa88b8cce388ffc75efe840a5709',
-      product: ['auth', 'transactions'],
+      product: ['transactions'],
       onSuccess: (public_token, metadata) => {
         axios.post('/get_access_token', { public_token, user })
           .then((response) => {
             dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: response.data });
           })
           .catch((error) => {
-            console.log('Error getting access token.');
+            console.log(`Error getting access token: ${error}`);
             dispatch({ type: ACCESS_TOKEN_ERROR, payload: error });
           });
       }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import * as actions from '../../actions';
 import DashStats from './DashStats';
 import DashNav from './DashNav';
@@ -11,16 +12,17 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     let user = props.user;
-
-    if (!user.hasAccessToken || !user.hasCustomerId) {
-      this.props.redirectToSetupAccount();
-    }
-
     if (user.hasAccessToken) {
       this.props.getTransactions(user);
     }
-
     this.state = { dashState: 'transaction' };
+  }
+
+  componentWillMount() {
+    const user = this.props.user;
+    if (!user.hasAccessToken || !user.hasCustomerId) {
+      browserHistory.push('/setup-account');
+    }
   }
 
   updateDash(tab) {

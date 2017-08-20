@@ -12,8 +12,6 @@ import {
 } from '../actions/types';
 
 export default function(state = {}, action) {
-  let user = {};
-
   switch(action.type) {
     case SIGNUP_SUCCESS:
       return {
@@ -58,39 +56,39 @@ export default function(state = {}, action) {
         error: {}
       };
     case ACCESS_TOKEN_SUCCESS:
-      user = state.user;
-      user.hasAccessToken = true;
-
       return {
         ...state,
-        user,
+        user: {
+          ...state.user,
+          hasAccessToken: true
+        },
         error: {}
       };
     case ACCESS_TOKEN_ERROR:
-      user = state.user;
-      user.hasAccessToken = false;
-
       return {
         ...state,
-        user,
+        user: {
+          ...state.user,
+          hasAccessToken: false
+        },
         error: action.payload
       };
     case STRIPE_SUCCESS:
-      user = state.user;
-      user.hasCustomerId = true;
-
       return {
         ...state,
-        hasCustomerId: true,
+        user: {
+          ...state.user,
+          hasCustomerId: true
+        },
         error: {}
       };
     case STRIPE_ERROR:
-      user = state.user;
-      user.hasCustomerId = false;
-
       return {
         ...state,
-        user,
+        user: {
+          ...state.user,
+          hasCustomerId: false
+        },
         error: action.payload
       };
     default:

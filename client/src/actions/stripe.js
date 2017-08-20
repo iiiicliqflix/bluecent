@@ -17,15 +17,3 @@ export function setupPayments(token, user) {
       });
   }
 }
-
-export function redirectToDashboard() {
-  return function(dispatch) {
-    dispatch(push('/dashboard'));
-  }
-}
-
-export function redirectToSetupAccount() {
-  return function(dispatch) {
-    dispatch(push('/setup-account'));
-  }
-}

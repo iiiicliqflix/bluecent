@@ -76,7 +76,7 @@ export const getTransactions = (req, res, next) => {
 export const chargeUsers = () => {
   let stripeKey = ((process.env.NODE_ENV === 'production') ? stripeKeys.live : stripeKeys.test);
   let stripe = stripePackage(stripeKey);
-  let today = moment().format('YYYY-MM-DD');
+  let today = moment().subtract(1, 'days').format('YYYY-MM-DD');
 
   User.find({}, (err, users) => {
     users.map((u) => {
@@ -96,7 +96,7 @@ export const chargeUsers = () => {
 
               const total = u.total + (savedChange/100);
               const numContribs = u.numContribs + transactions.length;
-              const lastContribDate = today;
+              const lastContribDate = moment().format('YYYY-MM-DD');
               User.findOneAndUpdate({ email: u.email }, { total, numContribs, lastContribDate }, (err, result) => {
                 if (err != null) { console.log('There was an error:', err); }
                 console.log("Successfully charged user.");
@@ -122,10 +122,10 @@ function calculateSavedChange(transactions) {
 
 function filterTransactions(transactions) {
   return transactions.filter((item) => {
-    if (item.amount > 0 && (Math.ceil(item.amount) - item.amount) !== 0) {
-      return true
+    if (item.amount > 0 && (Math.ceil(item.amount) - item.amount) !== 0 && !item.name.toUpperCase().includes('BLUECENT')) {
+      return true;
     }
-    return false
+    return false;
   });
 }
 

@@ -12,7 +12,7 @@ export default class FAQ extends Component {
             <li className="faq-item">
               <p className="faq-question" id="how">How does Bluecent work?</p>
               <p className="faq-answer">Bluecent rounds up spare change from daily financial transactions and at the end of every week donates the sum to Democratic candidates running for Congress in 2018. For example, spending $7.20 on a burrito will add $0.80 to your weekly total. Connect your bank account to Bluecent after signing up and the app will immediately begin rounding up and tallying spare change as you make transactions.</p>
-              <p className="faq-answer">Upcoming features will allow users to select specific campaigns that you want your contributions to support and the percentage of your contribution that will go to each campaign.</p>
+              <p className="faq-answer">Upcoming features will allow users to select specific campaigns that they want their contributions to support and the percentage of their contribution that will go to each campaign.</p>
             </li>
             <li className="faq-item">
               <p className="faq-question">Is Bluecent a PAC or a nonprofit?</p>

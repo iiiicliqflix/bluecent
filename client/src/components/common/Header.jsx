@@ -7,47 +7,37 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
-    this.closeAlert = this.closeAlert.bind(this);
-    this.state = { showBetaAlert: true };
   }
 
   handleClick() {
     this.props.signOut();
   }
 
-  closeAlert() {
-    this.setState({ showBetaAlert: false });
-  }
-
   render() {
     return (
       <header>
-        <h1 className="logo">
-          <Link to={this.props.authenticated ? '/dashboard' : '/'}>bluecent</Link>
-        </h1>
-        {/*{this.state.showBetaAlert &&
-          <div className="beta-alert">
-            <span>We're currently in beta!</span>
-            <span className="close-alert" onClick={this.closeAlert}>×</span>
-          </div>
-        }*/}
-        <ul className="nav">
-          <li className="nav-item">
-            <Link to="/faq">FAQ</Link>
-          </li>
-          <li className="nav-item">
-            <a href="https://github.com/rkrishnan8594/bluecent">Open Source</a>
-          </li>
-          {this.props.authenticated ?
-            <li className="nav-item login" onClick={this.handleClick}>
-              <Link to="#" className="signout-link">Sign Out</Link>
+        <div className="header-content">
+          <h1 className="logo">
+            <Link to={this.props.authenticated ? '/dashboard' : '/'}>bluecent</Link>
+          </h1>
+          <ul className="nav">
+            <li className="nav-item">
+              <Link to="/faq">FAQ</Link>
             </li>
-          :
-            <li className="nav-item login">
-              <Link to="/login" className="login-link">Login</Link>
+            <li className="nav-item">
+              <a href="https://github.com/rkrishnan8594/bluecent">Open Source</a>
             </li>
-          }
-        </ul>
+            {this.props.authenticated ?
+              <li className="nav-item login" onClick={this.handleClick}>
+                <Link to="#" className="signout-link">Sign Out</Link>
+              </li>
+            :
+              <li className="login">
+                <Link to="/login" className="login-link">Login</Link>
+              </li>
+            }
+          </ul>
+        </div>
       </header>
     )
   }

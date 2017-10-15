@@ -1,28 +1,18 @@
+.header-content {
+  margin: 0 2%;
+  padding-bottom: 10px;
+}
+
 .logo {
   color: white;
   display: inline-block;
-}
-
-.beta-alert {
-  background-color: rgba(103, 224, 163, 0.8);
-  border: 1px solid green;
-  border-radius: 3px;
-  display: inline-block;
-  margin-left: 32%;
-  padding: 10px 10px 10px 20px;
-  text-align: center;
-}
-
-.close-alert {
-  cursor: pointer;
-  margin-left: 20px;
 }
 
 .nav {
   color: white;
   display: inline-block;
   float: right;
-  margin-top: 22px;
+  line-height: 44px;
 }
 
 .nav li {
@@ -30,24 +20,34 @@
   list-style-type: none;
 }
 
-.nav-item {
+.nav-item:not(:first-child) {
   margin-left: 30px;
 }
 
+.nav-item {
+  padding-bottom: 19px;
+}
+
 .nav-item:hover {
-  border-bottom: 3px solid white;
+  border-bottom: 3px solid #0c1c5e;
 }
 
 .login {
-  background-color: white;
+  border: 2px solid #0c1c5e;
   border-radius: 9999px;
   padding: 4px 17px 4px 17px;
+  margin-left: 30px;
 }
 
 .login-link, .signout-link {
   color: #0c1c5e;
 }
 
+.login-link:hover, .signout-link:hover {
+  color: white;
+}
+
 .login:hover {
-  border: none;
+  background-color: #0c1c5e;
+  color: white;
 }

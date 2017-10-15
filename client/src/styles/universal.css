@@ -17,12 +17,12 @@ html {
 }
 
 a {
-  color: white;
+  color: #0c1c5e;
   text-decoration: none;
 }
 
 body {
-  background-color: #0c1c5e;
+  background-color: white;
   font-family: 'Avenir';
   font-weight: 300;
   overflow: auto;
@@ -47,5 +47,6 @@ footer {
 }
 
 header {
-  margin: 3% 5% 0 5%;
+  border-bottom: 1px solid #e5e5e5;
+  margin-top: 10px;
 }

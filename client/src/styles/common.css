@@ -4,15 +4,21 @@
 }
 
 .container-home {
-  margin-top: 12%;
+  margin-top: 5%;
   text-align: center;
 }
 
 .hdr {
-  color: white;
+  color: #0c1c5e;
   font-family: 'Avenir';
   font-size: 50px;
   font-weight: 300;
+}
+
+.sub-hdr {
+  color: #0c1c5e;
+  font-size: 16px;
+  margin-top: 20px;
 }
 
 .btns {
@@ -20,10 +26,10 @@
 }
 
 .btn {
-  background-color: #0c1c5e;
-  border: 2px solid white;
+  background-color: white;
+  border: 2px solid #0c1c5e;
   border-radius: 9999px;
-  color: white;
+  color: #0c1c5e;
   font-size: 16px;
   height: 50px;
   margin: 20px;
@@ -32,13 +38,13 @@
 }
 
 .btn:hover {
-  background-color: white;
-  color: #0c1c5e;
+  background-color: #0c1c5e;
+  color: white;
 }
 
 .input {
   border: none;
-  border-radius: 3px;
+  border-bottom: 2px solid #0c1c5e;
   font-size: 14px;
   height: 25px;
   margin-top: 30px;
@@ -48,21 +54,21 @@
 }
 
 .get-started {
-  border: 2px solid white;
-  border-radius: 9999px;
+  border: 2px solid #0c1c5e;
+  border-radius: 4px;
   background-color: #0c1c5e;
   color: white;
   font-size: 15px;
-  height: 45px;
-  margin: 10px 15px 0 0;
+  height: 60px;
+  margin-top: 20px;
   padding: 10px;
-  width: 150px;
+  width: 180px;
 }
 
-.get-started:hover {
-  background-color: white;
-  color: #0c1c5e;
-}
+/*.get-started:hover {
+  background-color: #0c1c5e;
+  color: white;
+}*/
 
 .footer-white {
   background-color: #FAFAFC;

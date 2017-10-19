@@ -43,6 +43,20 @@ export const getAccessToken = (req, res, next) => {
   });
 }
 
+export const getPublicToken = (req, res, next) => {
+  const user = JSON.parse(req.query.user);
+
+  User.findOne({ email: user.email }, (error, u) => {
+    const accessToken = u.access_token;
+
+    client.createPublicToken(accessToken, (err, result) => {
+      if (err) { return next(err); }
+      const public_token = result.public_token;
+      res.json({ public_token });
+    });
+  });
+}
+
 export const getTransactions = (req, res, next) => {
   const user = JSON.parse(req.query.user);
 
@@ -62,7 +76,7 @@ export const getTransactions = (req, res, next) => {
       if (err != null) {
         console.log(err);
         console.log('Error in fetching transactions.');
-        return res.json({ error: err });
+        return res.status(400).send({ error: err });
       }
 
       let transactions = filterTransactions(result.transactions);

@@ -30,26 +30,45 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { user } = this.props;
+    const {
+      user,
+      isDataLoaded,
+      savedChange,
+      transactions,
+      transactionsError,
+      updatePlaidItem,
+      publicToken
+    } = this.props;
 
-    if (this.props.isDataLoaded) {
+    if (isDataLoaded) {
       return (
         <div className="dash-container">
           <DashStats
             user={user}
-            savedChange={this.props.savedChange}
+            savedChange={savedChange}
           />
           <DashNav
             onClick={this.updateDash.bind(this)}
             dashState={this.state.dashState}
           />
           {(this.state.dashState === 'transaction') ?
-            <TransactionTable transactions={this.props.transactions} />
+            <TransactionTable transactions={transactions} />
           : (this.state.dashState === 'candidates') ?
             <Candidates />
           :
             <Settings />
           }
+        </div>
+      );
+    } else if (transactionsError) {
+      return (
+        <div className="dash-container">
+          <h1 className="update-hdr">Refresh your online banking data.</h1>
+          <button
+            className="btn btn-bank"
+            onClick={() => {updatePlaidItem(publicToken)}}>
+            Update Account
+          </button>
         </div>
       );
     } else {
@@ -67,6 +86,8 @@ function mapStateToProps(state) {
     transactions: state.plaid.transactions,
     savedChange: state.plaid.savedChange,
     isDataLoaded: state.plaid.isDataLoaded,
+    transactionsError: state.plaid.transactionsError,
+    publicToken: state.plaid.publicToken,
     user: state.auth.user
   };
 }

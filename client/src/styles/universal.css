@@ -48,5 +48,10 @@ footer {
 
 header {
   border-bottom: 1px solid #e5e5e5;
-  margin-top: 10px;
+  padding-top: 10px;
+}
+
+header.dark {
+  background-color: #0c1c5e;
+  border: none;
 }

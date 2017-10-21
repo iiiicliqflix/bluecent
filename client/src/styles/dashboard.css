@@ -1,5 +1,6 @@
 .dash-container {
-  margin: 5% auto 0 auto;
+  background-color: #0c1c5e;
+  padding-top: 5%;
   text-align: center;
 }
 
@@ -119,7 +120,7 @@
 }
 
 .dash-nav {
-  color: #FAFAFC;
+  color: white;
   margin-top: 5%;
 }
 
@@ -146,7 +147,7 @@
 
 .dash-stat {
   background-color: rgba(255, 255, 255, 0.1);
-  border-bottom: 3px solid #FAFAFC;
+  border-bottom: 3px solid white;
   border-radius: 3px;
   display: inline-block;
   height: 200px;
@@ -177,33 +178,10 @@
   margin-bottom: 20px;
 }
 
-.stat-mid {
-  height: 250px;
-  position: relative;
-  width: 300px;
-}
-
-.donate-btn {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 9999px;
-  border: 1px solid #FCF5C7;
-  bottom: -20px;
-  color: #FCF5C7;
-  font-size: 15px;
-  height: 40px;
-  position: relative;
-  width: 150px;
-}
-
-.donate-btn:hover {
-  background-color: #FCF5C7;
-  color: #0c1c5e;
-}
-
 /* Transaction Table */
 
 .transaction-table {
-  background-color: #fafafc;
+  background-color: white;
   margin-top: 18px;
   min-height: 250px;
   padding: 30px 0;
@@ -227,7 +205,7 @@
 
 .toggle-btn {
   border: 1px solid #0c1c5e;
-  background-color: #FAFAFC;
+  background-color: white;
   color: #0c1c5e;
   font-size: 15px;
   height: 40px;
@@ -236,7 +214,7 @@
 
 .toggle-btn:hover {
   background-color: #0c1c5e;
-  color: #FAFAFC;
+  color: white;
 }
 
 .left {
@@ -252,7 +230,7 @@
 
 .toggle-selected {
   background-color: #0c1c5e;
-  color: #FAFAFC;
+  color: white;
 }
 
 .ReactTable {
@@ -317,7 +295,7 @@
 /* Candidates & Settings */
 
 .candidates, .settings {
-  background-color: #FAFAFC;
+  background-color: white;
   height: 200px;
   margin-top: 18px;
   padding: 30px 0;

@@ -1,12 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { withRouter, Link } from 'react-router';
 import * as actions from '../../actions/auth';
 
 class Header extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    if (['/faq', '/dashboard'].indexOf(this.props.location.pathname) >= 0) {
+      this.state = { color: 'dark' };
+    } else {
+      this.state = { color: 'light' };
+    }
+  }
+
+  componentWillReceiveProps() {
+    let url = window.location.href;
+    let currentRoute = url.substr(url.lastIndexOf('/') + 1);
+    if (['faq', 'dashboard'].indexOf(currentRoute) < 0) {
+      this.setState({ color: 'light' });
+    } else {
+      this.setState({ color: 'dark' });
+    }
   }
 
   handleClick() {
@@ -15,7 +30,7 @@ class Header extends Component {
 
   render() {
     return (
-      <header>
+      <header className={this.state.color}>
         <div className="header-content">
           <h1 className="logo">
             <Link to={this.props.authenticated ? '/dashboard' : '/'}>bluecent</Link>
@@ -44,7 +59,9 @@ class Header extends Component {
 }
 
 function mapStateToProps(state) {
-  return { authenticated: state.auth.authenticated };
+  return {
+    authenticated: state.auth.authenticated
+  };
 }
 
-export default connect(mapStateToProps, actions)(Header);
+export default connect(mapStateToProps, actions)(withRouter(Header));

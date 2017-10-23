@@ -1,28 +1,52 @@
-.logo {
+.dark .nav-item, .dark .logo {
   color: white;
-  display: inline-block;
 }
 
-.beta-alert {
-  background-color: rgba(103, 224, 163, 0.8);
-  border: 1px solid green;
-  border-radius: 3px;
-  display: inline-block;
-  margin-left: 32%;
-  padding: 10px 10px 10px 20px;
-  text-align: center;
+.dark .nav-item:hover {
+  border-bottom: 3px solid white;
 }
 
-.close-alert {
-  cursor: pointer;
-  margin-left: 20px;
+.dark .login {
+  border: 2px solid white;
+  color: white;
+}
+
+.dark .login:hover {
+  background-color: white;
+  border: 2px solid white;
+  color: #0c1c5e;
+}
+
+.dark .path {
+  fill: white;
+}
+
+.header-content {
+  margin: 1% 5% 0;
+}
+
+.logo-svg {
+  vertical-align: top;
+  margin-right: 14px;
+}
+
+.logo {
+  color: #0c1c5e;
+  display: inline-block;
+  line-height: 48px;
+  margin-top: 3px;
+}
+
+.path {
+  fill: #0c1c5e;
 }
 
 .nav {
   color: white;
   display: inline-block;
   float: right;
-  margin-top: 22px;
+  line-height: 48px;
+  margin-top: 5px;
 }
 
 .nav li {
@@ -30,24 +54,28 @@
   list-style-type: none;
 }
 
-.nav-item {
+.nav-item:not(:first-child) {
   margin-left: 30px;
 }
 
+.nav-item {
+  color: #0c1c5e;
+  padding-bottom: 10px;
+}
+
 .nav-item:hover {
-  border-bottom: 3px solid white;
+  border-bottom: 3px solid #0c1c5e;
 }
 
 .login {
-  background-color: white;
+  border: 2px solid #0c1c5e;
   border-radius: 9999px;
-  padding: 4px 17px 4px 17px;
-}
-
-.login-link, .signout-link {
   color: #0c1c5e;
+  padding: 4px 17px 4px 17px;
+  margin-left: 30px;
 }
 
 .login:hover {
-  border: none;
+  background-color: #0c1c5e;
+  color: white;
 }

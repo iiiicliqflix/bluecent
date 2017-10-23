@@ -17,7 +17,7 @@ html {
 }
 
 a {
-  color: #0c1c5e;
+  color: inherit;
   text-decoration: none;
 }
 
@@ -47,11 +47,9 @@ footer {
 }
 
 header {
-  border-bottom: 1px solid #e5e5e5;
   padding-top: 10px;
 }
 
 header.dark {
   background-color: #0c1c5e;
-  border: none;
 }

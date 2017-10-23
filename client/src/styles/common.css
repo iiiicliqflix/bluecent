@@ -4,25 +4,37 @@
 }
 
 .container-home {
+  margin: 6% 5% 0 7%;
+}
+
+.cta {
+  display: inline-block;
+  float: left;
   margin-top: 5%;
-  text-align: center;
+  width: 500px;
+}
+
+.screenshot {
+  display: inline-block;
+  float: right;
 }
 
 .hdr {
   color: #0c1c5e;
   font-family: 'Avenir';
-  font-size: 50px;
-  font-weight: 300;
+  font-size: 60px;
+  font-weight: 400;
 }
 
 .sub-hdr {
-  color: #0c1c5e;
-  font-size: 16px;
+  color: #5b5e6d;
+  font-size: 20px;
+  line-height: 30px;
   margin-top: 20px;
 }
 
 .btns {
-  margin-top: 20px;
+  margin-top: 60px;
 }
 
 .btn {
@@ -57,7 +69,7 @@
   padding: 10px;
 }
 
-.get-started {
+/*.get-started {
   border: 2px solid #0c1c5e;
   border-radius: 4px;
   background-color: #0c1c5e;
@@ -67,12 +79,27 @@
   margin-top: 20px;
   padding: 10px;
   width: 180px;
+}*/
+
+.btns button {
+  background-color: white;
+  border: 2px solid #0c1c5e;
+  border-radius: 4px;
+  font-size: 16px;
+  height: 60px;
+  padding: 10px;
+  transition-duration: 200ms;
+  width: 180px;
 }
 
-/*.get-started:hover {
+.btns button:first-of-type {
+  margin-right: 20px;
+}
+
+.btns button:hover {
   background-color: #0c1c5e;
   color: white;
-}*/
+}
 
 .footer-white {
   background-color: #FAFAFC;

@@ -1,31 +1,52 @@
-.dark a {
+.dark .nav-item, .dark .logo {
   color: white;
+}
+
+.dark .nav-item:hover {
+  border-bottom: 3px solid white;
 }
 
 .dark .login {
   border: 2px solid white;
+  color: white;
 }
 
 .dark .login:hover {
-  color: #0c1c5e !important;
   background-color: white;
   border: 2px solid white;
+  color: #0c1c5e;
+}
+
+.dark .path {
+  fill: white;
 }
 
 .header-content {
-  margin: 0 2%;
-  padding-bottom: 10px;
+  margin: 1% 5% 0;
+}
+
+.logo-svg {
+  vertical-align: top;
+  margin-right: 14px;
 }
 
 .logo {
+  color: #0c1c5e;
   display: inline-block;
+  line-height: 48px;
+  margin-top: 3px;
+}
+
+.path {
+  fill: #0c1c5e;
 }
 
 .nav {
   color: white;
   display: inline-block;
   float: right;
-  line-height: 44px;
+  line-height: 48px;
+  margin-top: 5px;
 }
 
 .nav li {
@@ -38,7 +59,8 @@
 }
 
 .nav-item {
-  padding-bottom: 19px;
+  color: #0c1c5e;
+  padding-bottom: 10px;
 }
 
 .nav-item:hover {
@@ -48,16 +70,9 @@
 .login {
   border: 2px solid #0c1c5e;
   border-radius: 9999px;
+  color: #0c1c5e;
   padding: 4px 17px 4px 17px;
   margin-left: 30px;
-}
-
-.login-link, .signout-link {
-  color: #0c1c5e;
-}
-
-.login-link:hover, .signout-link:hover {
-  color: white;
 }
 
 .login:hover {

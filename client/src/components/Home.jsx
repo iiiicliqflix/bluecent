@@ -8,7 +8,7 @@ export default class Home extends Component {
       <div className="container-home">
         <div className="cta">
           <h1 className="hdr">Every cent counts.</h1>
-          <p className="sub-hdr">Donate spare change to Democrats running for Congress in 2018.</p>
+          <p className="sub-hdr">Automatically donate spare change to Democrats running for Congress in 2018.</p>
           <div className="btns">
             <Link to="/signup">
               <button>Get Started</button>

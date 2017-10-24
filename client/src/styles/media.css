@@ -19,7 +19,7 @@
   }
 
   .faq-hdr {
-    margin-top: 16%;
+    padding-top: 16%;
   }
 
   .container {
@@ -210,10 +210,11 @@
   }
 
   .btns {
-    margin: 20px 0 40px;
+    margin-top: 20px;
+    padding-bottom: 40px;
   }
 
   .btns button {
-    margin-top: 15px;
+    margin-top: 20px;
   }
 }

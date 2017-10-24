@@ -48,18 +48,6 @@
   }
 }
 
-@media only screen and (min-width: 320px) and (max-width: 600px) {
-  .container-home {
-    margin-top: 30%;
-  }
-}
-
-@media only screen and (min-width: 600px) and (max-width: 1000px) {
-  .container-home {
-    margin-top: 20%;
-  }
-}
-
 @media only screen and (min-width: 555px) and (max-width: 775px) {
   .bank-container {
     width: 75%;
@@ -168,5 +156,64 @@
 @media only screen and (min-width: 320px) and (max-width: 549px) {
   .transaction-table, .dash-nav {
     display: none;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 1300px) {
+  .header-content {
+    width: 90%;
+  }
+}
+
+@media only screen and (min-width: 1250px) and (max-width: 1300px) {
+  .container-home {
+    width: 90%;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 1250px) {
+  .cta {
+    display: block;
+    float: none;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .screenshot {
+    display: block;
+    float: none;
+    margin: 40px auto;
+    width: 600px;
+  }
+
+  .container-home {
+    width: 600px;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 600px) {
+  .container-home {
+    margin: 10% auto 0;
+    width: 75%;
+  }
+
+  .cta {
+    display: block;
+    float: none;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+  }
+
+  .screenshot {
+    display: none;
+  }
+
+  .btns {
+    margin-top: 20px;
+  }
+
+  .btns button {
+    margin-top: 15px;
   }
 }

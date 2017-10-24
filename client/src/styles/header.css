@@ -1,28 +1,6 @@
-.dark .nav-item, .dark .logo {
-  color: white;
-}
-
-.dark .nav-item:hover {
-  border-bottom: 3px solid white;
-}
-
-.dark .login {
-  border: 2px solid white;
-  color: white;
-}
-
-.dark .login:hover {
-  background-color: white;
-  border: 2px solid white;
-  color: #0c1c5e;
-}
-
-.dark .path {
-  fill: white;
-}
-
 .header-content {
-  margin-top: 1%;
+  margin: 1% auto 0;
+  width: 1250px;
 }
 
 .logo-svg {
@@ -79,4 +57,27 @@
 .login:hover {
   background-color: #0c1c5e;
   color: white;
+}
+
+.dark .nav-item, .dark .logo {
+  color: white;
+}
+
+.dark .nav-item:hover {
+  border-bottom: 3px solid white;
+}
+
+.dark .login {
+  border: 2px solid white;
+  color: white;
+}
+
+.dark .login:hover {
+  background-color: white;
+  border: 2px solid white;
+  color: #0c1c5e;
+}
+
+.dark .path {
+  fill: white;
 }

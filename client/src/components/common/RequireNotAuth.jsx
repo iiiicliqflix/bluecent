@@ -22,10 +22,14 @@ export default function (ComposedComponent) {
     }
   }
 
-  NotAuthentication.propTypes = { authenticated: PropTypes.bool };
+  NotAuthentication.propTypes = {
+    authenticated: PropTypes.bool
+  };
 
   function mapStateToProps(state) {
-    return { authenticated: state.auth.authenticated };
+    return {
+      authenticated: state.auth.authenticated
+    };
   }
 
   return connect(mapStateToProps)(NotAuthentication);

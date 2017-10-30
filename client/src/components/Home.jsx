@@ -18,7 +18,7 @@ export default class Home extends Component {
             </a>
           </div>
         </div>
-        <img className="screenshot" src={screenshot} />
+        <img className="screenshot" src={screenshot} alt="logo" />
       </div>
     );
   }

@@ -11,17 +11,22 @@ import Settings from './Settings';
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    let user = props.user;
-    if (user.hasAccessToken) {
-      this.props.getTransactions(user);
+    console.log('dashboard');
+    if (props.authenticated) {
+      let user = props.user;
+      if (user.hasAccessToken) {
+        this.props.getTransactions(user);
+      }
+      this.state = { dashState: 'transaction' };
     }
-    this.state = { dashState: 'transaction' };
   }
 
   componentWillMount() {
-    const user = this.props.user;
-    if (!user.hasAccessToken || !user.hasCustomerId) {
-      browserHistory.push('/setup-account');
+    if (this.props.authenticated) {
+      const user = this.props.user;
+      if (!user.hasAccessToken || !user.hasCustomerId) {
+        browserHistory.push('/setup-account');
+      }
     }
   }
 
@@ -83,6 +88,7 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
+    authenticated: state.auth.authenticated,
     transactions: state.plaid.transactions,
     savedChange: state.plaid.savedChange,
     isDataLoaded: state.plaid.isDataLoaded,

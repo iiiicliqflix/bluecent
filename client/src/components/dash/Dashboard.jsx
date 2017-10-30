@@ -11,7 +11,6 @@ import Settings from './Settings';
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    console.log('dashboard');
     if (props.authenticated) {
       let user = props.user;
       if (user.hasAccessToken) {

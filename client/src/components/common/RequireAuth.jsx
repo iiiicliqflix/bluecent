@@ -6,7 +6,6 @@ import { browserHistory } from 'react-router';
 export default function (ComposedComponent) {
   class Authentication extends Component {
     componentWillMount() {
-      console.log('require auth');
       if (!this.props.authenticated) {
         browserHistory.push('/');
       }

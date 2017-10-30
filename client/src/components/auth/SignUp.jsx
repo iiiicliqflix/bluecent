@@ -37,7 +37,7 @@ class SignUp extends Component {
 
     return (
       <div className="signup-container">
-        <h1 className="hdr">Sign Up</h1>
+        <h1 className="hdr auth-hdr">Sign Up</h1>
         <form onSubmit={handleSubmit(this.handleFormSubmit)}>
           <Field name="first" component={renderField} className="form-field field-first" type="text" placeholder="First" />
           <Field name="last" component={renderField} className="form-field field-last" type="text" placeholder="Last" />

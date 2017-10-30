@@ -2,6 +2,10 @@
   margin-top: 40px;
 }
 
+.auth-hdr {
+  font-size: 50px;
+}
+
 .signup-container {
   margin-top: 5%;
   text-align: center;
@@ -13,7 +17,7 @@
 }
 
 .field-first .signup-input {
-  width: 200px;
+  width: 205px;
 }
 
 .field-last {
@@ -21,7 +25,7 @@
 }
 
 .field-last .signup-input {
-  width: 200px;
+  width: 205px;
 }
 
 .signup-input {

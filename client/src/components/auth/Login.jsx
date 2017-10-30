@@ -35,7 +35,7 @@ class Login extends Component {
 
     return (
       <div className="container">
-        <h1 className="hdr">Login</h1>
+        <h1 className="hdr auth-hdr">Login</h1>
         <form onSubmit={handleSubmit(this.handleFormSubmit)}>
           <Field name="email" component={renderField} type="text" placeholder="Email" />
           <Field name="password" component={renderField} type="password" placeholder="Password" />

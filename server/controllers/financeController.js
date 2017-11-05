@@ -58,9 +58,9 @@ export const getPublicToken = (req, res, next) => {
 }
 
 export const getTransactions = (req, res, next) => {
-  const user = JSON.parse(req.query.user);
+  const email = req.query.email;
 
-  User.findOne({ email: user.email }, (error, u) => {
+  User.findOne({ email }, (error, u) => {
     const today = moment().format('YYYY-MM-DD');
     const threeWeeksAgo = moment().subtract(3, 'weeks').format('YYYY-MM-DD');
     const accessToken = u.access_token;

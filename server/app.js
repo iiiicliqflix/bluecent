@@ -41,18 +41,16 @@ schedule.scheduleJob({hour: 0, minute: 0, dayOfWeek: 0}, function() {
   chargeUsers();
 });
 
-// For testing purposes
-/*let rule = new schedule.RecurrenceRule();
-  rule.second = 0;
-  schedule.scheduleJob(rule, function() {
-  chargeUsers();
-});*/
+const corsOptions = {
+  origin: ['https://www.bluecent.org', 'http://localhost:3000'],
+  allowedHeaders: ['Authorization']
+}
 
 // App settings
 mongoose.set('debug', true);
 app.use(compression());
 app.use(morgan('combined'));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json({ type: '*/*' }));
 router(app);
 app.use('/*', staticFiles);

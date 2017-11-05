@@ -6,15 +6,21 @@ import {
   ACCESS_TOKEN_ERROR
 } from './types';
 
+const authorized = axios.create({
+  headers: {
+    'Authorization': JSON.parse(localStorage.getItem('user')).token
+  }
+});
+
 export function getTransactions(user) {
   return function(dispatch) {
-    axios.get('/get_transactions', { params: { user } })
+    authorized.get('/get_transactions', { params: { email: user.email } })
       .then((response) => {
         dispatch({ type: GET_TRANSACTIONS, payload: response.data });
       })
       .catch((error) => {
         if (error.response.data.error.error_code === 'ITEM_LOGIN_REQUIRED') {
-          axios.get('/get_public_token', { params: { user } })
+          authorized.get('/get_public_token', { params: { user } })
             .then((response) => {
               dispatch({ type: TRANSACTIONS_ERROR, payload: response.data });
             });
@@ -33,7 +39,7 @@ export function getAccessToken(user) {
       key: '80aa88b8cce388ffc75efe840a5709',
       product: ['transactions'],
       onSuccess: (public_token, metadata) => {
-        axios.post('/get_access_token', { public_token, user })
+        authorized.post('/get_access_token', { public_token, user })
           .then((response) => {
             dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: response.data });
           })

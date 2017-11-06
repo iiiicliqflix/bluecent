@@ -1,7 +1,6 @@
 import express from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
-import cors from 'cors';
 import morgan from 'morgan';
 import compression from 'compression';
 import mongoose from 'mongoose';
@@ -41,16 +40,10 @@ schedule.scheduleJob({hour: 0, minute: 0, dayOfWeek: 0}, function() {
   chargeUsers();
 });
 
-const corsOptions = {
-  origin: ['https://www.bluecent.org', 'http://localhost:3000'],
-  allowedHeaders: ['Authorization']
-}
-
 // App settings
 mongoose.set('debug', true);
 app.use(compression());
 app.use(morgan('combined'));
-app.use(cors(corsOptions));
 app.use(bodyParser.json({ type: '*/*' }));
 router(app);
 app.use('/*', staticFiles);

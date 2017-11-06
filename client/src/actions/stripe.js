@@ -4,15 +4,10 @@ import {
   STRIPE_ERROR
 } from './types';
 
-const authorized = axios.create({
-  headers: {
-    'Authorization': JSON.parse(localStorage.getItem('user')).token
-  }
-});
-
 export function setupPayments(token, user) {
   return function(dispatch) {
-    authorized.post('/setup-payments', { token, user })
+    axios.defaults.headers.common['Authorization'] = user.token;
+    axios.post('/setup-payments', { token, user })
       .then((response) => {
         dispatch({ type: STRIPE_SUCCESS, payload: response.data });
       })

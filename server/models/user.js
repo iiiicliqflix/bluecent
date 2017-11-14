@@ -17,6 +17,7 @@ const userSchema = new Schema({
   startedTrackingDate: { type: String, default: null },
   customerId: { type: String, default: null },
   role: { type: Number, default: 0 },
+  maxWeeklyContribution: { type: Number, default: -1 },
   auth: {
     token: String,
     used: Boolean,

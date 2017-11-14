@@ -302,6 +302,92 @@ body > iframe {
   width: 100%;
 }
 
+.settings-container {
+  display: inline-block;
+  margin: 0 auto 30px auto;
+  text-align: left;
+  width: 600px;
+}
+
+.settings-hdr {
+  font-size: 24px;
+  padding-bottom: 15px;
+}
+
+.setting {
+  margin-top: 20px;
+  height: 50px;
+}
+
+.setting-label {
+  float: left;
+}
+
+.setting-input {
+  float: right;
+}
+
+.setting-num {
+  border: none;
+  border-bottom: 1px solid #0c1c5e;
+  font-size: 14px;
+  outline: none;
+  padding-bottom: 5px;
+  text-align: center;
+  width: 100px;
+}
+
+.setting-btn {
+  background-color: white;
+  border-radius: 4px;
+  border: 1px solid #0c1c5e;
+  color: #0c1c5e;
+  height: 30px;
+  padding: 5px;
+  width: 100px;
+}
+
+.setting-btn:hover {
+  background-color: #0c1c5e;
+  color: white;
+}
+
+.delete-btn {
+  border: 1px solid #DA627D;
+  color: #DA627D;
+}
+
+.delete-btn:hover {
+  background-color: #DA627D;
+  color: #1C1A19;
+}
+
+.settings-submit {
+  background-color: white;
+  border-radius: 4px;
+  border: 1px solid #0c1c5e;
+  color: #0c1c5e;
+  display: block;
+  font-size: 14px;
+  height: 40px;
+  margin: 20px auto;
+  padding: 10px;
+  width: 100px;
+}
+
+.settings-submit:hover {
+  background-color: #0c1c5e;
+  color: white;
+}
+
+.settings-back-btn {
+  cursor: pointer;
+  font-size: 13px;
+  margin-top: 30px;
+  padding-bottom: 30px;
+  text-decoration: underline;
+}
+
 .coming-soon {
   border: 2px solid rgba(0, 0, 0, 0.4);
   border-radius: 3px;

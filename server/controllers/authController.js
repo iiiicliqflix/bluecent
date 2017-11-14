@@ -14,7 +14,8 @@ export const login = (req, res, next) => {
     hasCustomerId,
     total,
     numContribs,
-    lastContribDate
+    lastContribDate,
+    maxWeeklyContribution
   } = req.user;
 
   res.json({
@@ -26,7 +27,8 @@ export const login = (req, res, next) => {
     hasCustomerId,
     total,
     numContribs,
-    lastContribDate
+    lastContribDate,
+    maxWeeklyContribution
   });
 }
 
@@ -88,7 +90,8 @@ export const verifyAccount = (req, res, next) => {
         hasCustomerId,
         total,
         numContribs,
-        lastContribDate
+        lastContribDate,
+        maxWeeklyContribution
       } = user;
 
       res.json({
@@ -100,7 +103,8 @@ export const verifyAccount = (req, res, next) => {
         hasCustomerId,
         total,
         numContribs,
-        lastContribDate
+        lastContribDate,
+        maxWeeklyContribution
       });
     });
   });

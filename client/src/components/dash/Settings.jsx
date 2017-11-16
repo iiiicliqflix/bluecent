@@ -8,8 +8,6 @@ class Settings extends Component {
   constructor(props) {
     super(props);
     this.togglePaymentForm = this.togglePaymentForm.bind(this);
-    this.deleteAccount = this.deleteAccount.bind(this);
-    this.saveSettings = this.saveSettings.bind(this);
     this.state = { showPaymentForm: false };
   }
 

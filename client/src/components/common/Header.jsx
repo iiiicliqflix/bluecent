@@ -7,7 +7,7 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
-    if (['/faq', '/dashboard'].indexOf(this.props.location.pathname) >= 0) {
+    if (['/faq', '/dashboard', '/#how'].indexOf(this.props.location.pathname) >= 0) {
       this.state = { color: 'dark' };
     } else {
       this.state = { color: 'light' };
@@ -17,7 +17,7 @@ class Header extends Component {
   componentWillReceiveProps() {
     let url = window.location.href;
     let currentRoute = url.substr(url.lastIndexOf('/') + 1);
-    if (['faq', 'dashboard'].indexOf(currentRoute) < 0) {
+    if (['faq', 'dashboard', '#how'].indexOf(currentRoute) < 0) {
       this.setState({ color: 'light' });
     } else {
       this.setState({ color: 'dark' });

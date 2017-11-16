@@ -15,3 +15,8 @@ export const ACCESS_TOKEN_ERROR = 'ACCESS_TOKEN_ERROR';
 // stripe
 export const STRIPE_SUCCESS = 'STRIPE_SUCCESS';
 export const STRIPE_ERROR = 'STRIPE_ERROR';
+
+// settings
+export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
+export const SAVE_SETTINGS = 'SAVE_SETTINGS';
+export const UPDATE_BANK_ACCOUNT = 'UPDATE_BANK_ACCOUNT';

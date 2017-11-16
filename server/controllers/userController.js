@@ -110,6 +110,10 @@ export const verifyAccount = (req, res, next) => {
   });
 }
 
+export const deleteAccount = (req, res, next) => {
+  console.log(req.body.user);
+}
+
 export const setupPayments = (req, res, next) => {
   let stripeKey = ((process.env.NODE_ENV === 'production') ? stripeKeys.live : stripeKeys.test);
   let stripe = stripePackage(stripeKey);

@@ -388,6 +388,11 @@ body > iframe {
   text-decoration: underline;
 }
 
+.settings-payment-hdr {
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
 .coming-soon {
   border: 2px solid rgba(0, 0, 0, 0.4);
   border-radius: 3px;

@@ -8,6 +8,8 @@ class Settings extends Component {
   constructor(props) {
     super(props);
     this.togglePaymentForm = this.togglePaymentForm.bind(this);
+    this.deleteAccount = this.deleteAccount.bind(this);
+    this.saveSettings = this.saveSettings.bind(this);
     this.state = { showPaymentForm: false };
   }
 
@@ -21,7 +23,12 @@ class Settings extends Component {
   }
 
   render() {
-    const { user, updatePlaidItem } = this.props;
+    const {
+      user,
+      updateBankAccount,
+      deleteAccount,
+      saveSettings
+    } = this.props;
 
     if (!this.state.showPaymentForm) {
       return (
@@ -39,7 +46,7 @@ class Settings extends Component {
               <label className="setting-label">Update Bank Account</label>
               <button
                 className="setting-input setting-btn"
-                onClick={() => {updatePlaidItem(publicToken)}}>
+                onClick={() => {updateBankAccount()}}>
                 Update Bank
               </button>
             </div>
@@ -49,16 +56,16 @@ class Settings extends Component {
             </div>
             <div className="setting">
               <label className="setting-label">Delete Account</label>
-              <button className="setting-input setting-btn delete-btn">Delete</button>
+              <button className="setting-input setting-btn delete-btn" onClick={() => {deleteAccount(user)}}>Delete</button>
             </div>
-            <button className="settings-submit">Save</button>
+            <button className="settings-submit" onClick={() => {saveSettings()}}>Save</button>
           </div>
         </div>
       );
     } else {
       return (
         <div className="settings">
-          <h2>Update Payment Info</h2>
+          <h2 className="settings-payment-hdr">Update Payment Info</h2>
           <Elements>
             <SetupPayments submitToken={this.submitStripeToken.bind(this)} />
           </Elements>

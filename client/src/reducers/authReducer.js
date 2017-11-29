@@ -9,10 +9,10 @@ import {
   ACCESS_TOKEN_ERROR,
   STRIPE_SUCCESS,
   STRIPE_ERROR
-} from '../actions/types';
+} from "../actions/types";
 
 export default function(state = {}, action) {
-  switch(action.type) {
+  switch (action.type) {
     case SIGNUP_SUCCESS:
       return {
         ...state,

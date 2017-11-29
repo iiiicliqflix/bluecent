@@ -1,7 +1,7 @@
-import { GET_TRANSACTIONS, TRANSACTIONS_ERROR } from '../actions/types';
+import { GET_TRANSACTIONS, TRANSACTIONS_ERROR } from "../actions/types";
 
 export default function(state = {}, action) {
-  switch(action.type) {
+  switch (action.type) {
     case GET_TRANSACTIONS:
       return {
         ...state,
@@ -17,7 +17,7 @@ export default function(state = {}, action) {
         isDataLoaded: false,
         transactionsError: true,
         publicToken: action.payload.public_token
-      }
+      };
     }
     default:
       return state;

@@ -1,5 +1,5 @@
-import jwt from 'jwt-simple';
-import { mongoConfig } from '../config';
+import jwt from "jwt-simple";
+import { mongoConfig } from "../config";
 
 export function tokenForUser(user) {
   const timestamp = new Date().getTime();

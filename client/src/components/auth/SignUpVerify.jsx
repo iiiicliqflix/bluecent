@@ -33,7 +33,10 @@ class SignUpVerify extends Component {
 }
 
 function mapStateToProps(state) {
-  return { errorMessage: state.auth.error, signup: state.auth.signup };
+  return {
+    errorMessage: state.auth.error,
+    signup: state.auth.signup
+  };
 }
 
 export default connect(mapStateToProps, actions)(SignUpVerify);

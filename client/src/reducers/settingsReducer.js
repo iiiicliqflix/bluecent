@@ -1,7 +1,7 @@
-import { SAVE_SETTINGS, UPDATE_BANK_ACCOUNT } from '../actions/types';
+import { SAVE_SETTINGS, UPDATE_BANK_ACCOUNT } from "../actions/types";
 
 export default function(state = {}, action) {
-  switch(action.type) {
+  switch (action.type) {
     default:
       return state;
   }

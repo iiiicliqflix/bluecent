@@ -18,8 +18,10 @@ export function deleteAccount(user) {
   }
 }
 
-export function saveSettings() {
+export function saveSettings(maxContribution, user) {
   return function(dispatch) {
+    setAuthorizationToken(user.token);
+    axios.
     dispatch({ type: SAVE_SETTINGS });
   }
 }

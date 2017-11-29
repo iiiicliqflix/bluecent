@@ -8,7 +8,12 @@ class Settings extends Component {
   constructor(props) {
     super(props);
     this.togglePaymentForm = this.togglePaymentForm.bind(this);
-    this.state = { showPaymentForm: false };
+    this.saveSettings = this.saveSettings.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      showPaymentForm: false,
+      maxContribution: props.user.maxWeeklyContribution
+    };
   }
 
   togglePaymentForm() {
@@ -20,43 +25,53 @@ class Settings extends Component {
     this.props.setupPayments(token, this.props.user);
   }
 
+  handleChange(event) {
+    this.setState({maxContribution: event.target.value});
+  }
+
+  saveSettings(event) {
+    event.preventDefault();
+    this.props.saveSettings(this.state.maxContribution, this.props.user);
+  }
+
   render() {
     const {
       user,
       updateBankAccount,
-      deleteAccount,
-      saveSettings
+      deleteAccount
     } = this.props;
 
     if (!this.state.showPaymentForm) {
       return (
         <div className="settings">
           <div className="settings-container">
-            <div className="setting">
-              <label className="setting-label">Maximum Weekly Contribution</label>
-              {(user.maxWeeklyContribution === -1) ?
-                <input className="setting-input setting-num" type="number" placeholder="None" min="3"></input>
-              :
-                <input className="setting-input setting-num" type="number" value={user.maxWeeklyContribution} min="3"></input>
-              }
-            </div>
-            <div className="setting">
-              <label className="setting-label">Update Bank Account</label>
-              <button
-                className="setting-input setting-btn"
-                onClick={() => {updateBankAccount()}}>
-                Update Bank
-              </button>
-            </div>
-            <div className="setting">
-              <label className="setting-label">Update Payment Info</label>
-              <button className="setting-input setting-btn" onClick={this.togglePaymentForm}>Update Payment</button>
-            </div>
-            <div className="setting">
-              <label className="setting-label">Delete Account</label>
-              <button className="setting-input setting-btn delete-btn" onClick={() => {deleteAccount(user)}}>Delete</button>
-            </div>
-            <button className="settings-submit" onClick={() => {saveSettings()}}>Save</button>
+            <form onSubmit={this.saveSettings}>
+              <div className="setting">
+                <label className="setting-label">Maximum Weekly Contribution</label>
+                {(this.state.maxContribution === -1) ?
+                  <input className="setting-input setting-num" type="number" value="None" placeholder="None" min="3" onChange={this.handleChange}/>
+                :
+                  <input className="setting-input setting-num" type="number" value={this.state.maxContribution} min="3" onChange={this.handleChange}/>
+                }
+              </div>
+              <div className="setting">
+                <label className="setting-label">Update Bank Account</label>
+                <button
+                  className="setting-input setting-btn"
+                  onClick={() => {updateBankAccount()}}>
+                  Update Bank
+                </button>
+              </div>
+              <div className="setting">
+                <label className="setting-label">Update Payment Info</label>
+                <button className="setting-input setting-btn" onClick={this.togglePaymentForm}>Update Payment</button>
+              </div>
+              <div className="setting">
+                <label className="setting-label">Delete Account</label>
+                <button className="setting-input setting-btn delete-btn" onClick={() => {deleteAccount(user)}}>Delete</button>
+              </div>
+              <button className="settings-submit" type="submit">Save</button>
+            </form>
           </div>
         </div>
       );

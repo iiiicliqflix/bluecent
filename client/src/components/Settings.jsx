@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Elements } from 'react-stripe-elements';
-import * as actions from '../../actions';
-import SetupPayments from '../account/SetupPayments';
+import * as actions from '../actions';
+import SetupPayments from '../components/SetupPayments';
 
 class Settings extends Component {
   constructor(props) {

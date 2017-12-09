@@ -10,7 +10,8 @@ import {
   signup,
   verifyAccount,
   setupPayments,
-  deleteAccount
+  deleteAccount,
+  saveSettings
 } from "./controllers/userController";
 
 const requireAuth = passport.authenticate("jwt", { session: false });
@@ -25,6 +26,7 @@ const router = app => {
   app.get("/get_transactions", requireAuth, getTransactions);
   app.get("/get_public_token", requireAuth, getPublicToken);
   app.delete("/delete_account", requireAuth, deleteAccount);
+  app.patch("/save_settings", requireAuth, saveSettings);
 };
 
 export default router;

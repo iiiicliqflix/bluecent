@@ -156,25 +156,35 @@ export const setupPayments = (req, res, next) => {
         lastContribDate = moment().format("YYYY-MM-DD");
       }
 
-      User.findOneAndUpdate(
-        { email: user.email },
-        {
-          customerId: customer.id,
-          hasCustomerId: true,
-          startedTrackingDate,
-          lastContribDate
-        },
-        err => {
-          if (err) {
-            return next(err);
-          }
-          res.json({ hasCustomerId: true });
+      const changeset = {
+        customerId: customer.id,
+        hasCustomerId: true,
+        startedTrackingDate,
+        lastContribDate
+      };
+
+      User.findOneAndUpdate({ email: user.email }, changeset, err => {
+        if (err) {
+          return next(err);
         }
-      );
+        res.json({ hasCustomerId: true });
+      });
 
       return stripe.customers.createSource(customer.id, { source: token.id });
     })
     .catch(err => {
       console.log("Error setting up payment: ", err);
     });
+};
+
+export const saveSettings = (req, res, next) => {
+  const { user, maxContribution } = req.body;
+  const changeset = { maxWeeklyContribution: maxContribution };
+
+  User.findByIdAndUpdate(user.id, changeset, { new: true }, (err, user) => {
+    if (err) {
+      return next(err);
+    }
+    res.json({ user });
+  });
 };

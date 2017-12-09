@@ -1,16 +1,16 @@
 import React from "react";
 import { Route, IndexRoute } from "react-router";
-import requireAuth from "./components/common/RequireAuth.jsx";
-import requireNotAuth from "./components/common/RequireNotAuth.jsx";
-import App from "./components/App.jsx";
-import Home from "./components/Home.jsx";
-import FAQ from "./components/FAQ.jsx";
-import SignUp from "./components/auth/SignUp.jsx";
-import SignUpVerify from "./components/auth/SignUpVerify.jsx";
-import VerifyAccount from "./components/auth/VerifyAccount.jsx";
-import Login from "./components/auth/Login.jsx";
-import SetupAccount from "./components/account/SetupAccount";
-import Dashboard from "./components/dash/Dashboard.jsx";
+import requireAuth from "./components/RequireAuth.jsx";
+import requireNotAuth from "./components/RequireNotAuth.jsx";
+import App from "./containers/App.jsx";
+import Home from "./containers/Home.jsx";
+import FAQ from "./containers/FAQ.jsx";
+import SignUp from "./containers/SignUp.jsx";
+import SignUpVerify from "./containers/SignUpVerify.jsx";
+import VerifyAccount from "./containers/VerifyAccount.jsx";
+import Login from "./containers/Login.jsx";
+import SetupAccount from "./containers/SetupAccount";
+import Dashboard from "./containers/Dashboard.jsx";
 
 export default (
   <Route path="/" component={App}>

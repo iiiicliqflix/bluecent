@@ -1,6 +1,6 @@
 import axios from "axios";
 import { browserHistory } from "react-router";
-import { SAVE_SETTINGS, UPDATE_BANK_ACCOUNT, UNAUTH_USER } from "./types";
+import { SAVE_SETTINGS, UNAUTH_USER } from "./types";
 
 function setAuthorizationToken(token) {
   axios.defaults.headers.common["Authorization"] = token;
@@ -9,7 +9,7 @@ function setAuthorizationToken(token) {
 export function deleteAccount(user) {
   return function(dispatch) {
     setAuthorizationToken(user.token);
-    axios.delete("/delete_account", { data: { user } }).then(response => {
+    axios.delete("/delete_account", { data: { user } }).then(resp => {
       localStorage.clear();
       browserHistory.push("/");
       dispatch({ type: UNAUTH_USER });
@@ -20,7 +20,14 @@ export function deleteAccount(user) {
 export function saveSettings(maxContribution, user) {
   return function(dispatch) {
     setAuthorizationToken(user.token);
-    axios.dispatch({ type: SAVE_SETTINGS });
+    axios
+      .patch("/save_settings", { user, maxContribution })
+      .then(resp => {
+        dispatch({ type: SAVE_SETTINGS });
+      })
+      .catch(error => {
+        //dispatch({ type: SAVE_SETTINGS_ERROR });
+      });
   };
 }
 

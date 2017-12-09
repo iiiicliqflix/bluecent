@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { reduxForm, Field, change } from 'redux-form';
 import { connect } from 'react-redux';
-import * as actions from '../../actions';
+import * as actions from '../actions';
 
 const renderField = ({ input, className, type, placeholder, meta: { touched, error } }) => {
   return (

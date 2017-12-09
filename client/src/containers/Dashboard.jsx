@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import * as actions from '../../actions';
-import DashStats from './DashStats';
-import DashNav from './DashNav';
-import TransactionTable from './TransactionTable';
-import Candidates from './Candidates';
-import Settings from './Settings';
+import * as actions from '../actions';
+import DashStats from '../components/DashStats';
+import DashNav from '../components/DashNav';
+import TransactionTable from '../components/TransactionTable';
+import Candidates from '../components/Candidates';
+import Settings from '../components/Settings';
 
 class Dashboard extends Component {
   constructor(props) {

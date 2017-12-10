@@ -8,7 +8,9 @@ import {
   ACCESS_TOKEN_SUCCESS,
   ACCESS_TOKEN_ERROR,
   STRIPE_SUCCESS,
-  STRIPE_ERROR
+  STRIPE_ERROR,
+  SAVE_SETTINGS,
+  SAVE_SETTINGS_ERROR
 } from "../actions/types";
 
 export default function(state = {}, action) {
@@ -90,6 +92,16 @@ export default function(state = {}, action) {
           hasCustomerId: false
         },
         error: action.payload
+      };
+    case SAVE_SETTINGS:
+      return {
+        ...state,
+        user: action.payload
+      };
+    case SAVE_SETTINGS_ERROR:
+      return {
+        ...state,
+        settingsError: action.payload
       };
     default:
       return state;

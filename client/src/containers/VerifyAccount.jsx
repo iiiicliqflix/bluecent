@@ -50,7 +50,9 @@ class VerifyAccount extends Component {
 }
 
 function mapStateToProps(state) {
-  return { errorMessage: state.auth.error };
+  return {
+    errorMessage: state.user.error
+  };
 }
 
 export default connect(mapStateToProps, actions)(VerifyAccount);

@@ -180,11 +180,41 @@ export const setupPayments = (req, res, next) => {
 export const saveSettings = (req, res, next) => {
   const { user, maxContribution } = req.body;
   const changeset = { maxWeeklyContribution: maxContribution };
+  const token = user.token;
 
-  User.findByIdAndUpdate(user.id, changeset, { new: true }, (err, user) => {
-    if (err) {
-      return next(err);
+  User.findOneAndUpdate(
+    { email: user.email },
+    changeset,
+    { new: true },
+    (err, user) => {
+      if (err) {
+        return next(err);
+      }
+
+      const {
+        first,
+        last,
+        email,
+        hasAccessToken,
+        hasCustomerId,
+        total,
+        numContribs,
+        lastContribDate,
+        maxWeeklyContribution
+      } = user;
+
+      res.json({
+        token,
+        first,
+        last,
+        email,
+        hasAccessToken,
+        hasCustomerId,
+        total,
+        numContribs,
+        lastContribDate,
+        maxWeeklyContribution
+      });
     }
-    res.json({ user });
-  });
+  );
 };

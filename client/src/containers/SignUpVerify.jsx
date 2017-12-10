@@ -34,8 +34,8 @@ class SignUpVerify extends Component {
 
 function mapStateToProps(state) {
   return {
-    errorMessage: state.auth.error,
-    signup: state.auth.signup
+    errorMessage: state.user.error,
+    signup: state.user.signup
   };
 }
 

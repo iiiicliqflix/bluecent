@@ -1,6 +1,6 @@
 import axios from "axios";
 import { browserHistory } from "react-router";
-import { SAVE_SETTINGS, UNAUTH_USER } from "./types";
+import { SAVE_SETTINGS, SAVE_SETTINGS_ERROR, UNAUTH_USER } from "./types";
 
 function setAuthorizationToken(token) {
   axios.defaults.headers.common["Authorization"] = token;
@@ -22,11 +22,15 @@ export function saveSettings(maxContribution, user) {
     setAuthorizationToken(user.token);
     axios
       .patch("/save_settings", { user, maxContribution })
-      .then(resp => {
-        dispatch({ type: SAVE_SETTINGS });
+      .then(response => {
+        localStorage.setItem("user", JSON.stringify(response.data));
+        dispatch({ type: SAVE_SETTINGS, payload: response.data });
       })
       .catch(error => {
-        //dispatch({ type: SAVE_SETTINGS_ERROR });
+        dispatch({
+          type: SAVE_SETTINGS_ERROR,
+          payload: error.response.data.error
+        });
       });
   };
 }

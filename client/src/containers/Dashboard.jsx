@@ -44,6 +44,8 @@ class Dashboard extends Component {
       publicToken
     } = this.props;
 
+    console.log(user);
+
     if (isDataLoaded) {
       return (
         <div className="dash-container">
@@ -87,13 +89,13 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
-    authenticated: state.auth.authenticated,
+    authenticated: state.user.authenticated,
+    user: state.user.user,
     transactions: state.plaid.transactions,
     savedChange: state.plaid.savedChange,
     isDataLoaded: state.plaid.isDataLoaded,
     transactionsError: state.plaid.transactionsError,
-    publicToken: state.plaid.publicToken,
-    user: state.auth.user
+    publicToken: state.plaid.publicToken
   };
 }
 

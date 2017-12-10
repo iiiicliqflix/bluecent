@@ -96,7 +96,8 @@ export default function(state = {}, action) {
     case SAVE_SETTINGS:
       return {
         ...state,
-        user: action.payload
+        user: action.payload,
+        settingsSuccess: true
       };
     case SAVE_SETTINGS_ERROR:
       return {

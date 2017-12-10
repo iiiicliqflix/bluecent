@@ -1,0 +1,100 @@
+/* Bank Account */
+
+.bank-container {
+  margin: 6% auto 0 auto;
+  text-align: center;
+  width: 800px;
+}
+
+.solo-bank {
+  margin: 14% auto 0 auto;
+}
+
+.bank-hdr {
+  color: #0c1c5e;
+  font-size: 30px;
+  font-weight: 300;
+}
+
+.btn-bank {
+  border-radius: 4px;
+  transition-duration: 200ms;
+}
+
+/* Payment */
+
+body > iframe {
+  display: none;
+}
+
+.payment-container {
+  margin: 3% auto 0;
+  text-align: center;
+  width: 600px;
+}
+
+.solo-payment {
+  margin: 10% auto 0 auto;
+}
+
+.payment-hdr {
+  color: #0c1c5e;
+  font-family: 'Avenir';
+  font-size: 30px;
+  font-weight: 300;
+}
+
+.input-cardholder {
+  width: 390px;
+}
+
+.input-zipcode {
+  width: 80px;
+}
+
+.btn-payment {
+  border-radius: 4px;
+  display: block;
+  margin: 20px auto;
+  padding: 0;
+  transition-duration: 200ms;
+  width: 120px;
+}
+
+.payment-form iframe {
+  background-color: white;
+  border-radius: 3px;
+  color: black;
+  font-size: 14px;
+  font-family: 'Avenir';
+  height: 14px !important;
+  line-height: 1;
+  margin-top: 30px !important;
+  padding: 15px 10px !important;
+  outline: none;
+}
+
+.payment-form span * {
+  display: inline !important;
+}
+
+.card-number iframe {
+  min-width: 290px !important;
+  width: 290px !important;
+  border-radius: 0;
+  border-bottom: 2px solid #0c1c5e;
+}
+
+.card-expiry iframe {
+  min-width: 90px !important;
+  width: 90px !important;
+  border-radius: 0;
+  border-bottom: 2px solid #0c1c5e;
+}
+
+.card-cvc iframe {
+  min-width: 40px !important;
+  width: 40px !important;
+  border-radius: 0;
+  border-bottom: 2px solid #0c1c5e;
+}

@@ -11,13 +11,7 @@ import Settings from '../components/Settings';
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    if (props.authenticated) {
-      let user = props.user;
-      if (user.hasAccessToken) {
-        this.props.getTransactions(user);
-      }
-      this.state = { dashState: 'transaction' };
-    }
+    this.state = { dashState: 'transaction' };
   }
 
   componentWillMount() {
@@ -26,6 +20,13 @@ class Dashboard extends Component {
       if (!user.hasAccessToken || !user.hasCustomerId) {
         browserHistory.push('/setup-account');
       }
+    }
+  }
+
+  componentDidMount() {
+    let user = this.props.user;
+    if (user.hasAccessToken) {
+      this.props.getTransactions(user);
     }
   }
 
@@ -43,8 +44,6 @@ class Dashboard extends Component {
       updatePlaidItem,
       publicToken
     } = this.props;
-
-    console.log(user);
 
     if (isDataLoaded) {
       return (

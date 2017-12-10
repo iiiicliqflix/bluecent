@@ -37,15 +37,16 @@ class Settings extends Component {
   render() {
     const {
       user,
-      updateBankAccount,
-      deleteAccount
+      deleteAccount,
+      settingsError,
+      settingsSuccess
     } = this.props;
 
     if (!this.state.showPaymentForm) {
       return (
         <div className="settings">
           <div className="settings-container">
-            <form onSubmit={this.saveSettings}>
+            <form className="settings-form" onSubmit={this.saveSettings}>
               <div className="setting">
                 <label className="setting-label">Maximum Weekly Contribution</label>
                 {(this.state.maxContribution === -1) ?
@@ -54,14 +55,14 @@ class Settings extends Component {
                   <input className="setting-input setting-num" type="number" value={this.state.maxContribution} min="3" onChange={this.handleChange}/>
                 }
               </div>
-              <div className="setting">
+              {/*<div className="setting">
                 <label className="setting-label">Update Bank Account</label>
                 <button
                   className="setting-input setting-btn"
                   onClick={() => {updateBankAccount()}}>
                   Update Bank
                 </button>
-              </div>
+              </div> */}
               <div className="setting">
                 <label className="setting-label">Update Payment Info</label>
                 <button className="setting-input setting-btn" onClick={this.togglePaymentForm}>Update Payment</button>
@@ -70,7 +71,14 @@ class Settings extends Component {
                 <label className="setting-label">Delete Account</label>
                 <button className="setting-input setting-btn delete-btn" onClick={() => {deleteAccount(user)}}>Delete</button>
               </div>
-              <button className="settings-submit" type="submit">Save</button>
+              <div className="settings-bottom">
+                <button className="settings-submit" type="submit">Save</button>
+                {
+                  settingsSuccess ? <span className="settings-success">Success!</span> :
+                  settingsError ? <span className="settings-error">Error.</span> :
+                  null
+                }
+              </div>
             </form>
           </div>
         </div>
@@ -89,4 +97,11 @@ class Settings extends Component {
   }
 }
 
-export default connect(null, actions)(Settings);
+function mapStateToProps(state) {
+  return {
+    settingsError: state.user.settingsError,
+    settingsSuccess: state.user.settingsSuccess
+  };
+}
+
+export default connect(mapStateToProps, actions)(Settings);

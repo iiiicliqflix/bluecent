@@ -9,11 +9,19 @@ function setAuthorizationToken(token) {
 export function deleteAccount(user) {
   return function(dispatch) {
     setAuthorizationToken(user.token);
-    axios.delete("/delete_account", { data: { user } }).then(resp => {
-      localStorage.clear();
-      browserHistory.push("/");
-      dispatch({ type: UNAUTH_USER });
-    });
+    axios
+      .delete("/delete_account", { user })
+      .then(resp => {
+        localStorage.clear();
+        browserHistory.push("/");
+        dispatch({ type: UNAUTH_USER });
+      })
+      .catch(error => {
+        dispatch({
+          type: SAVE_SETTINGS_ERROR,
+          payload: error.response.data.error
+        });
+      });
   };
 }
 
@@ -33,8 +41,4 @@ export function saveSettings(maxContribution, user) {
         });
       });
   };
-}
-
-export function updateBankAccount() {
-  return function(dispatch) {};
 }

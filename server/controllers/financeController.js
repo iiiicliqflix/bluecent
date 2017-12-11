@@ -131,6 +131,13 @@ export const chargeUsers = () => {
               savedChange = 100 * savedChange.toFixed(2);
 
               if (savedChange >= 50) {
+                if (
+                  savedChange > u.maxWeeklyContribution &&
+                  u.maxWeeklyContribution !== -1
+                ) {
+                  savedChange = u.maxWeeklyContribution;
+                }
+
                 stripe.charges.create({
                   amount: savedChange,
                   currency: "usd",

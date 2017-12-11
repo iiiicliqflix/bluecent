@@ -135,7 +135,13 @@ export const verifyAccount = (req, res, next) => {
 };
 
 export const deleteAccount = (req, res, next) => {
-  console.log(req.body.user);
+  const user = req.body.user;
+
+  User.findOneAndRemove({ email: user.email }, err => {
+    if (err) {
+      return next(err);
+    }
+  });
 };
 
 export const setupPayments = (req, res, next) => {

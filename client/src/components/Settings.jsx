@@ -55,14 +55,16 @@ class Settings extends Component {
                   <input className="setting-input setting-num" type="number" value={this.state.maxContribution} min="3" onChange={this.handleChange}/>
                 }
               </div>
-              {/*<div className="setting">
+              {/*
+              <div className="setting">
                 <label className="setting-label">Update Bank Account</label>
                 <button
                   className="setting-input setting-btn"
                   onClick={() => {updateBankAccount()}}>
                   Update Bank
                 </button>
-              </div> */}
+              </div>
+              */}
               <div className="setting">
                 <label className="setting-label">Update Payment Info</label>
                 <button className="setting-input setting-btn" onClick={this.togglePaymentForm}>Update Payment</button>

@@ -38,18 +38,21 @@
 }
 
 .dash-stats {
+  display: flex;
   margin: 0 auto;
-  width: 1200px;
+  width: 1070px;
 }
 
 .dash-stat {
   background-color: rgba(255, 255, 255, 0.1);
   border-bottom: 3px solid white;
   border-radius: 3px;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 200px;
   margin-right: 100px;
-  padding: 0 20px 0 20px;
+  padding: 0 20px;
   width: 250px;
 }
 
@@ -59,10 +62,6 @@
 
 .dash-stat:last-of-type {
   margin: 0;
-}
-
-.stat-content {
-  margin-top: 55px;
 }
 
 .stat-number {

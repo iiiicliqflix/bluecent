@@ -10,7 +10,7 @@ export function deleteAccount(user) {
   return function(dispatch) {
     setAuthorizationToken(user.token);
     axios
-      .delete("/delete_account", { user })
+      .delete("/delete-account", { user })
       .then(resp => {
         localStorage.clear();
         browserHistory.push("/");
@@ -29,7 +29,7 @@ export function saveSettings(maxContribution, user) {
   return function(dispatch) {
     setAuthorizationToken(user.token);
     axios
-      .patch("/save_settings", { user, maxContribution })
+      .patch("/save-settings", { user, maxContribution })
       .then(response => {
         localStorage.setItem("user", JSON.stringify(response.data));
         dispatch({ type: SAVE_SETTINGS, payload: response.data });

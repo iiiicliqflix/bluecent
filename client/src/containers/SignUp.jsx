@@ -108,7 +108,7 @@ const onSubmitFail = (errors, dispatch) => {
 
 function mapStateToProps(state) {
   return {
-    errorMessage: state.auth.error
+    errorMessage: state.user.error
   };
 }
 

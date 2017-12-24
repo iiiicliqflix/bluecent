@@ -224,3 +224,13 @@ export const saveSettings = (req, res, next) => {
     }
   );
 };
+
+export const updatePayments = (req, res, next) => {
+  let stripeKey =
+    process.env.NODE_ENV === "production" ? stripeKeys.live : stripeKeys.test;
+  let stripe = stripePackage(stripeKey);
+  let user = req.body.user;
+  let token = req.body.token;
+
+  stripe.customers.update();
+};

@@ -14,14 +14,14 @@ export function getTransactions(user) {
   return function(dispatch) {
     setAuthorizationToken(user.token);
     axios
-      .get("/get_transactions", { params: { email: user.email } })
+      .get("/get-transactions", { params: { email: user.email } })
       .then(response => {
         dispatch({ type: GET_TRANSACTIONS, payload: response.data });
       })
       .catch(error => {
         if (error.response.data.error.error_code === "ITEM_LOGIN_REQUIRED") {
           axios
-            .get("/get_public_token", { params: { user } })
+            .get("/get-public-token", { params: { user } })
             .then(response => {
               dispatch({ type: TRANSACTIONS_ERROR, payload: response.data });
             });
@@ -42,7 +42,7 @@ export function getAccessToken(user) {
       product: ["transactions"],
       onSuccess: (public_token, metadata) => {
         axios
-          .post("/get_access_token", { public_token, user })
+          .post("/get-access-token", { public_token, user })
           .then(response => {
             dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: response.data });
           })

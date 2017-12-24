@@ -11,22 +11,24 @@ import {
   verifyAccount,
   setupPayments,
   deleteAccount,
-  saveSettings
+  saveSettings,
+  updatePayments
 } from "./controllers/userController";
 
 const requireAuth = passport.authenticate("jwt", { session: false });
 const requireLogin = passport.authenticate("local", { session: false });
 
 const router = app => {
-  app.post("/get_access_token", requireAuth, getAccessToken);
+  app.post("/get-access-token", requireAuth, getAccessToken);
   app.post("/signup", signup);
   app.post("/signup/verify-account", verifyAccount);
   app.post("/login", requireLogin, login);
   app.post("/setup-payments", requireAuth, setupPayments);
-  app.get("/get_transactions", requireAuth, getTransactions);
-  app.get("/get_public_token", requireAuth, getPublicToken);
-  app.delete("/delete_account", requireAuth, deleteAccount);
-  app.patch("/save_settings", requireAuth, saveSettings);
+  app.get("/get-transactions", requireAuth, getTransactions);
+  app.get("/get-public-token", requireAuth, getPublicToken);
+  app.delete("/delete-account", requireAuth, deleteAccount);
+  app.patch("/save-settings", requireAuth, saveSettings);
+  app.patch("/update-payments", requireAuth, updatePayments);
 };
 
 export default router;

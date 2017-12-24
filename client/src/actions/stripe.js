@@ -15,3 +15,15 @@ export function setupPayments(token, user) {
       });
   };
 }
+
+export function updatePayments(token, user) {
+  return function(dispatch) {
+    axios.defaults.headers.common["Authorization"] = user.token;
+    axios
+      .patch("/update-payments", { token, user })
+      .then(response => {
+        dispatch({});
+      })
+      .catch(error => {});
+  };
+}

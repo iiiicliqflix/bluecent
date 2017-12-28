@@ -1,6 +1,6 @@
 .candidates, .settings {
   background-color: white;
-  height: 200px;
+  min-height: 200px;
   margin-top: 18px;
   padding: 30px 0;
   width: 100%;
@@ -100,6 +100,16 @@
 .settings-error {
   color: #DA627D;
   margin-left: 15px;
+}
+
+.settings-success--stripe {
+  color: #16a085;
+  padding: 5px;
+}
+
+.settings-error--stripe {
+  color: #DA627D;
+  padding: 5px;
 }
 
 .settings-back-btn {

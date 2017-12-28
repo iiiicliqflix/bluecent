@@ -10,7 +10,9 @@ import {
   STRIPE_SUCCESS,
   STRIPE_ERROR,
   SAVE_SETTINGS,
-  SAVE_SETTINGS_ERROR
+  SAVE_SETTINGS_ERROR,
+  UPDATE_STRIPE_SUCCESS,
+  UPDATE_STRIPE_ERROR
 } from "../actions/types";
 
 export default function(state = {}, action) {
@@ -103,6 +105,18 @@ export default function(state = {}, action) {
       return {
         ...state,
         settingsError: action.payload
+      };
+    case UPDATE_STRIPE_SUCCESS:
+      return {
+        ...state,
+        updateStripeSuccess: true,
+        updateStripeError: false
+      };
+    case UPDATE_STRIPE_ERROR:
+      return {
+        ...state,
+        updateStripeSuccess: false,
+        updateStripeError: true
       };
     default:
       return state;

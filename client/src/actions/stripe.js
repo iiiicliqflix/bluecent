@@ -1,5 +1,10 @@
 import axios from "axios";
-import { STRIPE_SUCCESS, STRIPE_ERROR } from "./types";
+import {
+  STRIPE_SUCCESS,
+  STRIPE_ERROR,
+  UPDATE_STRIPE_SUCCESS,
+  UPDATE_STRIPE_ERROR
+} from "./types";
 
 export function setupPayments(token, user) {
   return function(dispatch) {
@@ -22,8 +27,13 @@ export function updatePayments(token, user) {
     axios
       .patch("/update-payments", { token, user })
       .then(response => {
-        dispatch({});
+        dispatch({ type: UPDATE_STRIPE_SUCCESS });
       })
-      .catch(error => {});
+      .catch(error => {
+        dispatch({
+          type: UPDATE_STRIPE_ERROR,
+          payload: error.response.data.error
+        });
+      });
   };
 }

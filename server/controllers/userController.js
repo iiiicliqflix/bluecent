@@ -56,7 +56,7 @@ export const signup = (req, res, next) => {
       }
 
       sendVerificationEmail(email, first, user.auth.token);
-      res.json({ first, last, email });
+      return res.json({ first, last, email });
     });
   });
 };
@@ -117,7 +117,7 @@ export const verifyAccount = (req, res, next) => {
           maxWeeklyContribution
         } = user;
 
-        res.json({
+        return res.json({
           token: tokenForUser(user),
           first,
           last,
@@ -141,6 +141,8 @@ export const deleteAccount = (req, res, next) => {
     if (err) {
       return next(err);
     }
+
+    return res.json({ userDeleted: true });
   });
 };
 
@@ -173,13 +175,22 @@ export const setupPayments = (req, res, next) => {
         if (err) {
           return next(err);
         }
-        res.json({ hasCustomerId: true });
-      });
 
-      return stripe.customers.createSource(customer.id, { source: token.id });
+        stripe.customers
+          .createSource(customer.id, { source: token.id })
+          .then(resp => {
+            console.log(resp);
+            return res.json({ hasCustomerId: true });
+          })
+          .catch(err => {
+            console.log("Error setting a credit card: ", err);
+            return next(err);
+          });
+      });
     })
     .catch(err => {
-      console.log("Error setting up payment: ", err);
+      console.log("Error creating a customer: ", err);
+      return next(err);
     });
 };
 
@@ -209,7 +220,7 @@ export const saveSettings = (req, res, next) => {
         maxWeeklyContribution
       } = user;
 
-      res.json({
+      return res.json({
         token,
         first,
         last,
@@ -229,8 +240,21 @@ export const updatePayments = (req, res, next) => {
   let stripeKey =
     process.env.NODE_ENV === "production" ? stripeKeys.live : stripeKeys.test;
   let stripe = stripePackage(stripeKey);
-  let user = req.body.user;
+  const user = req.body.user;
   let token = req.body.token;
 
-  stripe.customers.update();
+  User.findOne({ email: user.email }, (err, u) => {
+    if (err) {
+      return next(err);
+    }
+
+    stripe.customers
+      .update(u.customerId, { source: token.id })
+      .then(response => {
+        return res.json({ updateStripeSuccess: true });
+      })
+      .catch(err => {
+        return next(err);
+      });
+  });
 };

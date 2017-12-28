@@ -22,7 +22,7 @@ class Settings extends Component {
   }
 
   submitStripeToken(token) {
-    this.props.setupPayments(token, this.props.user);
+    this.props.updatePayments(token, this.props.user);
   }
 
   handleChange(event) {
@@ -39,8 +39,13 @@ class Settings extends Component {
       user,
       deleteAccount,
       settingsError,
-      settingsSuccess
+      settingsSuccess,
+      updateStripeSuccess,
+      updateStripeError
     } = this.props;
+
+    console.log(updateStripeSuccess);
+    console.log(updateStripeError);
 
     if (!this.state.showPaymentForm) {
       return (
@@ -92,6 +97,11 @@ class Settings extends Component {
           <Elements>
             <SetupPayments submitToken={this.submitStripeToken.bind(this)} />
           </Elements>
+          {
+            updateStripeSuccess ? <div className="settings-success--stripe">Success!</div> :
+            updateStripeError ? <div className="settings-error--stripe">Error.</div> :
+            null
+          }
           <span className="settings-back-btn" onClick={this.togglePaymentForm}>Back</span>
         </div>
       );
@@ -102,7 +112,9 @@ class Settings extends Component {
 function mapStateToProps(state) {
   return {
     settingsError: state.user.settingsError,
-    settingsSuccess: state.user.settingsSuccess
+    settingsSuccess: state.user.settingsSuccess,
+    updateStripeSuccess: state.user.updateStripeSuccess,
+    updateStripeError: state.user.updateStripeError
   };
 }
 

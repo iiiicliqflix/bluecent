@@ -3,6 +3,11 @@ import { genSalt, hash, compare } from "bcrypt-nodejs";
 
 const Schema = mongoose.Schema;
 
+const userCampaignSchema = new Schema({
+  campaign: Schema.Types.ObjectId,
+  points: Number
+});
+
 const userSchema = new Schema({
   first: String,
   last: String,
@@ -18,6 +23,8 @@ const userSchema = new Schema({
   customerId: { type: String, default: null },
   role: { type: Number, default: 0 },
   maxWeeklyContribution: { type: Number, default: -1 },
+  points: { type: Number, default: 100 },
+  campaigns: [userCampaignSchema],
   auth: {
     token: String,
     used: Boolean,

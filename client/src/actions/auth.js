@@ -23,7 +23,7 @@ export function signupUser(props) {
       .post("/signup", props)
       .then(() => {
         dispatch({ type: SIGNUP_SUCCESS });
-        dispatch(push(`/signup/verify-account?email=${props.email}`));
+        dispatch(push(`/verify-account?email=${props.email}`));
       })
       .catch(error => {
         dispatch(authError(SIGNUP_FAILURE, error.response.data.error));

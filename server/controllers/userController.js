@@ -13,6 +13,7 @@ export const login = (req, res, next) => {
     hasAccessToken,
     hasCustomerId,
     total,
+    points,
     numContribs,
     lastContribDate,
     maxWeeklyContribution
@@ -26,6 +27,7 @@ export const login = (req, res, next) => {
     hasAccessToken,
     hasCustomerId,
     total,
+    points,
     numContribs,
     lastContribDate,
     maxWeeklyContribution
@@ -112,6 +114,7 @@ export const verifyAccount = (req, res, next) => {
           hasAccessToken,
           hasCustomerId,
           total,
+          points,
           numContribs,
           lastContribDate,
           maxWeeklyContribution
@@ -125,6 +128,7 @@ export const verifyAccount = (req, res, next) => {
           hasAccessToken,
           hasCustomerId,
           total,
+          points,
           numContribs,
           lastContribDate,
           maxWeeklyContribution
@@ -215,6 +219,7 @@ export const saveSettings = (req, res, next) => {
         hasAccessToken,
         hasCustomerId,
         total,
+        points,
         numContribs,
         lastContribDate,
         maxWeeklyContribution
@@ -228,6 +233,7 @@ export const saveSettings = (req, res, next) => {
         hasAccessToken,
         hasCustomerId,
         total,
+        points,
         numContribs,
         lastContribDate,
         maxWeeklyContribution

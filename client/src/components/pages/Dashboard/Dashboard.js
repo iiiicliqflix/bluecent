@@ -1,0 +1,105 @@
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { browserHistory } from "react-router";
+import * as actions from "../../../actions";
+import DashStats from "./DashStats";
+import DashTabs from "./DashTabs";
+import Transactions from "./Transactions";
+import Campaigns from "./Campaigns";
+import Settings from "./Settings";
+import "./Dashboard.css";
+
+class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { dashState: "transaction" };
+  }
+
+  componentWillMount() {
+    if (this.props.authenticated) {
+      const user = this.props.user;
+      if (!user.hasAccessToken || !user.hasCustomerId) {
+        browserHistory.push("/setup-account");
+      }
+    }
+  }
+
+  componentDidMount() {
+    let user = this.props.user;
+    if (user.hasAccessToken) {
+      this.props.getTransactions(user);
+    }
+    this.props.getCampaigns();
+  }
+
+  updateDash(tab) {
+    this.setState({ dashState: tab });
+  }
+
+  render() {
+    const {
+      user,
+      isDataLoaded,
+      savedChange,
+      transactions,
+      transactionsError,
+      updatePlaidItem,
+      publicToken,
+      campaigns
+    } = this.props;
+
+    if (isDataLoaded) {
+      return (
+        <div className="dash-container">
+          <DashStats user={user} savedChange={savedChange} />
+          <DashTabs
+            onClick={this.updateDash.bind(this)}
+            dashState={this.state.dashState}
+          />
+          {this.state.dashState === "transaction" ? (
+            <Transactions transactions={transactions} />
+          ) : this.state.dashState === "campaigns" ? (
+            <Campaigns campaigns={campaigns} user={user} />
+          ) : (
+            <Settings user={user} />
+          )}
+        </div>
+      );
+    } else if (transactionsError) {
+      return (
+        <div className="dash-container">
+          <h1 className="update-hdr">Refresh your online banking data.</h1>
+          <button
+            className="btn btn-bank"
+            onClick={() => {
+              updatePlaidItem(publicToken);
+            }}
+          >
+            Update Account
+          </button>
+        </div>
+      );
+    } else {
+      return (
+        <div className="dash-container">
+          <h1 className="dash-hdr">Loading...</h1>
+        </div>
+      );
+    }
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    authenticated: state.user.authenticated,
+    user: state.user.user,
+    transactions: state.plaid.transactions,
+    campaigns: state.campaign.campaigns,
+    savedChange: state.plaid.savedChange,
+    isDataLoaded: state.plaid.isDataLoaded,
+    transactionsError: state.plaid.transactionsError,
+    publicToken: state.plaid.publicToken
+  };
+}
+
+export default connect(mapStateToProps, actions)(Dashboard);

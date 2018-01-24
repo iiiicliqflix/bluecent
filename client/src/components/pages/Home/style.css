@@ -59,3 +59,27 @@ input {
 
 #root {
   height: 100%; }
+
+.home {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between; }
+  .home__content {
+    width: 500px; }
+  .home__header {
+    font-size: 60px;
+    font-weight: 400; }
+  .home__sub-header {
+    margin-top: 20px;
+    color: #5b5e6d;
+    font-size: 20px;
+    line-height: 30px; }
+  .home__buttons {
+    margin-top: 45px; }
+  .home__button {
+    width: 180px;
+    height: 60px;
+    font-size: 16px; }
+    .home__button:first-of-type {
+      margin-right: 20px; }

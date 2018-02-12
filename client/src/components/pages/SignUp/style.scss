@@ -10,6 +10,10 @@
     flex-wrap: wrap;
     justify-content: space-between;
     width: 430px;
+
+    @media screen and (max-width: 500px) {
+      width: 300px;
+    }
   }
 
   &__field {
@@ -18,10 +22,18 @@
 
     &--first {
       width: 48%;
+
+      @media screen and (max-width: 500px) {
+        width: 100%;
+      }
     }
 
     &--last {
       width: 48%;
+
+      @media screen and (max-width: 500px) {
+        width: 100%;
+      }
     }
   }
 

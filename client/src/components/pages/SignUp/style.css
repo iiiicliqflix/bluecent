@@ -9,13 +9,22 @@
     flex-wrap: wrap;
     justify-content: space-between;
     width: 430px; }
+    @media screen and (max-width: 500px) {
+      .signup__form {
+        width: 300px; } }
   .signup__field {
     margin-top: 25px;
     width: 100%; }
     .signup__field--first {
       width: 48%; }
+      @media screen and (max-width: 500px) {
+        .signup__field--first {
+          width: 100%; } }
     .signup__field--last {
       width: 48%; }
+      @media screen and (max-width: 500px) {
+        .signup__field--last {
+          width: 100%; } }
   .signup__input {
     width: 100%; }
   .signup__button {

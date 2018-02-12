@@ -74,6 +74,17 @@
         color: $white;
         border-bottom: none;
       }
+
+      &--dark {
+        border: 2px solid $white;
+        color: $white;
+
+        &:hover {
+          background-color: $white;
+          color: $blue;
+          border-bottom: none;
+        }
+      }
     }
 
     &--dark {
@@ -92,6 +103,32 @@
       border-bottom: 3px solid $blue;
     }
   }
+
+  &__login {
+    display: inline;
+    margin-left: 30px;
+    padding: 4px 17px 4px 17px;
+    list-style-type: none;
+    border: 2px solid $blue;
+    border-radius: 9999px;
+    color: $blue;
+    transition-duration: 200ms;
+
+    &:hover {
+      background-color: $blue;
+      color: $white;
+    }
+
+    &--dark {
+      border: 2px solid $white;
+      color: $white;
+
+      &:hover {
+        background-color: $white;
+        color: $blue;
+      }
+    }
+  }
 }
 
 .burger {
@@ -104,6 +141,10 @@
     padding-top: 50px;
     text-align: center;
     background-color: $white;
+
+    &--dark {
+      background-color: $blue;
+    }
   }
 
   &__item {
@@ -111,5 +152,9 @@
     padding-bottom: 8px;
     font-size: 30px;
     list-style-type: none;
+
+    &--dark {
+      color: $white;
+    }
   }
 }

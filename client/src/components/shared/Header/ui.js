@@ -28,11 +28,11 @@ export class HeaderUI extends PureComponent {
                 <a href="https://github.com/rkrishnan8594/bluecent">Open Source</a>
               </li>
               {authenticated ? (
-                <li className="nav__item nav__item--login" onClick={signOut}>
+                <li className="nav__login nav__login--dark" onClick={signOut}>
                   <Link to="#">Sign Out</Link>
                 </li>
               ) : (
-                <li className="nav__item nav__item--login">
+                <li className="nav__login nav__login--dark">
                   <Link to="/login">Login</Link>
                 </li>
               )}
@@ -45,11 +45,11 @@ export class HeaderUI extends PureComponent {
               width={24}
               height={12}
               strokeWidth={3}
-              color="#0c1c5e"
+              color={theme === "dark" ? "#fff" : "#0c1c5e"}
               animationDuration={0.2}
             />
             {open && (
-              <nav className="burger__nav">
+              <nav className={`burger__nav burger__nav--${theme}`}>
                 <ul>
                   <li className={`burger__item burger__item--${theme}`}>
                     <Link to="/faq">FAQ</Link>
@@ -58,11 +58,11 @@ export class HeaderUI extends PureComponent {
                     <a href="https://github.com/rkrishnan8594/bluecent">Open Source</a>
                   </li>
                   {authenticated ? (
-                    <li className="burger__item" onClick={signOut}>
+                    <li className={`burger__item burger__item--${theme}`} onClick={signOut}>
                       <Link to="#">Sign Out</Link>
                     </li>
                   ) : (
-                    <li className="burger__item">
+                    <li className={`burger__item burger__item--${theme}`}>
                       <Link to="/login">Login</Link>
                     </li>
                   )}

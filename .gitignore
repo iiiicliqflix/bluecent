@@ -11,6 +11,7 @@ node_modules/
 build
 
 # misc
+*.css
 .DS_Store
 .env
 npm-debug.log*

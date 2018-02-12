@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { browserHistory } from "react-router";
 
-export default function(ComposedComponent) {
+export function RequireNotAuth(ComposedComponent) {
   class NotAuthentication extends Component {
     componentWillMount() {
       if (this.props.authenticated) {

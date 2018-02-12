@@ -7,12 +7,12 @@ import { HeaderUI } from "./ui";
 class HeaderContainer extends PureComponent {
   constructor(props) {
     super(props);
-    this.signOut = this.signOut.bind(this);
-    const darkPages = ["/faq", "/dashboard", "/faq/"];
+    this.hamburgerClick = this.hamburgerClick.bind(this);
+    const darkPages = ["/faq", "/dashboard"];
     if (darkPages.includes(props.location.pathname)) {
-      this.state = { color: "dark" };
+      this.state = { theme: "dark" };
     } else {
-      this.state = { color: "light" };
+      this.state = { theme: "light" };
     }
   }
 
@@ -20,21 +20,30 @@ class HeaderContainer extends PureComponent {
     const url = window.location.href;
     const currentRoute = url.substr(url.lastIndexOf("/") + 1);
     if (["faq", "dashboard"].indexOf(currentRoute) < 0) {
-      this.setState({ color: "light" });
+      this.setState({ theme: "light", open: false });
     } else {
-      this.setState({ color: "dark" });
+      this.setState({ theme: "dark", open: false });
     }
   }
 
-  signOut() {
-    this.props.signOut();
+  hamburgerClick() {
+    const { open } = this.state;
+    this.setState({ open: !open });
   }
 
   render() {
-    const { color } = this.state;
-    const { authenticated } = this.props;
+    const { theme, open } = this.state;
+    const { signOut, authenticated } = this.props;
 
-    return <HeaderUI color={color} authenticated={authenticated} signOut={this.signOut} />;
+    return (
+      <HeaderUI
+        theme={theme}
+        open={open}
+        authenticated={authenticated}
+        hamburgerClick={this.hamburgerClick}
+        signOut={signOut}
+      />
+    );
   }
 }
 

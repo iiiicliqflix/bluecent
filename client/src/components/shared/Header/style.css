@@ -1,80 +1,40 @@
-* {
-  margin: 0;
-  padding: 0;
-  font-family: 'Avenir';
-  box-sizing: border-box;
-  color: #0c1c5e; }
-
-html {
-  height: 100%; }
-
-body {
-  height: 100%; }
-
-h1,
-h2,
-h3,
-p {
-  font-family: 'Avenir';
-  font-weight: 400; }
-
-h1 {
-  font-size: 60px; }
-
-h2 {
-  font-size: 48px; }
-
-h3 {
-  font-size: 36px; }
-
-button {
-  padding: 10px;
-  border: 2px solid #0c1c5e;
-  border-radius: 4px;
-  background-color: white;
-  background-color: #ffffff;
-  cursor: pointer;
-  outline: none;
-  transition-duration: 200ms; }
-  button:hover {
-    background-color: #0c1c5e;
-    color: #ffffff; }
-
-a {
-  color: inherit;
-  text-decoration: none; }
-
-input {
-  border: none;
-  border-bottom: 2px solid #0c1c5e;
-  border-radius: 0;
-  font-size: 15px;
-  height: 45px;
-  outline: none; }
-  input.input--error {
-    padding-left: 5px;
-    background-color: #da627d; }
-    input.input--error::-webkit-input-placeholder {
-      color: #1c1a19; }
-
-#root {
-  height: 100%; }
-
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding-top: 20px; }
+  .header__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1250px;
+    margin: 0 auto; }
+    @media screen and (max-width: 1250px) {
+      .header__container {
+        margin: 0 20px; } }
   .header__logo {
     display: flex;
     align-items: center; }
+  .header--dark {
+    background-color: #0c1c5e; }
+  .header--light {
+    background-color: #ffffff; }
+  .header__nav {
+    display: block; }
+    @media screen and (max-width: 768px) {
+      .header__nav {
+        display: none; } }
+  .header__hamburger {
+    display: none; }
+    @media screen and (max-width: 768px) {
+      .header__hamburger {
+        display: block; } }
 
 .logo__text {
   margin-left: 15px; }
+  .logo__text--dark {
+    color: #ffffff; }
 
 .nav__item {
   display: inline;
-  padding-bottom: 10px;
+  padding-bottom: 8px;
   list-style-type: none; }
   .nav__item--login {
     border: 2px solid #0c1c5e;
@@ -87,7 +47,27 @@ input {
       background-color: #0c1c5e;
       color: #ffffff;
       border-bottom: none; }
+  .nav__item--dark {
+    color: #ffffff; }
+    .nav__item--dark:hover {
+      border-bottom: 3px solid #ffffff; }
   .nav__item:not(:first-child) {
     margin-left: 30px; }
   .nav__item:hover {
     border-bottom: 3px solid #0c1c5e; }
+
+.burger__nav {
+  position: absolute;
+  top: 20%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-top: 50px;
+  text-align: center;
+  background-color: #ffffff; }
+
+.burger__item {
+  margin-bottom: 30px;
+  padding-bottom: 8px;
+  font-size: 30px;
+  list-style-type: none; }

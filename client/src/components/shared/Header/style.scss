@@ -1,28 +1,64 @@
-@import "../../../assets/styles/main.scss";
+@import "../../../assets/styles/_variables.scss";
 
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding-top: 20px;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1250px;
+    margin: 0 auto;
+
+    @media screen and (max-width: $desktop) {
+      margin: 0 20px;
+    }
+  }
 
   &__logo {
     display: flex;
     align-items: center;
+  }
+
+  &--dark {
+    background-color: $blue;
+  }
+
+  &--light {
+    background-color: $white;
+  }
+
+  &__nav {
+    display: block;
+
+    @media screen and (max-width: $tablet) {
+      display: none;
+    }
+  }
+
+  &__hamburger {
+    display: none;
+
+    @media screen and (max-width: $tablet) {
+      display: block;
+    }
   }
 }
 
 .logo {
   &__text {
     margin-left: 15px;
+
+    &--dark {
+      color: $white;
+    }
   }
 }
 
 .nav {
-
   &__item {
     display: inline;
-    padding-bottom: 10px;
+    padding-bottom: 8px;
     list-style-type: none;
 
     &--login {
@@ -40,6 +76,14 @@
       }
     }
 
+    &--dark {
+      color: $white;
+
+      &:hover {
+        border-bottom: 3px solid $white;
+      }
+    }
+
     &:not(:first-child) {
       margin-left: 30px;
     }
@@ -47,5 +91,25 @@
     &:hover {
       border-bottom: 3px solid $blue;
     }
+  }
+}
+
+.burger {
+  &__nav {
+    position: absolute;
+    top: 20%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 50px;
+    text-align: center;
+    background-color: $white;
+  }
+
+  &__item {
+    margin-bottom: 30px;
+    padding-bottom: 8px;
+    font-size: 30px;
+    list-style-type: none;
   }
 }

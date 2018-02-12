@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, IndexRoute } from "react-router";
-import RequireAuth from "./components/hoc/RequireAuth";
-import RequireNotAuth from "./components/hoc/RequireNotAuth";
+import { RequireAuth, RequireNotAuth } from "./components/hoc";
 import {
   App,
   Home,

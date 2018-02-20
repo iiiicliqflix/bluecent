@@ -1,5 +1,5 @@
 export { App } from "./App";
-export { default as Dashboard } from "./Dashboard/Dashboard";
+export { Dashboard } from "./Dashboard";
 export { FAQ } from "./FAQ";
 export { Home } from "./Home";
 export { Login } from "./Login";

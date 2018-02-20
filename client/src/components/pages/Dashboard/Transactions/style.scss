@@ -1,0 +1,121 @@
+@import "../../../../assets/styles/_variables.scss";
+
+.transactions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 250px;
+  padding: 30px 0;
+  margin-top: 18px;
+  background-color: $white;
+
+  &__table {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+
+    @media screen and (max-width: 1000px) {
+      width: auto;
+      margin: 0 20px 0 20px;
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  &__title {
+    font-size: 28px;
+  }
+
+  &__button {
+    border: 1px solid $blue;
+    background-color: $white;
+    color: $blue;
+    font-size: 15px;
+    height: 40px;
+    width: 150px;
+
+    &--selected {
+      background-color: $blue;
+      color: $white;
+    }
+
+    &:hover {
+      background-color: $blue;
+      color: $white;
+    }
+
+    &:first-of-type {
+      border-top-left-radius: 9999px;
+      border-bottom-left-radius: 9999px;
+    }
+
+    &:last-of-type {
+      border-top-right-radius: 9999px;
+      border-bottom-right-radius: 9999px;
+      border-left: none;
+    }
+  }
+}
+
+.ReactTable {
+  border: none;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.ReactTable .rt-thead.-header {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.ReactTable .rt-thead .rt-th {
+  border-right: none;
+}
+
+.rt-td:not(:nth-child(2)) {
+  text-align: right;
+}
+
+.rt-td:first-child {
+  text-align: center;
+}
+
+.rt-th:nth-child(3), .rt-th:nth-child(4) {
+  text-align: right;
+}
+
+.rt-tr-group:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.rt-tbody {
+  font-size: 14px;
+}
+
+.ReactTable .rt-thead .rt-th.-sort-asc, .ReactTable .rt-thead .rt-td.-sort-asc {
+  box-shadow: inset 0 3px 0 0 #0c1c5e;
+}
+
+.ReactTable .rt-thead .rt-th.-sort-desc, .ReactTable .rt-thead .rt-td.-sort-desc {
+  box-shadow: inset 0 -3px 0 0 #0c1c5e;
+}
+
+.ReactTable .rt-tr-group {
+  height: 40px;
+  padding: 4px 0;
+}
+
+.ReactTable .rt-noData {
+  background: none;
+  color: black;
+  top: 250%;
+}

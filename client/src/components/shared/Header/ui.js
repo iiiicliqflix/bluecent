@@ -28,11 +28,11 @@ export class HeaderUI extends PureComponent {
                 <a href="https://github.com/rkrishnan8594/bluecent">Open Source</a>
               </li>
               {authenticated ? (
-                <li className="nav__login nav__login--dark" onClick={signOut}>
+                <li className={`nav__login nav__login--${theme}`} onClick={signOut}>
                   <Link to="#">Sign Out</Link>
                 </li>
               ) : (
-                <li className="nav__login nav__login--dark">
+                <li className={`nav__login nav__login--${theme}`}>
                   <Link to="/login">Login</Link>
                 </li>
               )}

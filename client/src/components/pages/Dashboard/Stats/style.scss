@@ -1,0 +1,44 @@
+@import "../../../../assets/styles/_variables.scss";
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1250px;
+  margin: 0 auto;
+
+  @media screen and (max-width: $desktop) {
+    margin: 0 20px;
+  }
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  max-width: 350px;
+  padding: 50px 0px;
+  margin-right: 20px;
+  border-bottom: 3px solid white;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.1);
+
+  &__number {
+    color: white;
+    font-size: 40px;
+  }
+
+  &__name {
+    color: $yellow;
+    margin-bottom: 20px;
+  }
+
+  &:hover {
+    border-bottom: 3px solid $yellow;
+  }
+
+  &:last-of-type {
+    margin: 0;
+  }
+}

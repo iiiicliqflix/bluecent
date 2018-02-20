@@ -56,11 +56,12 @@ input {
   border-radius: 0;
   font-size: 15px;
   height: 45px;
-  outline: none; }
+  outline: none;
+  color: #000; }
   input.input--error {
     padding-left: 5px;
     background-color: #da627d; }
     input.input--error::-webkit-input-placeholder {
-      color: #1c1a19; }
+      color: #000; }
   input::placeholder {
     color: #000; }

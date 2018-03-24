@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
   GET_TRANSACTIONS,
+  PLAID_ACCOUNT_ERROR,
   TRANSACTIONS_ERROR,
   ACCESS_TOKEN_SUCCESS,
   ACCESS_TOKEN_ERROR
@@ -20,13 +21,11 @@ export function getTransactions(user) {
       })
       .catch(error => {
         if (error.response.data.error.error_code === "ITEM_LOGIN_REQUIRED") {
-          axios
-            .get("/get-public-token", { params: { user } })
-            .then(response => {
-              dispatch({ type: TRANSACTIONS_ERROR, payload: response.data });
-            });
+          axios.get("/get-public-token", { params: { user } }).then(response => {
+            dispatch({ type: PLAID_ACCOUNT_ERROR, payload: response.data });
+          });
         } else {
-          console.log(error);
+          dispatch({ type: TRANSACTIONS_ERROR });
         }
       });
   };

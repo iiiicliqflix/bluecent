@@ -10,10 +10,9 @@ import reducers from "./reducers";
 import routes from "./routes";
 import { AUTH_USER } from "./actions/types";
 
-const createStoreWithMiddleware = applyMiddleware(
-  routerMiddleware(browserHistory),
-  reduxThunk
-)(createStore);
+const createStoreWithMiddleware = applyMiddleware(routerMiddleware(browserHistory), reduxThunk)(
+  createStore
+);
 const store = createStoreWithMiddleware(reducers);
 const history = syncHistoryWithStore(browserHistory, store);
 
@@ -22,12 +21,9 @@ if (user && user.token) {
   store.dispatch({ type: AUTH_USER, payload: user });
 }
 
-let apiKey = null;
-if (process.env.NODE_ENV === "production") {
-  apiKey = "pk_live_xvmsTnJOgZBGHRntb8kNTRYP";
-} else {
-  apiKey = "pk_test_at49IUFDA9RttSjpq7zmrqId";
-}
+const testKey = "pk_test_at49IUFDA9RttSjpq7zmrqId";
+const prodKey = "pk_live_xvmsTnJOgZBGHRntb8kNTRYP";
+const apiKey = process.env.NODE_ENV === "production" ? prodKey : testKey;
 
 render(
   <Provider store={store}>

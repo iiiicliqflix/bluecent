@@ -73,15 +73,3 @@ input {
 .app__container {
   margin: 0 auto;
   max-width: 1250px; }
-
-.has-error::-webkit-input-placeholder {
-  color: #1C1A19; }
-
-.has-error::-moz-placeholder {
-  color: #1C1A19; }
-
-.has-error:-ms-input-placeholder {
-  color: #1C1A19; }
-
-.has-error:-moz-placeholder {
-  color: #1C1A19; }

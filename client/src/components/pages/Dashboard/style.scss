@@ -4,27 +4,17 @@
   padding-top: 80px;
   text-align: center;
   background-color: $blue;
-}
 
-.dash-hdr {
-  color: $blue;
-  font-weight: normal;
-  margin-top: 15%;
+  &__loading {
+    margin-top: 100px;
+    padding-bottom: 100%;
+    color: $white;
+    font-weight: normal;
+  }
 }
 
 .update-hdr {
   color: $blue;
   font-weight: normal;
   margin: 10% 0 20px 0;
-}
-
-.coming-soon {
-  border: 2px solid rgba(0, 0, 0, 0.4);
-  border-radius: 3px;
-  color: rgba(0, 0, 0, 0.4);
-  display: block;
-  margin: 5% auto;
-  padding: 15px;
-  text-align: middle;
-  width: 500px;
 }

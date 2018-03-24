@@ -5,7 +5,7 @@ export const TabsUI = ({ tab, updateTab }) => (
   <ul className="tabs">
     <li
       className={`tab ${tab === "transactions" ? "tab--active" : ""}`}
-      onClick={() => updateTab("transaction")}
+      onClick={() => updateTab("transactions")}
     >
       Transactions
     </li>

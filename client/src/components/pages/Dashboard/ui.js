@@ -3,7 +3,7 @@ import { Stats } from "./Stats";
 import { Tabs } from "./Tabs";
 import { Transactions } from "./Transactions";
 import Campaigns from "./Campaigns";
-import Settings from "./Settings";
+import { Settings } from "./Settings";
 import "./style.css";
 
 export class DashboardUI extends Component {
@@ -13,7 +13,7 @@ export class DashboardUI extends Component {
     return (
       <div className="dashboard">
         <Stats user={user} savedChange={savedChange} />
-        <Tabs onClick={updateTab} tab={tab} />
+        <Tabs updateTab={updateTab} tab={tab} />
         {tab === "transactions" ? (
           <Transactions transactions={transactions} />
         ) : tab === "campaigns" ? (
@@ -31,7 +31,7 @@ export class DashboardUI extends Component {
     return (
       <div className="dashboard">
         <h1 className="update-hdr">Refresh your online banking data.</h1>
-        <button onClick={updatePlaidItem(publicToken)}>Update Account</button>
+        <button onClick={() => updatePlaidItem(publicToken)}>Update Account</button>
       </div>
     );
   }
@@ -39,18 +39,28 @@ export class DashboardUI extends Component {
   renderLoading() {
     return (
       <div className="dashboard">
-        <h1 className="dash-hdr">Loading...</h1>
+        <h3 className="dashboard__loading">Loading...</h3>
+      </div>
+    );
+  }
+
+  renderError() {
+    return (
+      <div className="dashboard">
+        <h3 className="dashboard__loading">Error fetching your account info :(</h3>
       </div>
     );
   }
 
   render() {
-    const { isDataLoaded, transactionsError } = this.props;
+    const { isDataLoaded, plaidError, transactionsError } = this.props;
 
     if (!isDataLoaded) {
       return this.renderLoading();
-    } else if (transactionsError) {
+    } else if (plaidError) {
       return this.renderUpdate();
+    } else if (transactionsError) {
+      return this.renderError();
     }
 
     return this.renderContent();

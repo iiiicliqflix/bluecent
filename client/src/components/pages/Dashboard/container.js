@@ -49,6 +49,7 @@ function mapStateToProps(state) {
     campaigns: state.campaign.campaigns,
     savedChange: state.plaid.savedChange,
     isDataLoaded: state.plaid.isDataLoaded,
+    plaidError: state.plaid.plaidError,
     transactionsError: state.plaid.transactionsError,
     publicToken: state.plaid.publicToken
   };

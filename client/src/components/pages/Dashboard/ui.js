@@ -7,6 +7,33 @@ import { Settings } from "./Settings";
 import "./style.css";
 
 export class DashboardUI extends Component {
+  static renderLoading() {
+    return (
+      <div className="dashboard">
+        <h3 className="dashboard__loading">Loading...</h3>
+      </div>
+    );
+  }
+
+  static renderError() {
+    return (
+      <div className="dashboard">
+        <h3 className="dashboard__loading">Error fetching your account info :(</h3>
+      </div>
+    );
+  }
+
+  renderUpdate() {
+    const { updateToken, publicToken } = this.props;
+
+    return (
+      <div className="dashboard">
+        <h1 className="update-hdr">Refresh your online banking data.</h1>
+        <button onClick={updateToken}>Update Account</button>
+      </div>
+    );
+  }
+
   renderContent() {
     const { user, savedChange, transactions, campaigns, tab, updateTab } = this.props;
 
@@ -21,33 +48,6 @@ export class DashboardUI extends Component {
         ) : (
           <Settings user={user} />
         )}
-      </div>
-    );
-  }
-
-  renderUpdate() {
-    const { updatePlaidItem, publicToken } = this.props;
-
-    return (
-      <div className="dashboard">
-        <h1 className="update-hdr">Refresh your online banking data.</h1>
-        <button onClick={() => updatePlaidItem(publicToken)}>Update Account</button>
-      </div>
-    );
-  }
-
-  renderLoading() {
-    return (
-      <div className="dashboard">
-        <h3 className="dashboard__loading">Loading...</h3>
-      </div>
-    );
-  }
-
-  renderError() {
-    return (
-      <div className="dashboard">
-        <h3 className="dashboard__loading">Error fetching your account info :(</h3>
       </div>
     );
   }

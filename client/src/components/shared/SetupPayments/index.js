@@ -1,24 +1,11 @@
 import React, { Component } from "react";
 import { reduxForm, Field, change } from "redux-form";
-import {
-  CardNumberElement,
-  CardExpiryElement,
-  CardCVCElement,
-  injectStripe
-} from "react-stripe-elements";
+import { CardNumberElement, CardExpiryElement, CardCVCElement, injectStripe } from "react-stripe-elements";
 
-const renderField = ({
-  input,
-  className,
-  placeholder,
-  maxLength,
-  meta: { touched, error }
-}) => (
+const renderField = ({ input, className, placeholder, maxLength, meta: { touched, error } }) => (
   <span>
     <input
-      className={`input input-${className} ${
-        touched && error ? "has-error" : ""
-      }`}
+      className={`input input-${className} ${touched && error ? "has-error" : ""}`}
       placeholder={touched && error ? error : placeholder}
       maxLength={maxLength ? maxLength : 50}
       {...input}
@@ -33,10 +20,8 @@ class SetupPayments extends Component {
   }
 
   componentDidMount() {
-    let frames = Array.from(document.getElementsByTagName("iframe"));
-    let stripeEls = Array.from(
-      document.getElementsByClassName("__PrivateStripeElement")
-    );
+    const frames = Array.from(document.getElementsByTagName("iframe"));
+    const stripeEls = Array.from(document.getElementsByClassName("__PrivateStripeElement"));
     Array.from(frames).forEach(el => {
       el.style = null;
     });
@@ -66,19 +51,8 @@ class SetupPayments extends Component {
     return (
       <form onSubmit={this.handleSubmit} className="payment-form">
         <div className="payment-details">
-          <Field
-            component={renderField}
-            className="cardholder"
-            name="cardholder"
-            placeholder="Carholder's Name"
-          />
-          <Field
-            component={renderField}
-            className="zipcode"
-            name="zipcode"
-            maxLength="5"
-            placeholder="Zipcode"
-          />
+          <Field component={renderField} className="cardholder" name="cardholder" placeholder="Carholder's Name" />
+          <Field component={renderField} className="zipcode" name="zipcode" maxLength="5" placeholder="Zipcode" />
         </div>
         <div>
           <CardNumberElement classes={{ base: "card-number" }} />
@@ -117,7 +91,5 @@ const onSubmitFail = (errors, dispatch) => {
   }
 };
 
-SetupPayments = reduxForm({ form: "setuppayments", validate, onSubmitFail })(
-  SetupPayments
-);
+SetupPayments = reduxForm({ form: "setuppayments", validate, onSubmitFail })(SetupPayments);
 export default injectStripe(SetupPayments);

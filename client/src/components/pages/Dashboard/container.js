@@ -8,6 +8,7 @@ class DashboardContainer extends Component {
   constructor(props) {
     super(props);
     this.updateTab = this.updateTab.bind(this);
+    this.updateToken = this.updateToken.bind(this);
     this.state = { tab: "transactions" };
   }
 
@@ -32,12 +33,17 @@ class DashboardContainer extends Component {
   }
 
   updateTab(tab) {
-    this.setState({ tab: tab });
+    this.setState({ tab });
+  }
+
+  updateToken() {
+    const { updatePlaidItem, publicToken } = this.props;
+    updatePlaidItem(publicToken);
   }
 
   render() {
     const { tab } = this.state;
-    return <DashboardUI tab={tab} updateTab={this.updateTab} {...this.props} />;
+    return <DashboardUI tab={tab} updateTab={this.updateTab} updateToken={this.updateToken} {...this.props} />;
   }
 }
 

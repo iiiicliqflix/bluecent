@@ -1,16 +1,7 @@
 import React from "react";
 import { Route, IndexRoute } from "react-router";
 import { RequireAuth, RequireNotAuth } from "./components/hoc";
-import {
-  App,
-  Home,
-  FAQ,
-  SignUp,
-  Login,
-  VerifyAccount,
-  Dashboard,
-  SetupAccount
-} from "./components/pages";
+import { App, Home, FAQ, SignUp, Login, VerifyAccount, Dashboard, SetupAccount } from "./components/pages";
 
 export default (
   <Route path="/" component={App}>

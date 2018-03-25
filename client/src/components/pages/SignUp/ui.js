@@ -25,13 +25,7 @@ export class SignUpUI extends PureComponent {
             type="text"
             placeholder="Last"
           />
-          <Field
-            name="email"
-            component={SignUpField}
-            className="signup__field"
-            type="text"
-            placeholder="Email"
-          />
+          <Field name="email" component={SignUpField} className="signup__field" type="text" placeholder="Email" />
           <Field
             name="password"
             component={SignUpField}
@@ -46,8 +40,7 @@ export class SignUpUI extends PureComponent {
             type="password"
             placeholder="Confirm Password"
           />
-          {errorMessage &&
-            errorMessage.signup && <div className="error-container">{errorMessage.signup}</div>}
+          {errorMessage && errorMessage.signup && <div className="error-container">{errorMessage.signup}</div>}
           <button type="submit" className="signup__button">
             Sign Up
           </button>

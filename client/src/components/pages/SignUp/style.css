@@ -8,7 +8,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    width: 430px; }
+    width: 430px;
+    margin-top: 15px; }
     @media screen and (max-width: 500px) {
       .signup__form {
         width: 300px; } }
@@ -32,10 +33,11 @@
     width: 100px;
     font-size: 15px; }
   .signup__error-container {
-    background-color: #DA627D;
+    width: 200px;
+    margin: 20px auto -20px auto;
+    padding: 5px;
     border: 1px solid red;
     border-radius: 3px;
     font-size: 14px;
-    margin: 20px auto -20px auto;
-    padding: 5px;
-    width: 200px; }
+    background-color: #da627d;
+    color: #000000; }

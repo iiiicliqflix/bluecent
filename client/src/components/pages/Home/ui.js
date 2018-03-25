@@ -47,8 +47,7 @@ export class HomeUI extends PureComponent {
                 <p className="list__number">3</p>
                 <p className="list__step">Automatically donate spare change.</p>
                 <p className="list__details">
-                  Watch as Bluecent makes contributions every week and tracks your fundraising
-                  goals.
+                  Watch as Bluecent makes contributions every week and tracks your fundraising goals.
                 </p>
               </li>
             </ol>

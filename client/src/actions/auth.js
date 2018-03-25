@@ -1,14 +1,7 @@
 import axios from "axios";
 import { browserHistory } from "react-router";
 import { push } from "react-router-redux";
-import {
-  SIGNUP_SUCCESS,
-  SIGNUP_FAILURE,
-  AUTH_USER,
-  LOGIN_FAILURE,
-  VERIFY_ACCOUNT_FAILURE,
-  UNAUTH_USER
-} from "./types";
+import { SIGNUP_SUCCESS, SIGNUP_FAILURE, AUTH_USER, LOGIN_FAILURE, VERIFY_ACCOUNT_FAILURE, UNAUTH_USER } from "./types";
 
 export function authError(CONST, error) {
   return {
@@ -18,7 +11,7 @@ export function authError(CONST, error) {
 }
 
 export function signupUser(props) {
-  return function(dispatch) {
+  return dispatch => {
     axios
       .post("/signup", props)
       .then(() => {
@@ -34,7 +27,7 @@ export function signupUser(props) {
 export function loginUser(props) {
   const { email, password } = props;
 
-  return function(dispatch) {
+  return dispatch => {
     axios
       .post("/login", { email, password })
       .then(response => {
@@ -53,7 +46,7 @@ export function loginUser(props) {
 }
 
 export function verifyAccount(props) {
-  return function(dispatch) {
+  return dispatch => {
     axios
       .post("/signup/verify-account", props)
       .then(response => {

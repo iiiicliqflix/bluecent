@@ -53,10 +53,7 @@ export const SettingsUI = props => {
             </div>
             <div className="setting">
               <label className="setting-label">Delete Account</label>
-              <button
-                className="setting-input setting-btn delete-btn"
-                onClick={() => deleteAccount(user)}
-              >
+              <button className="setting-input setting-btn delete-btn" onClick={() => deleteAccount(user)}>
                 Delete
               </button>
             </div>
@@ -74,22 +71,22 @@ export const SettingsUI = props => {
         </div>
       </div>
     );
-  } else {
-    return (
-      <div className="settings">
-        <h2 className="settings-payment-hdr">Update Payment Info</h2>
-        <Elements>
-          <SetupPayments submitToken={submitStripeToken} />
-        </Elements>
-        {updateStripeSuccess ? (
-          <div className="settings-success--stripe">Success!</div>
-        ) : updateStripeError ? (
-          <div className="settings-error--stripe">Error.</div>
-        ) : null}
-        <span className="settings-back-btn" onClick={togglePaymentForm}>
-          Back
-        </span>
-      </div>
-    );
   }
+
+  return (
+    <div className="settings">
+      <h2 className="settings-payment-hdr">Update Payment Info</h2>
+      <Elements>
+        <SetupPayments submitToken={submitStripeToken} />
+      </Elements>
+      {updateStripeSuccess ? (
+        <div className="settings-success--stripe">Success!</div>
+      ) : updateStripeError ? (
+        <div className="settings-error--stripe">Error.</div>
+      ) : null}
+      <span className="settings-back-btn" onClick={togglePaymentForm}>
+        Back
+      </span>
+    </div>
+  );
 };

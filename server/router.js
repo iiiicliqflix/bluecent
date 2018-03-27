@@ -1,10 +1,6 @@
 import passport from "passport";
 import passportService from "./services/passport";
-import {
-  getAccessToken,
-  getTransactions,
-  getPublicToken
-} from "./controllers/financeController";
+import { getAccessToken, getTransactions, getPublicToken } from "./controllers/financeController";
 import {
   login,
   signup,

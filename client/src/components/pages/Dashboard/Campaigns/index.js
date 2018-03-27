@@ -12,7 +12,7 @@ export default class Campaigns extends Component {
     };
   }
 
-  groupCampaignsByType(campaigns) {
+  static groupCampaignsByType(campaigns) {
     return campaigns.reduce((memo, x) => {
       const arr = memo;
       if (!arr[x.level]) {

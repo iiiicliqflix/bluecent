@@ -10,7 +10,7 @@ export function authError(CONST, error) {
   };
 }
 
-export function signupUser(props) {
+export function signUpUser(props) {
   return dispatch => {
     axios
       .post("/signup", props)

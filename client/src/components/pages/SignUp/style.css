@@ -32,12 +32,15 @@
     margin: 50px auto 0 auto;
     width: 100px;
     font-size: 15px; }
-  .signup__error-container {
-    width: 200px;
-    margin: 20px auto -20px auto;
-    padding: 5px;
-    border: 1px solid red;
-    border-radius: 3px;
-    font-size: 14px;
-    background-color: #da627d;
-    color: #000000; }
+  .signup__error {
+    width: 100%;
+    margin: 20px auto -20px auto; }
+    .signup__error--message {
+      width: 200px;
+      margin: 0 auto;
+      padding: 5px;
+      border: 1px solid red;
+      border-radius: 3px;
+      font-size: 14px;
+      background-color: #da627d;
+      color: #000000; }

@@ -50,14 +50,19 @@
     font-size: 15px;
   }
 
-  &__error-container {
-    width: 200px;
+  &__error {
+    width: 100%;
     margin: 20px auto -20px auto;
-    padding: 5px;
-    border: 1px solid red;
-    border-radius: 3px;
-    font-size: 14px;
-    background-color: $red;
-    color: $black;
+
+    &--message {
+      width: 200px;
+      margin: 0 auto;
+      padding: 5px;
+      border: 1px solid red;
+      border-radius: 3px;
+      font-size: 14px;
+      background-color: $red;
+      color: $black;
+    }
   }
 }

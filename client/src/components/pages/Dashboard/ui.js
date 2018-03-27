@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Stats } from "./Stats";
 import { Tabs } from "./Tabs";
 import { Transactions } from "./Transactions";
@@ -7,6 +8,17 @@ import { Settings } from "./Settings";
 import "./style.css";
 
 export class DashboardUI extends Component {
+  static propTypes = {
+    user: PropTypes.object.isRequired, // eslint-disable-line
+    transactions: PropTypes.objectOf(PropTypes.array).isRequired,
+    campaigns: PropTypes.arrayOf(PropTypes.object).isRequired,
+    savedChange: PropTypes.number.isRequired,
+    tab: PropTypes.string.isRequired,
+    isDataLoaded: PropTypes.bool.isRequired,
+    updateToken: PropTypes.func.isRequired,
+    updateTab: PropTypes.func.isRequired
+  };
+
   static renderLoading() {
     return (
       <div className="dashboard">
@@ -24,7 +36,7 @@ export class DashboardUI extends Component {
   }
 
   renderUpdate() {
-    const { updateToken, publicToken } = this.props;
+    const { updateToken } = this.props;
 
     return (
       <div className="dashboard">

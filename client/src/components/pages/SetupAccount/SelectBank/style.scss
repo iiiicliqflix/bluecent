@@ -1,0 +1,16 @@
+.bank {
+  &--solo {
+    margin-top: 30px;
+  }
+
+  &__header {
+    margin-bottom: 30px;
+    font-size: 30px;
+    font-weight: 300;
+  }
+
+  &__button {
+    padding: 15px 30px;
+    font-size: 14px;
+  }
+}

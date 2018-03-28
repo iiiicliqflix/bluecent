@@ -1,5 +1,4 @@
 import React from "react";
-import { Elements } from "react-stripe-elements";
 import SetupPayments from "../../../shared/SetupPayments";
 import "./style.css";
 
@@ -76,9 +75,7 @@ export const SettingsUI = props => {
   return (
     <div className="settings">
       <h2 className="settings-payment-hdr">Update Payment Info</h2>
-      <Elements>
-        <SetupPayments submitToken={submitStripeToken} />
-      </Elements>
+      <SetupPayments submitToken={submitStripeToken} />
       {updateStripeSuccess ? (
         <div className="settings-success--stripe">Success!</div>
       ) : updateStripeError ? (

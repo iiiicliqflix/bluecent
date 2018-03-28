@@ -1,36 +1,16 @@
-/* Bank Account */
-
-.bank-container {
-  margin: 6% auto 0 auto;
+.setup-account {
+  display: flex;
+  flex-direction: column;
+  margin: 100px auto 0 auto;
   text-align: center;
-  width: 800px;
 }
-
-.solo-bank {
-  margin: 14% auto 0 auto;
-}
-
-.bank-hdr {
-  color: #0c1c5e;
-  font-size: 30px;
-  font-weight: 300;
-}
-
-.btn-bank {
-  border-radius: 4px;
-  transition-duration: 200ms;
-}
-
-/* Payment */
 
 body > iframe {
   display: none;
 }
 
-.payment-container {
-  margin: 3% auto 0;
-  text-align: center;
-  width: 600px;
+.payments {
+  margin: 80px auto 0 auto;
 }
 
 .solo-payment {

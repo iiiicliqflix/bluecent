@@ -10,13 +10,20 @@ import "./style.css";
 export class DashboardUI extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired, // eslint-disable-line
-    transactions: PropTypes.objectOf(PropTypes.array).isRequired,
-    campaigns: PropTypes.arrayOf(PropTypes.object).isRequired,
-    savedChange: PropTypes.number.isRequired,
+    transactions: PropTypes.objectOf(PropTypes.array),
+    campaigns: PropTypes.arrayOf(PropTypes.object),
+    savedChange: PropTypes.number,
     tab: PropTypes.string.isRequired,
-    isDataLoaded: PropTypes.bool.isRequired,
+    isDataLoaded: PropTypes.bool,
     updateToken: PropTypes.func.isRequired,
     updateTab: PropTypes.func.isRequired
+  };
+
+  static defaultProps = {
+    transactions: {},
+    campaigns: [],
+    savedChange: 0,
+    isDataLoaded: false
   };
 
   static renderLoading() {
@@ -68,11 +75,11 @@ export class DashboardUI extends Component {
     const { isDataLoaded, plaidError, transactionsError } = this.props;
 
     if (!isDataLoaded) {
-      return this.renderLoading();
+      return this.constructor.renderLoading();
     } else if (plaidError) {
       return this.renderUpdate();
     } else if (transactionsError) {
-      return this.renderError();
+      return this.constructor.renderError();
     }
 
     return this.renderContent();

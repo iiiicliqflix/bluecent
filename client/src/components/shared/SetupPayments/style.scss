@@ -1,0 +1,57 @@
+.payment-form {
+  margin-top: 30px;
+
+  & iframe {
+    background-color: white;
+    color: black;
+    font-size: 14px;
+    font-family: 'Avenir';
+    height: 30px !important;
+    line-height: 1;
+    outline: none;
+  }
+
+  & span * {
+    display: inline !important;
+  }
+
+  &__stripe {
+    display: flex;
+    margin-top: 30px;
+  }
+
+  &__button {
+    margin: 30px auto;
+    padding: 15px 30px;
+    font-size: 14px;
+  }
+}
+
+.card {
+  &__number {
+    & iframe {
+      min-width: 290px !important;
+      width: 290px !important;
+      border-radius: 0;
+      border-bottom: 2px solid #0c1c5e;
+    }
+  }
+
+  &__expiry {
+    & iframe {
+      min-width: 125px !important;
+      width: 125px !important;
+      border-radius: 0;
+      border-bottom: 2px solid #0c1c5e;
+    }
+  }
+
+  &__cvc {
+    & iframe {
+      min-width: 55px !important;
+      width: 55px !important;
+      border-radius: 0;
+      border-bottom: 2px solid #0c1c5e;
+    }
+  }
+}

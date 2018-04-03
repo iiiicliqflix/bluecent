@@ -1,5 +1,5 @@
 import React from "react";
-import SetupPayments from "../../../shared/SetupPayments";
+import { SetupPayments } from "../../../shared/SetupPayments";
 import "./style.css";
 
 export const SettingsUI = props => {

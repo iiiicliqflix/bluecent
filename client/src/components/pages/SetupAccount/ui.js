@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Elements } from "react-stripe-elements";
 import { SelectBank } from "./SelectBank";
-import SetupPayments from "../../shared/SetupPayments";
+import { SetupPayments } from "../../shared/SetupPayments";
 import "./style.css";
 
 export const SetupAccountUI = ({ user, getAccessToken, submitStripeToken }) => {
@@ -11,7 +11,7 @@ export const SetupAccountUI = ({ user, getAccessToken, submitStripeToken }) => {
       <div className="setup-account">
         <SelectBank getAccessToken={getAccessToken} />
         <div className="payments">
-          <h3 className="payment-hdr">Setup your payment information.</h3>
+          <h2 className="payments__header">Setup your payment information.</h2>
           <Elements>
             <SetupPayments submitToken={submitStripeToken} />
           </Elements>
@@ -20,8 +20,8 @@ export const SetupAccountUI = ({ user, getAccessToken, submitStripeToken }) => {
     );
   } else if (user.hasAccessToken && !user.hasCustomerId) {
     return (
-      <div className="payments solo-payment">
-        <h3 className="payment-hdr">Setup your payment information.</h3>
+      <div className="payments--solo">
+        <h3 className="payments__header">Setup your payment information.</h3>
         <Elements>
           <SetupPayments submitToken={submitStripeToken} />
         </Elements>

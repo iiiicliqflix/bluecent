@@ -64,4 +64,4 @@ input {
     input.input--error::-webkit-input-placeholder {
       color: #000; }
   input::placeholder {
-    color: #000; }
+    color: #555; }

@@ -1,7 +1,15 @@
 .cardholder {
   width: 390px;
+
+  @media screen and (max-width: 500px) {
+    width: 83%;
+  }
 }
 
 .zipcode {
   width: 80px;
+
+  @media screen and (max-width: 500px) {
+    width: 17%;
+  }
 }

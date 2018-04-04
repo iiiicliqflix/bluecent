@@ -30,28 +30,37 @@
 .card {
   &__number {
     & iframe {
-      min-width: 290px !important;
       width: 290px !important;
       border-radius: 0;
       border-bottom: 2px solid #0c1c5e;
+
+      @media screen and (max-width: 500px) {
+        width: 61% !important;
+      }
     }
   }
 
   &__expiry {
     & iframe {
-      min-width: 125px !important;
       width: 125px !important;
       border-radius: 0;
       border-bottom: 2px solid #0c1c5e;
+
+      @media screen and (max-width: 500px) {
+        width: 27% !important;
+      }
     }
   }
 
   &__cvc {
     & iframe {
-      min-width: 55px !important;
       width: 55px !important;
       border-radius: 0;
       border-bottom: 2px solid #0c1c5e;
+
+      @media screen and (max-width: 500px) {
+        width: 12% !important;
+      }
     }
   }
 }

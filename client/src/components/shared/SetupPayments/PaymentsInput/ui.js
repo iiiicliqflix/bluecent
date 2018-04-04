@@ -2,15 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./style.css";
 
-export const PaymentsInputUI = ({ input: { name }, placeholder, maxLength, meta: { error, touched } }) => (
-  <span>
-    <input
-      className={`input ${name} ${touched && error ? "has-error" : ""}`}
-      placeholder={touched && error ? error : placeholder}
-      maxLength={maxLength}
-    />
-  </span>
-);
+export const PaymentsInputUI = ({ input, placeholder, maxLength, meta: { error, touched } }) => {
+  return (
+    <span>
+      <input
+        className={`input ${input.name} ${touched && error ? "input--error" : ""}`}
+        placeholder={touched && error ? error : placeholder}
+        maxLength={maxLength}
+        {...input}
+      />
+    </span>
+  );
+};
 
 PaymentsInputUI.propTypes = {
   input: PropTypes.object.isRequired,

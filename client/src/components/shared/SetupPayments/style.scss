@@ -9,6 +9,8 @@
     height: 30px !important;
     line-height: 1;
     outline: none;
+    border-radius: 0;
+    border-bottom: 2px solid #0c1c5e;
   }
 
   & span * {
@@ -30,37 +32,27 @@
 .card {
   &__number {
     & iframe {
-      width: 290px !important;
-      border-radius: 0;
-      border-bottom: 2px solid #0c1c5e;
+      width: 290px;
 
       @media screen and (max-width: 500px) {
-        width: 61% !important;
+        width: 205px;
       }
     }
   }
 
   &__expiry {
     & iframe {
-      width: 125px !important;
-      border-radius: 0;
-      border-bottom: 2px solid #0c1c5e;
+      width: 125px;
 
       @media screen and (max-width: 500px) {
-        width: 27% !important;
+        width: 100px;
       }
     }
   }
 
   &__cvc {
     & iframe {
-      width: 55px !important;
-      border-radius: 0;
-      border-bottom: 2px solid #0c1c5e;
-
-      @media screen and (max-width: 500px) {
-        width: 12% !important;
-      }
+      width: 55px;
     }
   }
 }

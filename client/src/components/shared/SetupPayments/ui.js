@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Field } from "redux-form";
 import { CardNumberElement, CardExpiryElement, CardCVCElement } from "react-stripe-elements";
 import { PaymentsInput } from "./PaymentsInput";
@@ -9,8 +10,8 @@ const base = {
   fontFamily: "Avenir"
 };
 
-export const SetupPaymentsUI = () => (
-  <form onSubmit={this.handleSubmit} className="payment-form">
+export const SetupPaymentsUI = ({ handleSubmit, submit }) => (
+  <form className="payment-form" onSubmit={handleSubmit(submit)}>
     <div className="payment-form__details">
       <Field name="cardholder" component={PaymentsInput} placeholder="Cardholder's Name" />
       <Field name="zipcode" component={PaymentsInput} placeholder="Zipcode" maxLength="5" />
@@ -25,3 +26,8 @@ export const SetupPaymentsUI = () => (
     </button>
   </form>
 );
+
+SetupPaymentsUI.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  submit: PropTypes.func.isRequired
+};

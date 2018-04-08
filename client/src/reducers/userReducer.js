@@ -16,6 +16,7 @@ import {
 } from "../actions/types";
 
 export default function(state = {}, action) {
+  console.log(action);
   switch (action.type) {
     case SIGNUP_SUCCESS:
       return {
@@ -89,22 +90,23 @@ export default function(state = {}, action) {
     case STRIPE_ERROR:
       return {
         ...state,
-        user: {
-          ...state.user,
-          hasCustomerId: false
-        },
-        error: action.payload
+        error: {
+          ...state.error,
+          stripe: action.payload
+        }
       };
     case SAVE_SETTINGS:
       return {
         ...state,
-        user: action.payload,
-        settingsSuccess: true
+        user: action.payload
       };
     case SAVE_SETTINGS_ERROR:
       return {
         ...state,
-        settingsError: action.payload
+        error: {
+          ...state.error,
+          settings: action.payload
+        }
       };
     case UPDATE_STRIPE_SUCCESS:
       return {

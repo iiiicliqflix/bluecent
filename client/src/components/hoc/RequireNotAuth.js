@@ -5,8 +5,19 @@ import { browserHistory } from "react-router";
 
 export function RequireNotAuth(ComposedComponent) {
   class NotAuthentication extends Component {
-    componentWillMount() {
-      if (this.props.authenticated) {
+    static propTypes = {
+      authenticated: PropTypes.bool
+    };
+
+    static defaultProps = {
+      authenticated: false
+    };
+
+    constructor(props) {
+      super(props);
+      console.log("Require not auth");
+      if (props.authenticated) {
+        console.log("Require not auth - authenticated");
         browserHistory.push("/dashboard");
       }
     }
@@ -18,13 +29,10 @@ export function RequireNotAuth(ComposedComponent) {
     }
 
     render() {
+      console.log(this.props);
       return <ComposedComponent {...this.props} />;
     }
   }
-
-  NotAuthentication.propTypes = {
-    authenticated: PropTypes.bool
-  };
 
   function mapStateToProps(state) {
     return {

@@ -28,7 +28,11 @@ export const SetupAccountUI = ({ user, getAccessToken, submitStripeToken }) => {
       </div>
     );
   }
-  return <SelectBank getAccessToken={getAccessToken} displaySolo />;
+  return (
+    <div className="setup-account">
+      <SelectBank getAccessToken={getAccessToken} displaySolo />
+    </div>
+  );
 };
 
 SetupAccountUI.propTypes = {

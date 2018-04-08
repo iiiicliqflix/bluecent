@@ -5,6 +5,10 @@ import { browserHistory } from "react-router";
 
 export function RequireAuth(ComposedComponent) {
   class Authentication extends Component {
+    static propTypes = {
+      authenticated: PropTypes.bool.isRequired
+    };
+
     componentWillMount() {
       if (!this.props.authenticated) {
         browserHistory.push("/");
@@ -21,10 +25,6 @@ export function RequireAuth(ComposedComponent) {
       return <ComposedComponent {...this.props} />;
     }
   }
-
-  Authentication.propTypes = {
-    authenticated: PropTypes.bool
-  };
 
   function mapStateToProps(state) {
     return {

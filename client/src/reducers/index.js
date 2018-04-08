@@ -5,12 +5,10 @@ import userReducer from "./userReducer";
 import plaidReducer from "./plaidReducer";
 import campaignReducer from "./campaignReducer";
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   form,
   user: userReducer,
   plaid: plaidReducer,
   campaign: campaignReducer,
   routing: routerReducer
 });
-
-export default rootReducer;

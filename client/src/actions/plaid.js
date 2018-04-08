@@ -12,7 +12,7 @@ function setAuthorizationToken(token) {
 }
 
 export function getTransactions(user) {
-  return function(dispatch) {
+  return dispatch => {
     setAuthorizationToken(user.token);
     axios
       .get("/get-transactions", { params: { email: user.email } })
@@ -32,9 +32,9 @@ export function getTransactions(user) {
 }
 
 export function getAccessToken(user) {
-  return function(dispatch) {
+  return dispatch => {
     setAuthorizationToken(user.token);
-    let handler = window.Plaid.create({
+    const handler = window.Plaid.create({
       clientName: "Bluecent",
       env: "development",
       key: "80aa88b8cce388ffc75efe840a5709",
@@ -56,16 +56,14 @@ export function getAccessToken(user) {
 }
 
 export function updatePlaidItem(publicToken) {
-  return function(dispatch) {
-    let handler = window.Plaid.create({
+  return () => {
+    const handler = window.Plaid.create({
       clientName: "Bluecent",
       env: "development",
       key: "80aa88b8cce388ffc75efe840a5709",
       product: ["transactions"],
       token: publicToken,
-      onSuccess: function(public_token, metadata) {
-        console.log("successful");
-      }
+      onSuccess: (public_token, metadata) => console.log("successful")
     });
     handler.open();
   };

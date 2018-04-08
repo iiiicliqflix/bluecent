@@ -6,17 +6,16 @@ import { VerifyAccountUI } from "./ui";
 
 class VerifyAccountContainer extends Component {
   componentWillMount() {
-    const { signup } = this.props;
-    const { location } = this.props;
-    this.email = location.query.email;
+    const { signup, location } = this.props;
 
-    if (!signup || !this.email) {
+    if (!signup || !location.query.email) {
       browserHistory.push("/signup");
     }
   }
 
   render() {
-    return <VerifyAccountUI email={this.email} />;
+    const { location } = this.props;
+    return <VerifyAccountUI email={location.query.email} />;
   }
 }
 

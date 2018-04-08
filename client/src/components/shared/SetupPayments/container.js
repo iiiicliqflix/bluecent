@@ -7,8 +7,9 @@ import { SetupPaymentsUI } from "./ui";
 
 class SetupPaymentsContainer extends Component {
   static propTypes = {
-    stripe: PropTypes.object.isRequired, // eslint-disable-line
-    submitToken: PropTypes.func.isRequired
+    stripe: PropTypes.object.isRequired,
+    submitToken: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -27,24 +28,19 @@ class SetupPaymentsContainer extends Component {
     });
   }
 
-  submit(event) {
-    event.preventDefault();
+  submit(values) {
+    const { cardholder, zipcode } = values;
     const { stripe, submitToken } = this.props;
-    const form = document.querySelector("form");
-
-    const extraDetails = {
-      name: form.querySelector("input[name=cardholder]").value,
-      address_zip: form.querySelector("input[name=zipcode]").value
-    };
 
     stripe
-      .createToken(extraDetails)
-      .then(token => submitToken(token))
+      .createToken({ name: cardholder, address_zip: zipcode })
+      .then(({ token }) => submitToken(token))
       .catch(error => console.log(error));
   }
 
   render() {
-    return <SetupPaymentsUI submit={this.submit} />;
+    const { handleSubmit } = this.props;
+    return <SetupPaymentsUI handleSubmit={handleSubmit} submit={this.submit} />;
   }
 }
 

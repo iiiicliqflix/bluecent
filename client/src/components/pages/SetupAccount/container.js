@@ -8,7 +8,7 @@ import "./style.css";
 
 class SetupAccountContainer extends Component {
   static propTypes = {
-    user: PropTypes.object.isRequired, // eslint-disable-line
+    user: PropTypes.object.isRequired,
     getAccessToken: PropTypes.func.isRequired,
     setupPayments: PropTypes.func.isRequired
   };

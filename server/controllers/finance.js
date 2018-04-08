@@ -10,12 +10,7 @@ const PLAID_SECRET = envvar.string("PLAID_SECRET");
 const PLAID_PUBLIC_KEY = envvar.string("PLAID_PUBLIC_KEY");
 const PLAID_ENV = "development";
 
-let client = new plaid.Client(
-  PLAID_CLIENT_ID,
-  PLAID_SECRET,
-  PLAID_PUBLIC_KEY,
-  plaid.environments[PLAID_ENV]
-);
+let client = new plaid.Client(PLAID_CLIENT_ID, PLAID_SECRET, PLAID_PUBLIC_KEY, plaid.environments[PLAID_ENV]);
 
 export const getAccessToken = (req, res, next) => {
   const PUBLIC_TOKEN = req.body.public_token;
@@ -87,30 +82,23 @@ export const getTransactions = (req, res, next) => {
       startDate = threeWeeksAgo;
     }
 
-    client.getTransactions(
-      accessToken,
-      startDate,
-      today,
-      { count: 250, offset: 0 },
-      (err, result) => {
-        if (err != null) {
-          console.log(err);
-          console.log("Error in fetching transactions.");
-          return res.status(400).send({ error: err });
-        }
-
-        let transactions = filterTransactions(result.transactions);
-        let transObj = splitTransactions(transactions, u.lastContribDate);
-        const savedChange = calculateSavedChange(transObj.active);
-        res.json({ transactions: transObj, savedChange });
+    client.getTransactions(accessToken, startDate, today, { count: 250, offset: 0 }, (err, result) => {
+      if (err != null) {
+        console.log(err);
+        console.log("Error in fetching transactions.");
+        return res.status(400).send({ error: err });
       }
-    );
+
+      let transactions = filterTransactions(result.transactions);
+      let transObj = splitTransactions(transactions, u.lastContribDate);
+      const savedChange = calculateSavedChange(transObj.active);
+      res.json({ transactions: transObj, savedChange });
+    });
   });
 };
 
 export const chargeUsers = () => {
-  let stripeKey =
-    process.env.NODE_ENV === "production" ? stripeKeys.live : stripeKeys.test;
+  let stripeKey = process.env.NODE_ENV === "production" ? stripeKeys.live : stripeKeys.test;
   let stripe = stripePackage(stripeKey);
   let today = moment()
     .subtract(1, "days")
@@ -119,50 +107,37 @@ export const chargeUsers = () => {
   User.find({}, (err, users) => {
     users.map(u => {
       if (u.customerId && u.access_token) {
-        client.getTransactions(
-          u.access_token,
-          u.lastContribDate,
-          today,
-          { count: 250, offset: 0 },
-          (err, result) => {
-            if (err == null) {
-              let transactions = filterTransactions(result.transactions);
-              let savedChange = calculateSavedChange(transactions);
-              savedChange = 100 * savedChange.toFixed(2);
+        client.getTransactions(u.access_token, u.lastContribDate, today, { count: 250, offset: 0 }, (err, result) => {
+          if (err == null) {
+            let transactions = filterTransactions(result.transactions);
+            let savedChange = calculateSavedChange(transactions);
+            savedChange = 100 * savedChange.toFixed(2);
 
-              if (savedChange >= 50) {
-                if (
-                  savedChange > u.maxWeeklyContribution &&
-                  u.maxWeeklyContribution !== -1
-                ) {
-                  savedChange = u.maxWeeklyContribution;
-                }
-
-                stripe.charges.create({
-                  amount: savedChange,
-                  currency: "usd",
-                  customer: u.customerId
-                });
-
-                const total = u.total + savedChange / 100;
-                const numContribs = u.numContribs + transactions.length;
-                const lastContribDate = moment().format("YYYY-MM-DD");
-                User.findOneAndUpdate(
-                  { email: u.email },
-                  { total, numContribs, lastContribDate },
-                  (err, result) => {
-                    if (err != null) {
-                      console.log("There was an error:", err);
-                    }
-                    console.log("Successfully charged user.");
-                  }
-                );
+            if (savedChange >= 50) {
+              if (savedChange > u.maxWeeklyContribution && u.maxWeeklyContribution !== -1) {
+                savedChange = u.maxWeeklyContribution;
               }
-            } else {
-              console.log(err);
+
+              stripe.charges.create({
+                amount: savedChange,
+                currency: "usd",
+                customer: u.customerId
+              });
+
+              const total = u.total + savedChange / 100;
+              const numContribs = u.numContribs + transactions.length;
+              const lastContribDate = moment().format("YYYY-MM-DD");
+              User.findOneAndUpdate({ email: u.email }, { total, numContribs, lastContribDate }, (err, result) => {
+                if (err != null) {
+                  console.log("There was an error:", err);
+                }
+                console.log("Successfully charged user.");
+              });
             }
+          } else {
+            console.log(err);
           }
-        );
+        });
       }
     });
   });

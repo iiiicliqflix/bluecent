@@ -15,7 +15,6 @@ export function signUpUser(props) {
     axios
       .post("/signup", props)
       .then(() => {
-        console.log("hi");
         dispatch({ type: SIGNUP_SUCCESS });
         dispatch(push(`/verify-account?email=${props.email}`));
       })
@@ -47,10 +46,9 @@ export function loginUser(props) {
 }
 
 export function verifyAccount(props) {
-  console.log("verify account");
   return dispatch => {
     axios
-      .post("/signup/verify-account", props)
+      .post("/verify-account", props)
       .then(response => {
         localStorage.setItem("user", JSON.stringify(response.data));
         dispatch({ type: AUTH_USER, payload: response.data });

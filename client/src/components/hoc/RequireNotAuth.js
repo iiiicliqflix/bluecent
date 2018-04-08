@@ -15,9 +15,7 @@ export function RequireNotAuth(ComposedComponent) {
 
     constructor(props) {
       super(props);
-      console.log("Require not auth");
       if (props.authenticated) {
-        console.log("Require not auth - authenticated");
         browserHistory.push("/dashboard");
       }
     }
@@ -29,7 +27,6 @@ export function RequireNotAuth(ComposedComponent) {
     }
 
     render() {
-      console.log(this.props);
       return <ComposedComponent {...this.props} />;
     }
   }

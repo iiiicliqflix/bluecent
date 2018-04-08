@@ -72,21 +72,15 @@ export const verifyAccount = (req, res, next) => {
     }
 
     if (!user) {
-      return res
-        .status(422)
-        .send({ error: { message: "User does not exist." } });
+      return res.status(422).send({ error: { message: "User does not exist." } });
     }
 
     if (user.auth.used) {
-      return res
-        .status(422)
-        .send({ error: { message: "Link already used", resend: false } });
+      return res.status(422).send({ error: { message: "Link already used", resend: false } });
     }
 
     if (new Date() > user.auth.expires) {
-      return res
-        .status(422)
-        .send({ error: { message: "Link already expired.", resend: true } });
+      return res.status(422).send({ error: { message: "Link already expired.", resend: true } });
     }
 
     if (token !== user.auth.token) {
@@ -98,43 +92,38 @@ export const verifyAccount = (req, res, next) => {
       });
     }
 
-    User.findByIdAndUpdate(
-      user.id,
-      { role: 1, auth: { used: true } },
-      { new: true },
-      (err, user) => {
-        if (err) {
-          return next(err);
-        }
-
-        const {
-          first,
-          last,
-          email,
-          hasAccessToken,
-          hasCustomerId,
-          total,
-          points,
-          numContribs,
-          lastContribDate,
-          maxWeeklyContribution
-        } = user;
-
-        return res.json({
-          token: tokenForUser(user),
-          first,
-          last,
-          email,
-          hasAccessToken,
-          hasCustomerId,
-          total,
-          points,
-          numContribs,
-          lastContribDate,
-          maxWeeklyContribution
-        });
+    User.findByIdAndUpdate(user.id, { role: 1, auth: { used: true } }, { new: true }, (err, user) => {
+      if (err) {
+        return next(err);
       }
-    );
+
+      const {
+        first,
+        last,
+        email,
+        hasAccessToken,
+        hasCustomerId,
+        total,
+        points,
+        numContribs,
+        lastContribDate,
+        maxWeeklyContribution
+      } = user;
+
+      return res.json({
+        token: tokenForUser(user),
+        first,
+        last,
+        email,
+        hasAccessToken,
+        hasCustomerId,
+        total,
+        points,
+        numContribs,
+        lastContribDate,
+        maxWeeklyContribution
+      });
+    });
   });
 };
 
@@ -151,8 +140,7 @@ export const deleteAccount = (req, res, next) => {
 };
 
 export const setupPayments = (req, res, next) => {
-  let stripeKey =
-    process.env.NODE_ENV === "production" ? stripeKeys.live : stripeKeys.test;
+  let stripeKey = process.env.NODE_ENV === "production" ? stripeKeys.live : stripeKeys.test;
   let stripe = stripePackage(stripeKey);
   let user = req.body.user;
   let token = req.body.token;
@@ -175,27 +163,18 @@ export const setupPayments = (req, res, next) => {
         lastContribDate
       };
 
-      User.findOneAndUpdate({ email: user.email }, changeset, err => {
+      User.findOneAndUpdate({ email: user.email }, changeset, (err, user) => {
         if (err) {
           return next(err);
         }
 
         stripe.customers
           .createSource(customer.id, { source: token.id })
-          .then(resp => {
-            console.log(resp);
-            return res.json({ hasCustomerId: true });
-          })
-          .catch(err => {
-            console.log("Error setting a credit card: ", err);
-            return next(err);
-          });
+          .then(() => res.json(user))
+          .catch(err => next(err));
       });
     })
-    .catch(err => {
-      console.log("Error creating a customer: ", err);
-      return next(err);
-    });
+    .catch(err => next(err));
 };
 
 export const saveSettings = (req, res, next) => {
@@ -203,48 +182,42 @@ export const saveSettings = (req, res, next) => {
   const changeset = { maxWeeklyContribution: maxContribution };
   const token = user.token;
 
-  User.findOneAndUpdate(
-    { email: user.email },
-    changeset,
-    { new: true },
-    (err, user) => {
-      if (err) {
-        return next(err);
-      }
-
-      const {
-        first,
-        last,
-        email,
-        hasAccessToken,
-        hasCustomerId,
-        total,
-        points,
-        numContribs,
-        lastContribDate,
-        maxWeeklyContribution
-      } = user;
-
-      return res.json({
-        token,
-        first,
-        last,
-        email,
-        hasAccessToken,
-        hasCustomerId,
-        total,
-        points,
-        numContribs,
-        lastContribDate,
-        maxWeeklyContribution
-      });
+  User.findOneAndUpdate({ email: user.email }, changeset, { new: true }, (err, user) => {
+    if (err) {
+      return next(err);
     }
-  );
+
+    const {
+      first,
+      last,
+      email,
+      hasAccessToken,
+      hasCustomerId,
+      total,
+      points,
+      numContribs,
+      lastContribDate,
+      maxWeeklyContribution
+    } = user;
+
+    return res.json({
+      token,
+      first,
+      last,
+      email,
+      hasAccessToken,
+      hasCustomerId,
+      total,
+      points,
+      numContribs,
+      lastContribDate,
+      maxWeeklyContribution
+    });
+  });
 };
 
 export const updatePayments = (req, res, next) => {
-  let stripeKey =
-    process.env.NODE_ENV === "production" ? stripeKeys.live : stripeKeys.test;
+  let stripeKey = process.env.NODE_ENV === "production" ? stripeKeys.live : stripeKeys.test;
   let stripe = stripePackage(stripeKey);
   const user = req.body.user;
   let token = req.body.token;

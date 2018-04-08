@@ -17,7 +17,6 @@ export class ConfirmAccountContainer extends Component {
   componentWillMount() {
     const { location, verifyAccount } = this.props;
     const { email, token } = location.query;
-    console.log("confirm account");
     verifyAccount({ email, token });
   }
 
@@ -28,7 +27,6 @@ export class ConfirmAccountContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log("map state to props");
   return {
     errorMessage: state.user.error
   };

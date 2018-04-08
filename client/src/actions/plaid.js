@@ -39,7 +39,7 @@ export function getAccessToken(user) {
       env: "development",
       key: "80aa88b8cce388ffc75efe840a5709",
       product: ["transactions"],
-      onSuccess: (public_token, metadata) => {
+      onSuccess: public_token => {
         axios
           .post("/get-access-token", { public_token, user })
           .then(response => dispatch({ type: ACCESS_TOKEN_SUCCESS, payload: response.data }))
@@ -58,7 +58,7 @@ export function updatePlaidItem(publicToken) {
       key: "80aa88b8cce388ffc75efe840a5709",
       product: ["transactions"],
       token: publicToken,
-      onSuccess: (public_token, metadata) => console.log("successful")
+      onSuccess: () => console.log("successful")
     });
     handler.open();
   };

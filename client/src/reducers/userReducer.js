@@ -21,13 +21,17 @@ export default function(state = {}, action) {
       return {
         ...state,
         signup: true,
-        error: {}
+        error: {
+          ...state.error,
+          signup: null
+        }
       };
     case SIGNUP_FAILURE:
       return {
         ...state,
         signup: false,
         error: {
+          ...state.error,
           signup: action.payload
         }
       };
@@ -35,56 +39,55 @@ export default function(state = {}, action) {
       return {
         ...state,
         authenticated: true,
-        error: {},
-        user: action.payload
+        user: action.payload,
+        error: {
+          ...state.error,
+          login: null
+        }
       };
     case LOGIN_FAILURE:
       return {
         ...state,
+        authenticated: false,
         error: {
+          ...state.error,
           login: action.payload
         }
       };
     case VERIFY_ACCOUNT_FAILURE:
       return {
         ...state,
-        signup: true,
         error: {
+          ...state.error,
           verifyAccount: action.payload
         }
       };
     case UNAUTH_USER:
       return {
         ...state,
-        authenticated: false,
-        error: {}
+        authenticated: false
       };
     case ACCESS_TOKEN_SUCCESS:
       return {
         ...state,
-        user: {
-          ...state.user,
-          hasAccessToken: true
-        },
-        error: {}
+        user: action.payload,
+        error: {
+          ...state.error,
+          accessToken: null
+        }
       };
     case ACCESS_TOKEN_ERROR:
       return {
         ...state,
-        user: {
-          ...state.user,
-          hasAccessToken: false
-        },
-        error: action.payload
+        error: {
+          ...state.error,
+          accessToken: action.payload
+        }
       };
     case STRIPE_SUCCESS:
       return {
         ...state,
-        user: {
-          ...state.user,
-          hasCustomerId: true
-        },
-        error: {}
+        user: action.payload
       };
     case STRIPE_ERROR:
       return {
@@ -110,14 +113,17 @@ export default function(state = {}, action) {
     case UPDATE_STRIPE_SUCCESS:
       return {
         ...state,
-        updateStripeSuccess: true,
-        updateStripeError: false
+        error: {
+          updateStripe: null
+        }
       };
     case UPDATE_STRIPE_ERROR:
       return {
         ...state,
-        updateStripeSuccess: false,
-        updateStripeError: true
+        error: {
+          ...state.error,
+          updateStripe: true
+        }
       };
     default:
       return state;

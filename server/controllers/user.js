@@ -19,19 +19,7 @@ export const login = (req, res, next) => {
     maxWeeklyContribution
   } = req.user;
 
-  res.json({
-    token: tokenForUser(req.user),
-    first,
-    last,
-    email,
-    hasAccessToken,
-    hasCustomerId,
-    total,
-    points,
-    numContribs,
-    lastContribDate,
-    maxWeeklyContribution
-  });
+  res.json({ token: tokenForUser(req.user), ...user });
 };
 
 export const signup = (req, res, next) => {
@@ -110,25 +98,13 @@ export const verifyAccount = (req, res, next) => {
         maxWeeklyContribution
       } = user;
 
-      return res.json({
-        token: tokenForUser(user),
-        first,
-        last,
-        email,
-        hasAccessToken,
-        hasCustomerId,
-        total,
-        points,
-        numContribs,
-        lastContribDate,
-        maxWeeklyContribution
-      });
+      return res.json({ token: tokenForUser(user), ...user });
     });
   });
 };
 
 export const deleteAccount = (req, res, next) => {
-  const user = req.body.user;
+  const { user } = req.body;
 
   User.findOneAndRemove({ email: user.email }, err => {
     if (err) {
@@ -140,21 +116,15 @@ export const deleteAccount = (req, res, next) => {
 };
 
 export const setupPayments = (req, res, next) => {
-  let stripeKey = process.env.NODE_ENV === "production" ? stripeKeys.live : stripeKeys.test;
-  let stripe = stripePackage(stripeKey);
-  let user = req.body.user;
-  let token = req.body.token;
+  const { user, token } = req.body;
+  const stripeKey = process.env.NODE_ENV === "production" ? stripeKeys.live : stripeKeys.test;
+  const stripe = stripePackage(stripeKey);
 
   stripe.customers
     .create({ email: user.email })
     .then(customer => {
-      let lastContribDate = null;
-      let startedTrackingDate = null;
-
-      if (customer.id && user.hasAccessToken) {
-        startedTrackingDate = moment().format("YYYY-MM-DD");
-        lastContribDate = moment().format("YYYY-MM-DD");
-      }
+      const lastContribDate = customer.id && user.hasAccessToken ? moment().format("YYYY-MM-DD") : null;
+      const startedTrackingDate = customer.id && user.hasAccessToken ? moment().format("YYYY-MM-DD") : null;
 
       const changeset = {
         customerId: customer.id,
@@ -163,7 +133,7 @@ export const setupPayments = (req, res, next) => {
         lastContribDate
       };
 
-      User.findOneAndUpdate({ email: user.email }, changeset, (err, user) => {
+      User.findOneAndUpdate({ email: user.email }, changeset, { new: true }, (err, user) => {
         if (err) {
           return next(err);
         }
@@ -178,11 +148,10 @@ export const setupPayments = (req, res, next) => {
 };
 
 export const saveSettings = (req, res, next) => {
-  const { user, maxContribution } = req.body;
+  const { user: { token, email }, maxContribution } = req.body;
   const changeset = { maxWeeklyContribution: maxContribution };
-  const token = user.token;
 
-  User.findOneAndUpdate({ email: user.email }, changeset, { new: true }, (err, user) => {
+  User.findOneAndUpdate({ email }, changeset, { new: true }, (err, user) => {
     if (err) {
       return next(err);
     }
@@ -200,35 +169,22 @@ export const saveSettings = (req, res, next) => {
       maxWeeklyContribution
     } = user;
 
-    return res.json({
-      token,
-      first,
-      last,
-      email,
-      hasAccessToken,
-      hasCustomerId,
-      total,
-      points,
-      numContribs,
-      lastContribDate,
-      maxWeeklyContribution
-    });
+    return res.json({ token, ...user });
   });
 };
 
 export const updatePayments = (req, res, next) => {
-  let stripeKey = process.env.NODE_ENV === "production" ? stripeKeys.live : stripeKeys.test;
-  let stripe = stripePackage(stripeKey);
-  const user = req.body.user;
-  let token = req.body.token;
+  const { user, token } = req.body;
+  const stripeKey = process.env.NODE_ENV === "production" ? stripeKeys.live : stripeKeys.test;
+  const stripe = stripePackage(stripeKey);
 
-  User.findOne({ email: user.email }, (err, u) => {
+  User.findOne({ email: user.email }, (err, user) => {
     if (err) {
       return next(err);
     }
 
     stripe.customers
-      .update(u.customerId, { source: token.id })
+      .update(user.customerId, { source: token.id })
       .then(response => {
         return res.json({ updateStripeSuccess: true });
       })

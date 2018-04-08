@@ -3,6 +3,7 @@ import envvar from "envvar";
 import moment from "moment";
 import stripePackage from "stripe";
 import { stripeKeys } from "../config";
+import { calculateSavedChange, filterTransactions, splitTransactions } from "../helpers/utils";
 import User from "../models/user";
 
 const PLAID_CLIENT_ID = envvar.string("PLAID_CLIENT_ID");
@@ -10,42 +11,33 @@ const PLAID_SECRET = envvar.string("PLAID_SECRET");
 const PLAID_PUBLIC_KEY = envvar.string("PLAID_PUBLIC_KEY");
 const PLAID_ENV = "development";
 
-let client = new plaid.Client(PLAID_CLIENT_ID, PLAID_SECRET, PLAID_PUBLIC_KEY, plaid.environments[PLAID_ENV]);
+const client = new plaid.Client(PLAID_CLIENT_ID, PLAID_SECRET, PLAID_PUBLIC_KEY, plaid.environments[PLAID_ENV]);
 
 export const getAccessToken = (req, res, next) => {
-  const PUBLIC_TOKEN = req.body.public_token;
-  let u = req.body.user;
-  client.exchangePublicToken(PUBLIC_TOKEN, function(error, tokenResponse) {
+  const { user, public_token } = req.body;
+
+  client.exchangePublicToken(public_token, (error, tokenResponse) => {
+    const { access_token, item_id } = tokenResponse;
+    const lastContribDate = access_token && user.hasCustomerId ? moment().format("YYYY-MM-DD") : null;
+    const startedTrackingDate = access_token && user.hasCustomerId ? moment().format("YYYY-MM-DD") : null;
+
+    const changeset = {
+      access_token,
+      hasAccessToken: true,
+      startedTrackingDate,
+      lastContribDate
+    };
+
     if (error != null) {
-      console.log(`Could not exchange public_token: ${error}.`);
-      return res.json({ error: error });
+      return res.json({ error });
     }
 
-    const ACCESS_TOKEN = tokenResponse.access_token;
-    const ITEM_ID = tokenResponse.item_id;
-    let lastContribDate = null;
-    let startedTrackingDate = null;
-
-    if (ACCESS_TOKEN && u.hasCustomerId) {
-      startedTrackingDate = moment().format("YYYY-MM-DD");
-      lastContribDate = moment().format("YYYY-MM-DD");
-    }
-
-    User.findOneAndUpdate(
-      { email: u.email },
-      {
-        access_token: ACCESS_TOKEN,
-        hasAccessToken: true,
-        startedTrackingDate,
-        lastContribDate
-      },
-      err => {
-        if (err) {
-          return next(err);
-        }
-        res.json({ hasAccessToken: true });
+    User.findOneAndUpdate({ email: user.email }, changeset, { new: true }, (err, user) => {
+      if (err) {
+        return next(err);
       }
-    );
+      res.json(user);
+    });
   });
 };
 
@@ -59,8 +51,7 @@ export const getPublicToken = (req, res, next) => {
       if (err) {
         return next(err);
       }
-      const public_token = result.public_token;
-      res.json({ public_token });
+      res.json({ public_token: result.public_token });
     });
   });
 };
@@ -84,8 +75,6 @@ export const getTransactions = (req, res, next) => {
 
     client.getTransactions(accessToken, startDate, today, { count: 250, offset: 0 }, (err, result) => {
       if (err != null) {
-        console.log(err);
-        console.log("Error in fetching transactions.");
         return res.status(400).send({ error: err });
       }
 
@@ -98,9 +87,9 @@ export const getTransactions = (req, res, next) => {
 };
 
 export const chargeUsers = () => {
-  let stripeKey = process.env.NODE_ENV === "production" ? stripeKeys.live : stripeKeys.test;
-  let stripe = stripePackage(stripeKey);
-  let today = moment()
+  const stripeKey = process.env.NODE_ENV === "production" ? stripeKeys.live : stripeKeys.test;
+  const stripe = stripePackage(stripeKey);
+  const today = moment()
     .subtract(1, "days")
     .format("YYYY-MM-DD");
 
@@ -109,7 +98,7 @@ export const chargeUsers = () => {
       if (u.customerId && u.access_token) {
         client.getTransactions(u.access_token, u.lastContribDate, today, { count: 250, offset: 0 }, (err, result) => {
           if (err == null) {
-            let transactions = filterTransactions(result.transactions);
+            const transactions = filterTransactions(result.transactions);
             let savedChange = calculateSavedChange(transactions);
             savedChange = 100 * savedChange.toFixed(2);
 
@@ -142,38 +131,3 @@ export const chargeUsers = () => {
     });
   });
 };
-
-function calculateSavedChange(transactions) {
-  return transactions.reduce((acc, item) => {
-    if (item.amount > 0) {
-      return acc + (Math.ceil(item.amount) - item.amount);
-    }
-    return acc;
-  }, 0);
-}
-
-function filterTransactions(transactions) {
-  return transactions.filter(item => {
-    if (
-      item.amount > 0 &&
-      Math.ceil(item.amount) - item.amount !== 0 &&
-      !item.name.toUpperCase().includes("BLUECENT")
-    ) {
-      return true;
-    }
-    return false;
-  });
-}
-
-function splitTransactions(transactions, lastContribDate) {
-  let active = [];
-  let contributed = [];
-  transactions.forEach(item => {
-    if (moment(item.date, "YYYY-MM-DD").isBefore(lastContribDate)) {
-      contributed.push(item);
-    } else {
-      active.push(item);
-    }
-  });
-  return { active, contributed };
-}

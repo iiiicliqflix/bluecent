@@ -19,7 +19,19 @@ export const login = (req, res, next) => {
     maxWeeklyContribution
   } = req.user;
 
-  res.json({ token: tokenForUser(req.user), ...user });
+  res.json({
+    token: tokenForUser(req.user),
+    first,
+    last,
+    email,
+    hasAccessToken,
+    hasCustomerId,
+    total,
+    points,
+    numContribs,
+    lastContribDate,
+    maxWeeklyContribution
+  });
 };
 
 export const signup = (req, res, next) => {

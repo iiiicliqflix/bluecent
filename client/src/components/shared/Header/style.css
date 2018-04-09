@@ -54,14 +54,14 @@
         background-color: #ffffff;
         color: #0c1c5e;
         border-bottom: none; }
-  .nav__item--dark {
-    color: #ffffff; }
-    .nav__item--dark:hover {
-      border-bottom: 3px solid #ffffff; }
   .nav__item:not(:first-child) {
     margin-left: 30px; }
   .nav__item:hover {
     border-bottom: 3px solid #0c1c5e; }
+  .nav__item--dark {
+    color: #ffffff; }
+    .nav__item--dark:hover {
+      border-bottom: 3px solid #ffffff; }
 
 .nav__login {
   display: inline;

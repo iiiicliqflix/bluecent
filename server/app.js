@@ -7,7 +7,7 @@ import mongoose from "mongoose";
 import schedule from "node-schedule";
 import router from "./router";
 import { mongoConfig } from "./config";
-import { chargeUsers } from "./controllers/financeController";
+import { chargeUsers } from "./controllers/finance";
 
 const app = express();
 
@@ -15,10 +15,7 @@ const app = express();
 app.use((req, res, next) => {
   let sslUrl;
 
-  if (
-    process.env.NODE_ENV === "production" &&
-    req.headers["x-forwarded-proto"] !== "https"
-  ) {
+  if (process.env.NODE_ENV === "production" && req.headers["x-forwarded-proto"] !== "https") {
     sslUrl = ["https://www.bluecent.org", req.url].join("");
     return res.redirect(sslUrl);
   }

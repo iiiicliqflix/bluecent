@@ -1,10 +1,24 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { browserHistory } from "react-router";
 import * as actions from "../../../actions";
 import { DashboardUI } from "./ui";
 
 class DashboardContainer extends Component {
+  static propTypes = {
+    authenticated: PropTypes.bool,
+    user: PropTypes.object.isRequired,
+    getTransactions: PropTypes.func.isRequired,
+    updatePlaidItem: PropTypes.func.isRequired,
+    publicToken: PropTypes.string
+  };
+
+  static defaultProps = {
+    authenticated: false,
+    publicToken: null
+  };
+
   constructor(props) {
     super(props);
     this.updateTab = this.updateTab.bind(this);
@@ -23,13 +37,11 @@ class DashboardContainer extends Component {
   }
 
   componentDidMount() {
-    const { user, getTransactions, getCampaigns } = this.props;
+    const { user, getTransactions } = this.props;
 
     if (user.hasAccessToken) {
       getTransactions(user);
     }
-
-    getCampaigns();
   }
 
   updateTab(tab) {
@@ -48,6 +60,7 @@ class DashboardContainer extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state);
   return {
     authenticated: state.user.authenticated,
     user: state.user.user,

@@ -87,20 +87,20 @@
       }
     }
 
-    &--dark {
-      color: $white;
-
-      &:hover {
-        border-bottom: 3px solid $white;
-      }
-    }
-
     &:not(:first-child) {
       margin-left: 30px;
     }
 
     &:hover {
       border-bottom: 3px solid $blue;
+    }
+
+    &--dark {
+      color: $white;
+
+      &:hover {
+        border-bottom: 3px solid $white;
+      }
     }
   }
 

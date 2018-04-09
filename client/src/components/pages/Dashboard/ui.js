@@ -9,7 +9,7 @@ import "./style.css";
 
 export class DashboardUI extends Component {
   static propTypes = {
-    user: PropTypes.object.isRequired, // eslint-disable-line
+    user: PropTypes.object.isRequired,
     transactions: PropTypes.objectOf(PropTypes.array),
     campaigns: PropTypes.arrayOf(PropTypes.object),
     savedChange: PropTypes.number,
